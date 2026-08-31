@@ -190,7 +190,7 @@ export default function Home() {
           as="section"
           aria-labelledby="hero-title"
           position="relative"
-          minH={{ base: "clamp(700px, 94svh, 980px)", lg: "clamp(760px, 92svh, 1080px)" }}
+          minH="100svh"
           overflow="hidden"
           bg="brand.primary"
           color="fg.onBrand"
@@ -255,7 +255,7 @@ export default function Home() {
             px={{ base: "5", md: "8", xl: "10" }}
             position="relative"
             zIndex="1"
-            minH={{ base: "clamp(700px, 94svh, 980px)", lg: "clamp(760px, 92svh, 1080px)" }}
+            minH="100svh"
             display="flex"
             alignItems="center"
             py="0"
