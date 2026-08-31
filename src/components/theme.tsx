@@ -9,6 +9,7 @@ const config = defineConfig({
     "html, body": {
       background: "bg.canvas",
       color: "fg.default",
+      scrollBehavior: "smooth",
     },
     body: {
       fontFamily: "body",
@@ -53,15 +54,16 @@ const config = defineConfig({
       },
       fonts: {
         heading: {
-          value: "'Cormorant Garamond', Georgia, 'Times New Roman', serif",
+          value: "Lora, Georgia, 'Times New Roman', serif",
         },
         body: {
-          value: "Montserrat, Arial, Helvetica, sans-serif",
+          value: "Manrope, Arial, Helvetica, sans-serif",
         },
       },
       fontSizes: {
         h1: { value: "clamp(2.5rem, 5vw, 3.5rem)" },
         h2: { value: "clamp(1.75rem, 3.5vw, 2.25rem)" },
+        h3: { value: "clamp(1.25rem, 2vw, 1.5rem)" },
         body: { value: "clamp(1rem, 1.5vw, 1.125rem)" },
         cta: { value: "clamp(0.875rem, 1.25vw, 1rem)" },
         micro: { value: "clamp(0.6875rem, 1vw, 0.8125rem)" },
@@ -115,6 +117,14 @@ const config = defineConfig({
           fontWeight: "semibold",
           lineHeight: "1.12",
           letterSpacing: "-0.015em",
+        },
+      },
+      h3: {
+        value: {
+          fontFamily: "heading",
+          fontSize: "h3",
+          fontWeight: "semibold",
+          lineHeight: "1.25",
         },
       },
       body: {

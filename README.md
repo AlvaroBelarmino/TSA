@@ -26,3 +26,4 @@ Abra [http://localhost:3000](http://localhost:3000) no navegador.
 - React
 - Chakra UI
 - TypeScript
+- Lora e Manrope
