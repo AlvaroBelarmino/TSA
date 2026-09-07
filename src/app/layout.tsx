@@ -9,14 +9,14 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "TSA Gestão Contábil",
+    default: "TSA Gestão Contábil — Segurança para cuidar. Clareza para decidir.",
     template: "%s | TSA Gestão Contábil",
   },
   description:
-    "Contabilidade para empresas de serviços no Rio de Janeiro, com clareza, rigor técnico e proximidade real.",
+    "Contabilidade completa e próxima para prestadores de serviços e PMEs no Rio de Janeiro. Clareza, orientação e segurança para decidir.",
   openGraph: {
     title: "TSA Gestão Contábil",
-    description: "Clareza para decidir com segurança.",
+    description: "Segurança para cuidar. Clareza para decidir.",
     type: "website",
     locale: "pt_BR",
     siteName: "TSA Gestão Contábil",
@@ -25,19 +25,19 @@ export const metadata: Metadata = {
         url: "/capaCp.png",
         width: 852,
         height: 316,
-        alt: "TSA Gestão Contábil — Clareza para decidir com segurança.",
+        alt: "TSA Gestão Contábil — Segurança para cuidar. Clareza para decidir.",
       },
     ],
   },
   icons: {
-    icon: [{ url: "/TsaLogoSite.png", type: "image/png" }],
-    shortcut: ["/TsaLogoSite.png"],
-    apple: [{ url: "/TsaLogoSite.png", type: "image/png" }],
+    icon: [{ url: "/favicon.png", type: "image/png" }],
+    shortcut: ["/favicon.png"],
+    apple: [{ url: "/favicon.png", type: "image/png" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "TSA Gestão Contábil",
-    description: "Clareza para decidir com segurança.",
+    description: "Segurança para cuidar. Clareza para decidir.",
     images: ["/capaCp.png"],
   },
 }

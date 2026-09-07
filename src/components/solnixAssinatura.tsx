@@ -18,14 +18,14 @@ export default function SolnixAssinatura() {
       py="1.5"
       pr="3"
       pl="1.5"
-      border="1px solid rgba(185, 152, 122, 0.35)"
+      border="1px solid rgba(244, 132, 32, 0.35)"
       borderRadius="14px"
-      background="linear-gradient(120deg, rgba(185, 152, 122, 0.12), rgba(255, 255, 255, 0.035))"
+      background="linear-gradient(120deg, rgba(244, 132, 32, 0.12), rgba(255, 255, 255, 0.035))"
       transition="border-color 220ms ease, background 220ms ease, transform 220ms ease, box-shadow 220ms ease"
       _hover={{
         borderColor: "accent.warm",
-        background: "linear-gradient(120deg, rgba(185, 152, 122, 0.2), rgba(255, 255, 255, 0.07))",
-        boxShadow: "0 10px 28px rgba(185, 152, 122, 0.13)",
+        background: "linear-gradient(120deg, rgba(244, 132, 32, 0.2), rgba(255, 255, 255, 0.07))",
+        boxShadow: "0 10px 28px rgba(244, 132, 32, 0.13)",
         textDecoration: "none",
         transform: "translateY(-2px)",
       }}

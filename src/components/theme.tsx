@@ -43,13 +43,14 @@ const config = defineConfig({
     tokens: {
       colors: {
         tsa: {
-          blue: { value: "#0B0D38" },
-          ivory: { value: "#F7F5F1" },
-          taupe: { value: "#8B8785" },
-          caramel: { value: "#B9987A" },
-          sage: { value: "#667B73" },
-          graphite: { value: "#282A32" },
+          blue: { value: "#003858" },
+          ivory: { value: "#F7F3EE" },
+          taupe: { value: "#8A8681" },
+          orange: { value: "#F48420" },
+          sage: { value: "#5F736B" },
+          graphite: { value: "#1F2430" },
           white: { value: "#FFFFFF" },
+          mist: { value: "rgba(0, 56, 88, 0.08)" },
         },
       },
       fonts: {
@@ -92,11 +93,11 @@ const config = defineConfig({
           onBrand: { value: "{colors.tsa.ivory}" },
         },
         accent: {
-          warm: { value: "{colors.tsa.caramel}" },
+          warm: { value: "{colors.tsa.orange}" },
           balance: { value: "{colors.tsa.sage}" },
         },
         border: {
-          subtle: { value: "{colors.tsa.taupe}" },
+          subtle: { value: "rgba(0, 56, 88, 0.12)" },
         },
       },
     },

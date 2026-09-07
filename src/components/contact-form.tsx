@@ -185,7 +185,7 @@ export function ContactForm({
           borderRadius="full"
           px="7"
           disabled={!isConfigured || submissionState === "sending"}
-          _hover={{ bg: "accent.balance" }}
+          _hover={{ bg: "accent.warm", color: "brand.primary" }}
         >
           {submissionState === "sending"
             ? "Enviando..."

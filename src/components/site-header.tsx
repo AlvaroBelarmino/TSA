@@ -9,6 +9,14 @@ interface SiteHeaderProps {
   whatsappNumber?: string
 }
 
+const navItems = [
+  ["Início", "#inicio"],
+  ["Serviços", "#servicos"],
+  ["Método", "#metodo"],
+  ["Sobre", "#sobre"],
+  ["Contato", "#contato"],
+] as const
+
 export function SiteHeader({ whatsappNumber = "" }: SiteHeaderProps) {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
@@ -26,16 +34,25 @@ export function SiteHeader({ whatsappNumber = "" }: SiteHeaderProps) {
     return () => window.removeEventListener("scroll", onScroll)
   }, [])
 
+  useEffect(() => {
+    if (!menuOpen) return
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setMenuOpen(false)
+    }
+    window.addEventListener("keydown", onKey)
+    return () => window.removeEventListener("keydown", onKey)
+  }, [menuOpen])
+
   return (
     <Box
       as="header"
       position="fixed"
       inset="0 0 auto"
       zIndex="sticky"
-      bg={scrolled ? "rgba(247, 245, 241, 0.94)" : "transparent"}
+      bg={scrolled || menuOpen ? "rgba(247, 243, 238, 0.94)" : "transparent"}
       borderBottomWidth="1px"
-      borderColor={scrolled ? "border.subtle" : "transparent"}
-      backdropFilter={scrolled ? "blur(14px)" : "none"}
+      borderColor={scrolled || menuOpen ? "border.subtle" : "transparent"}
+      backdropFilter={scrolled || menuOpen ? "blur(14px)" : "none"}
       transition="background 480ms ease-in-out, border-color 480ms ease-in-out, backdrop-filter 480ms ease-in-out"
     >
       <Container maxW="1440px" px={{ base: "5", md: "8", xl: "12" }}>
@@ -43,32 +60,32 @@ export function SiteHeader({ whatsappNumber = "" }: SiteHeaderProps) {
           <Link href="#inicio" aria-label="TSA Gestão Contábil — início">
             <Box
               position="relative"
-              width="clamp(98px, 10vw, 136px)"
-              aspectRatio="1582 / 882"
+              width="clamp(108px, 11vw, 148px)"
+              aspectRatio="870 / 630"
             >
               <Image
-                src="/logo-Branca.png"
+                src="/logo-white.png"
                 alt=""
                 fill
                 priority
-                sizes="136px"
-                aria-hidden={scrolled}
+                sizes="148px"
+                aria-hidden={scrolled || menuOpen}
                 style={{
                   objectFit: "contain",
-                  opacity: scrolled ? 0 : 1,
+                  opacity: scrolled || menuOpen ? 0 : 1,
                   transition: "opacity 480ms ease-in-out",
                 }}
               />
               <Image
-                src="/logo-Azul.png"
+                src="/logo-dark.png"
                 alt=""
                 fill
                 priority
-                sizes="136px"
-                aria-hidden={!scrolled}
+                sizes="148px"
+                aria-hidden={!(scrolled || menuOpen)}
                 style={{
                   objectFit: "contain",
-                  opacity: scrolled ? 1 : 0,
+                  opacity: scrolled || menuOpen ? 1 : 0,
                   transition: "opacity 480ms ease-in-out",
                 }}
               />
@@ -81,61 +98,41 @@ export function SiteHeader({ whatsappNumber = "" }: SiteHeaderProps) {
             gap="8"
             display={{ base: "none", lg: "flex" }}
           >
-            <Link
-              href="#inicio"
-              textStyle="cta"
-              color={scrolled ? "brand.primary" : "fg.onBrand"}
-              transition="color 480ms ease-in-out"
-            >
-              Início
-            </Link>
-            <Link
-              href="#servicos"
-              textStyle="cta"
-              color={scrolled ? "brand.primary" : "fg.onBrand"}
-              transition="color 480ms ease-in-out"
-            >
-              Serviços
-            </Link>
-            <Link
-              href="#metodo"
-              textStyle="cta"
-              color={scrolled ? "brand.primary" : "fg.onBrand"}
-              transition="color 480ms ease-in-out"
-            >
-              Método Clareza
-            </Link>
-            <Link
-              href="#sobre"
-              textStyle="cta"
-              color={scrolled ? "brand.primary" : "fg.onBrand"}
-              transition="color 480ms ease-in-out"
-            >
-              Sobre
-            </Link>
-            <Link
-              href="#contato"
-              textStyle="cta"
-              color={scrolled ? "brand.primary" : "fg.onBrand"}
-              transition="color 480ms ease-in-out"
-            >
-              Contato
-            </Link>
+            {navItems.map(([label, href]) => (
+              <Link
+                key={href}
+                href={href}
+                textStyle="cta"
+                color={scrolled ? "brand.primary" : "fg.onBrand"}
+                transition="color 480ms ease-in-out"
+                _hover={{ color: "accent.warm" }}
+              >
+                {label}
+              </Link>
+            ))}
           </HStack>
 
           <HStack gap="2">
             <Button
               asChild
-              bg={scrolled ? "brand.primary" : "accent.warm"}
-              color={scrolled ? "fg.onBrand" : "brand.primary"}
+              bg={scrolled || menuOpen ? "brand.primary" : "accent.warm"}
+              color={scrolled || menuOpen ? "fg.onBrand" : "brand.primary"}
               borderRadius="full"
               px={{ base: "4", md: "6" }}
-              _hover={{ bg: scrolled ? "accent.balance" : "fg.onBrand" }}
+              _hover={{ bg: scrolled || menuOpen ? "accent.balance" : "fg.onBrand" }}
               transition="background-color 480ms ease-in-out, color 480ms ease-in-out"
             >
-              <a href={whatsappHref} target={normalizedNumber ? "_blank" : undefined} rel={normalizedNumber ? "noreferrer" : undefined}>
-                <Box as="span" display={{ base: "none", sm: "inline" }}>Conversar com a TSA</Box>
-                <Box as="span" display={{ base: "inline", sm: "none" }}>Conversar</Box>
+              <a
+                href={whatsappHref}
+                target={normalizedNumber ? "_blank" : undefined}
+                rel={normalizedNumber ? "noreferrer" : undefined}
+              >
+                <Box as="span" display={{ base: "none", sm: "inline" }}>
+                  Falar no WhatsApp
+                </Box>
+                <Box as="span" display={{ base: "inline", sm: "none" }}>
+                  WhatsApp
+                </Box>
                 <LuArrowUpRight />
               </a>
             </Button>
@@ -145,8 +142,10 @@ export function SiteHeader({ whatsappNumber = "" }: SiteHeaderProps) {
               aria-expanded={menuOpen}
               onClick={() => setMenuOpen((open) => !open)}
               variant="ghost"
-              color={scrolled ? "brand.primary" : "fg.onBrand"}
-              _hover={{ bg: scrolled ? "rgba(11,13,56,0.08)" : "rgba(247,245,241,0.12)" }}
+              color={scrolled || menuOpen ? "brand.primary" : "fg.onBrand"}
+              _hover={{
+                bg: scrolled || menuOpen ? "rgba(0,56,88,0.08)" : "rgba(247,243,238,0.12)",
+              }}
             >
               {menuOpen ? <LuX size="22" /> : <LuMenu size="22" />}
             </IconButton>
@@ -154,15 +153,19 @@ export function SiteHeader({ whatsappNumber = "" }: SiteHeaderProps) {
         </Flex>
         <Box
           display={{ base: menuOpen ? "block" : "none", lg: "none" }}
-          bg="bg.canvas"
           color="brand.primary"
           borderTopWidth="1px"
           borderColor="border.subtle"
           py="5"
         >
           <Stack gap="4">
-            {[['Início', '#inicio'], ['Serviços', '#servicos'], ['Método Clareza', '#metodo'], ['Sobre', '#sobre'], ['Contato', '#contato']].map(([label, href]) => (
-              <Link key={href} href={href} textStyle="cta" onClick={() => setMenuOpen(false)}>
+            {navItems.map(([label, href]) => (
+              <Link
+                key={href}
+                href={href}
+                textStyle="cta"
+                onClick={() => setMenuOpen(false)}
+              >
                 {label}
               </Link>
             ))}
