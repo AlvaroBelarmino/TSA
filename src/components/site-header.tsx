@@ -55,12 +55,18 @@ export function SiteHeader({ whatsappNumber = "" }: SiteHeaderProps) {
       backdropFilter={scrolled || menuOpen ? "blur(14px)" : "none"}
       transition="background 480ms ease-in-out, border-color 480ms ease-in-out, backdrop-filter 480ms ease-in-out"
     >
-      <Container maxW="1440px" px={{ base: "5", md: "8", xl: "12" }}>
-        <Flex minH={{ base: "76px", md: "88px" }} align="center" justify="space-between">
-          <Link href="#inicio" aria-label="TSA Gestão Contábil — início">
+      <Container maxW="1440px" px={{ base: "5", md: "8", xl: "12" }} minW="0">
+        <Flex
+          minH={{ base: "76px", md: "88px" }}
+          align="center"
+          justify="space-between"
+          gap="3"
+          minW="0"
+        >
+          <Link href="#inicio" aria-label="TSA Gestão Contábil — início" flexShrink="0">
             <Box
               position="relative"
-              width="clamp(108px, 11vw, 148px)"
+              width="clamp(88px, 22vw, 148px)"
               aspectRatio="870 / 630"
             >
               <Image
@@ -112,13 +118,15 @@ export function SiteHeader({ whatsappNumber = "" }: SiteHeaderProps) {
             ))}
           </HStack>
 
-          <HStack gap="2">
+          <HStack gap="2" flexShrink="0" minW="0">
             <Button
               asChild
               bg={scrolled || menuOpen ? "brand.primary" : "accent.warm"}
               color={scrolled || menuOpen ? "fg.onBrand" : "brand.primary"}
               borderRadius="full"
-              px={{ base: "4", md: "6" }}
+              px={{ base: "3", md: "6" }}
+              flexShrink="1"
+              maxW={{ base: "46vw", sm: "none" }}
               _hover={{ bg: scrolled || menuOpen ? "accent.balance" : "fg.onBrand" }}
               transition="background-color 480ms ease-in-out, color 480ms ease-in-out"
             >

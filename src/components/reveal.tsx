@@ -40,6 +40,8 @@ export function Reveal({ children, delay = 0, y = 24 }: RevealProps) {
     <Box
       ref={ref}
       width="full"
+      maxW="100%"
+      minW="0"
       opacity={visible ? 1 : 0}
       transform={visible ? "translateY(0)" : `translateY(${y}px)`}
       transition={`opacity 700ms cubic-bezier(0.22, 1, 0.36, 1) ${delay}ms, transform 700ms cubic-bezier(0.22, 1, 0.36, 1) ${delay}ms`}

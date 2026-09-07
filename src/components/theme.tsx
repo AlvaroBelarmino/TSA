@@ -10,12 +10,17 @@ const config = defineConfig({
       background: "bg.canvas",
       color: "fg.default",
       scrollBehavior: "smooth",
+      overflowX: "clip",
+      maxWidth: "100%",
     },
     body: {
       fontFamily: "body",
       fontSize: "body",
       fontWeight: "regular",
       lineHeight: "1.7",
+    },
+    "img, svg, video, canvas": {
+      maxWidth: "100%",
     },
     h1: {
       textStyle: "h1",

@@ -214,9 +214,9 @@ function Kicker({
   color?: string
 }) {
   return (
-    <HStack gap="4">
-      <Box w="10" h="1px" bg="accent.warm" aria-hidden="true" />
-      <Text textStyle="micro" color={color}>
+    <HStack gap="4" minW="0" align="center">
+      <Box w="10" h="1px" bg="accent.warm" flex="0 0 auto" aria-hidden="true" />
+      <Text textStyle="micro" color={color} minW="0" css={{ overflowWrap: "anywhere" }}>
         {children}
       </Text>
     </HStack>
@@ -264,7 +264,7 @@ function CheckItem({
   onBrand?: boolean
 }) {
   return (
-    <HStack gap="3" align="flex-start">
+    <HStack gap="3" align="flex-start" minW="0" w="full">
       <Flex
         mt="1"
         boxSize="5"
@@ -277,7 +277,13 @@ function CheckItem({
       >
         <LuCheck size="12" />
       </Flex>
-      <Text textStyle="cta" fontWeight="regular" color={onBrand ? "fg.onBrand" : "fg.default"}>
+      <Text
+        textStyle="cta"
+        fontWeight="regular"
+        color={onBrand ? "fg.onBrand" : "fg.default"}
+        minW="0"
+        css={{ overflowWrap: "anywhere" }}
+      >
         {children}
       </Text>
     </HStack>
@@ -291,6 +297,9 @@ function ServiceCard({ service }: { service: (typeof services)[number] }) {
       position="relative"
       overflow="hidden"
       h="full"
+      w="full"
+      minW="0"
+      maxW="100%"
       gap="0"
       bg="bg.surface"
       borderWidth="1px"
@@ -342,17 +351,17 @@ function ServiceCard({ service }: { service: (typeof services)[number] }) {
         </Box>
       </Box>
 
-      <Stack gap="0" flex="1" px={{ base: "6", md: "7" }} pt="7" pb="6">
+      <Stack gap="0" flex="1" minW="0" px={{ base: "5", md: "7" }} pt="7" pb="6">
         <Heading
           as="h3"
           fontFamily="heading"
-          fontSize="1.3125rem"
+          fontSize={{ base: "1.2rem", md: "1.3125rem" }}
           lineHeight="1.3"
           fontWeight="semibold"
           letterSpacing="-0.01em"
           color="brand.primary"
           mb="3"
-          css={{ textWrap: "balance" }}
+          css={{ textWrap: "balance", overflowWrap: "anywhere" }}
         >
           {service.title}
         </Heading>
@@ -360,7 +369,7 @@ function ServiceCard({ service }: { service: (typeof services)[number] }) {
           fontSize="0.9375rem"
           lineHeight="1.6"
           color="fg.default"
-          css={{ textWrap: "pretty" }}
+          css={{ textWrap: "pretty", overflowWrap: "anywhere" }}
         >
           {service.description}
         </Text>
@@ -371,9 +380,10 @@ function ServiceCard({ service }: { service: (typeof services)[number] }) {
           pt="6"
           borderTopWidth="1px"
           borderColor="border.subtle"
+          minW="0"
         >
           {service.items.map((item) => (
-            <HStack key={item} gap="2.5" align="center">
+            <HStack key={item} gap="2.5" align="center" minW="0">
               <Box
                 boxSize="1.5"
                 borderRadius="full"
@@ -381,7 +391,13 @@ function ServiceCard({ service }: { service: (typeof services)[number] }) {
                 flex="0 0 auto"
                 aria-hidden="true"
               />
-              <Text fontSize="0.8125rem" lineHeight="1.5" color="fg.muted">
+              <Text
+                fontSize="0.8125rem"
+                lineHeight="1.5"
+                color="fg.muted"
+                minW="0"
+                css={{ overflowWrap: "anywhere" }}
+              >
                 {item}
               </Text>
             </HStack>
@@ -401,22 +417,28 @@ function ServiceCard({ service }: { service: (typeof services)[number] }) {
         alignItems="center"
         justifyContent="space-between"
         gap="3"
-        px={{ base: "6", md: "7" }}
+        px={{ base: "5", md: "7" }}
         py="4"
         borderTopWidth="1px"
         borderColor="border.subtle"
         color="brand.primary"
+        minW="0"
         transition="background 260ms ease, color 260ms ease"
         _groupHover={{ bg: "brand.primary", color: "fg.onBrand" }}
         _hover={{ textDecoration: "none" }}
       >
-        <HStack gap="2.5">
-          <FaWhatsapp size={16} aria-hidden="true" />
-          Falar sobre esse serviço
+        <HStack gap="2.5" minW="0">
+          <Box flex="0 0 auto">
+            <FaWhatsapp size={16} aria-hidden="true" />
+          </Box>
+          <Text as="span" css={{ overflowWrap: "anywhere" }}>
+            Falar sobre esse serviço
+          </Text>
         </HStack>
         <Box
           as="span"
           display="inline-flex"
+          flex="0 0 auto"
           transition="transform 240ms ease"
           _groupHover={{ transform: "translate(3px, -3px)" }}
         >
@@ -429,10 +451,10 @@ function ServiceCard({ service }: { service: (typeof services)[number] }) {
 
 export default function Home() {
   return (
-    <Box overflow="hidden">
+    <Box overflowX="clip" maxW="100%">
       <SiteHeader whatsappNumber={whatsappNumber} />
 
-      <Box as="main">
+      <Box as="main" minW="0" maxW="100%">
         <Box
           id="inicio"
           as="section"
@@ -505,9 +527,15 @@ export default function Home() {
             pb={{ base: "16", lg: "0" }}
             pt={{ base: "28", lg: "0" }}
           >
-            <Stack gap={{ base: "5", md: "6" }} maxW="680px">
+            <Stack gap={{ base: "5", md: "6" }} maxW="680px" w="full" minW="0">
               <Kicker color="accent.warm">TSA Gestão Contábil · Rio de Janeiro</Kicker>
-              <Heading id="hero-title" as="h1" textStyle="h1" color="fg.onBrand">
+              <Heading
+                id="hero-title"
+                as="h1"
+                textStyle="h1"
+                color="fg.onBrand"
+                css={{ textWrap: "balance", overflowWrap: "anywhere" }}
+              >
                 Segurança para cuidar.
                 <Box as="span" display="block">
                   Clareza para decidir.
@@ -517,14 +545,15 @@ export default function Home() {
                 Contabilidade completa e próxima para quem empreende: cuidamos das
                 obrigações e orientamos as decisões do seu negócio.
               </Text>
-              <Flex gap="3" wrap="wrap" pt="1">
+              <Flex gap="3" wrap="wrap" pt="1" w="full">
                 <Button
                   asChild
                   size="lg"
                   bg="accent.warm"
                   color="brand.primary"
                   borderRadius="full"
-                  px="7"
+                  px={{ base: "5", md: "7" }}
+                  w={{ base: "full", sm: "auto" }}
                   _hover={{ bg: "fg.onBrand" }}
                 >
                   <a href={whatsappHref} {...externalLinkProps}>
@@ -539,7 +568,8 @@ export default function Home() {
                   borderColor="rgba(247, 243, 238, 0.55)"
                   color="fg.onBrand"
                   borderRadius="full"
-                  px="7"
+                  px={{ base: "5", md: "7" }}
+                  w={{ base: "full", sm: "auto" }}
                   _hover={{ bg: "rgba(247, 243, 238, 0.1)" }}
                 >
                   <a href="#servicos">
@@ -683,99 +713,147 @@ export default function Home() {
           py={{ base: "20", md: "28" }}
           bg="bg.canvas"
         >
-          <Container maxW="1200px" px={{ base: "5", md: "8" }}>
-            <Stack gap={{ base: "10", md: "14" }}>
+          <Container maxW="1200px" px={{ base: "5", md: "8" }} minW="0">
+            <Stack gap={{ base: "10", md: "14" }} minW="0" w="full">
               <Grid
                 templateColumns={{ base: "1fr", lg: "1.1fr 0.9fr" }}
                 gap={{ base: "6", lg: "16" }}
                 alignItems="end"
+                minW="0"
               >
-                <Stack gap="5">
+                <Stack gap="5" minW="0">
                   <Kicker>Assessoria contábil completa</Kicker>
-                  <Heading as="h2" textStyle="h2" color="brand.primary">
+                  <Heading
+                    as="h2"
+                    textStyle="h2"
+                    color="brand.primary"
+                    css={{ textWrap: "balance", overflowWrap: "anywhere" }}
+                  >
                     Rigor técnico para manter sua empresa organizada. Presença para
                     orientar o caminho.
                   </Heading>
                 </Stack>
-                <Text textStyle="body" color="fg.default">
+                <Text textStyle="body" color="fg.default" minW="0">
                   Escolha o serviço que faz sentido para o seu momento e fale
                   diretamente sobre ele — a conversa já começa no assunto certo.
                 </Text>
               </Grid>
 
               <Reveal>
-                <Grid
-                  templateColumns={{ base: "1fr", lg: "1.15fr 0.85fr" }}
-                  gap={{ base: "6", md: "7" }}
+                <Box
+                  w="full"
+                  minW="0"
+                  maxW="100%"
                   bg="bg.brand"
                   color="fg.onBrand"
                   borderRadius="2xl"
-                  p={{ base: "7", md: "10" }}
-                  alignItems="center"
+                  overflow="hidden"
+                  p={{ base: "5", sm: "7", md: "10" }}
                 >
-                  <Stack gap="5">
-                    <HStack gap="3" wrap="wrap">
-                      <Box
-                        as="span"
-                        borderWidth="1px"
-                        borderColor="accent.warm"
-                        color="accent.warm"
-                        borderRadius="full"
-                        px="3"
-                        py="1"
-                        textStyle="micro"
+                  <Grid
+                    templateColumns={{ base: "1fr", lg: "1.15fr 0.85fr" }}
+                    gap={{ base: "6", md: "7" }}
+                    alignItems="center"
+                    w="full"
+                    minW="0"
+                  >
+                    <Stack gap="5" minW="0" w="full">
+                      <HStack gap="3" wrap="wrap">
+                        <Box
+                          as="span"
+                          borderWidth="1px"
+                          borderColor="accent.warm"
+                          color="accent.warm"
+                          borderRadius="full"
+                          px="3"
+                          py="1"
+                          textStyle="micro"
+                        >
+                          {featuredService.badge}
+                        </Box>
+                      </HStack>
+                      <Heading
+                        as="h3"
+                        fontFamily="heading"
+                        fontSize={{ base: "1.5rem", sm: "h2" }}
+                        lineHeight="1.2"
+                        fontWeight="semibold"
+                        color="fg.onBrand"
+                        css={{ textWrap: "balance", overflowWrap: "anywhere" }}
                       >
-                        {featuredService.badge}
-                      </Box>
-                    </HStack>
-                    <Heading
-                      as="h3"
-                      fontFamily="heading"
-                      fontSize="h2"
-                      lineHeight="1.12"
-                      fontWeight="semibold"
-                      color="fg.onBrand"
-                    >
-                      {featuredService.title}
-                    </Heading>
-                    <Text textStyle="body" color="fg.onBrand" opacity="0.9" maxW="60ch">
-                      {featuredService.description}
-                    </Text>
-                  </Stack>
+                        {featuredService.title}
+                      </Heading>
+                      <Text
+                        textStyle="body"
+                        color="fg.onBrand"
+                        opacity="0.9"
+                        maxW="60ch"
+                        css={{ overflowWrap: "anywhere" }}
+                      >
+                        {featuredService.description}
+                      </Text>
+                    </Stack>
 
-                  <Stack gap="6">
-                    <SimpleGrid columns={{ base: 1, sm: 2, lg: 1 }} gap="3">
-                      {featuredService.items.map((item) => (
-                        <CheckItem key={item} onBrand>
-                          {item}
-                        </CheckItem>
-                      ))}
-                    </SimpleGrid>
-                    <Button
-                      asChild
-                      size="lg"
-                      alignSelf={{ base: "stretch", sm: "flex-start" }}
-                      bg="accent.warm"
-                      color="brand.primary"
-                      borderRadius="full"
-                      px="7"
-                      _hover={{ bg: "fg.onBrand" }}
-                    >
-                      <a
-                        href={whatsappLink(featuredService.message)}
-                        {...externalLinkProps}
+                    <Stack gap="6" minW="0" w="full">
+                      <SimpleGrid columns={{ base: 1, sm: 2, lg: 1 }} gap="3" minW="0">
+                        {featuredService.items.map((item) => (
+                          <CheckItem key={item} onBrand>
+                            {item}
+                          </CheckItem>
+                        ))}
+                      </SimpleGrid>
+                      <Button
+                        asChild
+                        size="lg"
+                        alignSelf="stretch"
+                        w="full"
+                        maxW="100%"
+                        bg="accent.warm"
+                        color="brand.primary"
+                        borderRadius="full"
+                        px={{ base: "4", md: "7" }}
+                        h="auto"
+                        minH="12"
+                        whiteSpace="normal"
+                        _hover={{ bg: "fg.onBrand" }}
+                        css={{
+                          "& a": {
+                            display: "inline-flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            gap: "0.5rem",
+                            width: "100%",
+                            whiteSpace: "normal",
+                            textAlign: "center",
+                            lineHeight: "1.3",
+                            paddingBlock: "0.85rem",
+                            overflowWrap: "anywhere",
+                          },
+                        }}
                       >
-                        Falar sobre contabilidade completa
-                        <FaWhatsapp />
-                      </a>
-                    </Button>
-                  </Stack>
-                </Grid>
+                        <a
+                          href={whatsappLink(featuredService.message)}
+                          {...externalLinkProps}
+                        >
+                          <Box as="span" display={{ base: "none", sm: "inline" }}>
+                            Falar sobre contabilidade completa
+                          </Box>
+                          <Box as="span" display={{ base: "inline", sm: "none" }}>
+                            Falar no WhatsApp
+                          </Box>
+                          <FaWhatsapp />
+                        </a>
+                      </Button>
+                    </Stack>
+                  </Grid>
+                </Box>
               </Reveal>
 
               <SimpleGrid
                 columns={{ base: 1, md: 2, lg: 3 }}
                 gap={{ base: "5", md: "6" }}
+                minW="0"
+                w="full"
               >
                 {services.map((service, index) => (
                   <Reveal key={service.title} delay={index * 60}>
@@ -785,15 +863,17 @@ export default function Home() {
               </SimpleGrid>
 
               <Flex
-                align="center"
+                align={{ base: "stretch", sm: "center" }}
                 justify="space-between"
+                direction={{ base: "column", sm: "row" }}
                 gap="5"
                 wrap="wrap"
                 borderTopWidth="1px"
                 borderColor="border.subtle"
                 pt="7"
+                minW="0"
               >
-                <Text textStyle="body" color="fg.default" maxW="60ch">
+                <Text textStyle="body" color="fg.default" maxW="60ch" minW="0">
                   Não encontrou exatamente o que precisa? Conte sua situação e a TSA
                   indica o caminho contábil mais adequado.
                 </Text>
@@ -804,6 +884,8 @@ export default function Home() {
                   color="brand.primary"
                   borderRadius="full"
                   px="6"
+                  w={{ base: "full", sm: "auto" }}
+                  flexShrink="0"
                   _hover={{ bg: "brand.primary", color: "fg.onBrand" }}
                 >
                   <a href="#contato">
@@ -851,6 +933,8 @@ export default function Home() {
                   gap="0"
                   borderTopWidth="1px"
                   borderColor="border.subtle"
+                  minW="0"
+                  w="full"
                 >
                   {methodSteps.map((step, index) => (
                     <Stack
@@ -864,6 +948,7 @@ export default function Home() {
                       borderLeftWidth={{ base: "0", lg: index === 0 ? "0" : "1px" }}
                       borderColor="border.subtle"
                       gap="4"
+                      minW="0"
                     >
                       <Box
                         position="absolute"
@@ -1113,11 +1198,29 @@ export default function Home() {
                   asChild
                   size="lg"
                   alignSelf={{ base: "stretch", sm: "flex-start" }}
+                  w={{ base: "full", sm: "auto" }}
+                  maxW="100%"
                   bg="#25D366"
                   color="white"
                   borderRadius="full"
-                  px="7"
+                  px={{ base: "5", md: "7" }}
+                  h="auto"
+                  minH="12"
+                  whiteSpace="normal"
                   _hover={{ bg: "#1EBE5D" }}
+                  css={{
+                    "& a": {
+                      display: "inline-flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      gap: "0.5rem",
+                      width: "100%",
+                      whiteSpace: "normal",
+                      textAlign: "center",
+                      lineHeight: "1.3",
+                      paddingBlock: "0.85rem",
+                    },
+                  }}
                 >
                   <a href={whatsappHref} {...externalLinkProps}>
                     Abrir conversa no WhatsApp
@@ -1170,20 +1273,21 @@ export default function Home() {
       </Box>
 
       <Box as="footer" bg="bg.brand" color="fg.onBrand" py={{ base: "12", md: "14" }}>
-        <Container maxW="1200px" px={{ base: "5", md: "8" }}>
+        <Container maxW="1200px" px={{ base: "5", md: "8" }} minW="0">
           <Grid
             templateColumns={{ base: "1fr", md: "1.35fr 0.7fr 0.7fr 0.9fr" }}
             gap={{ base: "10", md: "8" }}
+            minW="0"
           >
-            <Stack gap="5" maxW="420px">
+            <Stack gap="5" maxW="420px" minW="0">
               <Image
                 src="/logo-white.png"
                 alt="TSA Gestão Contábil"
                 width={801}
                 height={486}
-                style={{ width: "148px", height: "auto" }}
+                style={{ width: "min(148px, 100%)", height: "auto" }}
               />
-              <Text textStyle="h3" color="fg.onBrand">
+              <Text textStyle="h3" color="fg.onBrand" css={{ overflowWrap: "anywhere" }}>
                 Segurança para cuidar. Clareza para decidir.
               </Text>
               <HStack gap="3" pt="1">

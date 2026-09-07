@@ -178,12 +178,16 @@ export function ContactForm({
 
         <Button
           type="submit"
-          alignSelf={{ base: "stretch", sm: "flex-start" }}
+          alignSelf="stretch"
+          w={{ base: "full", sm: "auto" }}
           size="lg"
           bg="brand.primary"
           color="fg.onBrand"
           borderRadius="full"
-          px="7"
+          px={{ base: "5", md: "7" }}
+          h="auto"
+          minH="12"
+          whiteSpace="normal"
           disabled={!isConfigured || submissionState === "sending"}
           _hover={{ bg: "accent.warm", color: "brand.primary" }}
         >
