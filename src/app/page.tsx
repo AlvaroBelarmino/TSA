@@ -150,58 +150,42 @@ const methodSteps = [
   {
     number: "01",
     title: "Diagnóstico",
-    description: "Levantamento real da situação contábil e financeira da empresa.",
+    description: "Você entende exatamente onde sua empresa está hoje, sem letras miúdas.",
     icon: "/icons/bussola.png",
   },
   {
     number: "02",
     title: "Organização",
-    description: "Processos e documentação em ordem, sem burocracia extra.",
+    description: "Suas informações ficam em ordem, sem você precisar correr atrás.",
     icon: "/icons/funil.png",
   },
   {
     number: "03",
     title: "Direção",
-    description: "Recomendações claras para decisões de curto e médio prazo.",
+    description: "Você recebe recomendações claras pra decidir com segurança.",
     icon: "/icons/farol.png",
   },
   {
     number: "04",
     title: "Acompanhamento",
-    description: "Presença contínua antes que a dúvida vire problema.",
+    description: "Você tem alguém por perto antes que a dúvida vire problema.",
     icon: "/icons/ponte.png",
   },
 ]
 
 const values = [
   {
-    title: "Clareza",
-    description: "Tornar o que é complexo compreensível para o cliente.",
+    title: "Missão",
+    description: "Traduzir a contabilidade em clareza, para você decidir com mais segurança.",
   },
   {
-    title: "Proximidade",
-    description: "Conhecer a realidade de cada negócio e estar acessível.",
+    title: "Visão",
+    description: "Ser referência em contabilidade próxima e estratégica no Rio de Janeiro.",
   },
   {
-    title: "Responsabilidade",
-    description: "Cuidar de informações, obrigações e decisões com rigor.",
+    title: "Valores",
+    description: "Clareza, proximidade e responsabilidade em cada relação.",
   },
-  {
-    title: "Ética",
-    description: "Agir com transparência, integridade e respeito.",
-  },
-  {
-    title: "Confiança",
-    description: "Construir relações consistentes pela competência e presença.",
-  },
-]
-
-const audiences = [
-  "Tecnologia e informática",
-  "Advocacia e serviços profissionais",
-  "Saúde e bem-estar",
-  "Educação, cursos e treinamentos",
-  "Empresas prestadoras de serviços",
 ]
 
 const sectionAnchorOffset = { base: "76px", md: "88px" }
@@ -528,7 +512,7 @@ export default function Home() {
             pt={{ base: "28", lg: "0" }}
           >
             <Stack gap={{ base: "5", md: "6" }} maxW="680px" w="full" minW="0">
-              <Kicker color="accent.warm">TSA Gestão Contábil · Rio de Janeiro</Kicker>
+              <Kicker color="accent.warm">CONTABILIDADE PARA EMPRESAS EM CRESCIMENTO</Kicker>
               <Heading
                 id="hero-title"
                 as="h1"
@@ -536,14 +520,11 @@ export default function Home() {
                 color="fg.onBrand"
                 css={{ textWrap: "balance", overflowWrap: "anywhere" }}
               >
-                Segurança para cuidar.
-                <Box as="span" display="block">
-                  Clareza para decidir.
-                </Box>
+                Sua contabilidade deve trazer clareza, não mais dúvidas.
               </Heading>
               <Text textStyle="body" color="fg.onBrand" maxW="48ch" opacity="0.92">
-                Contabilidade completa e próxima para quem empreende: cuidamos das
-                obrigações e orientamos as decisões do seu negócio.
+                Organizamos, acompanhamos e traduzimos os números da sua empresa para que você entenda melhor o negócio e tome decisões com mais segurança.
+
               </Text>
               <Flex gap="3" wrap="wrap" pt="1" w="full">
                 <Button
@@ -557,24 +538,8 @@ export default function Home() {
                   _hover={{ bg: "fg.onBrand" }}
                 >
                   <a href={whatsappHref} {...externalLinkProps}>
-                    Conversar no WhatsApp
+                    Quero conversar sobre minha empresa
                     <FaWhatsapp />
-                  </a>
-                </Button>
-                <Button
-                  asChild
-                  size="lg"
-                  variant="outline"
-                  borderColor="rgba(247, 243, 238, 0.55)"
-                  color="fg.onBrand"
-                  borderRadius="full"
-                  px={{ base: "5", md: "7" }}
-                  w={{ base: "full", sm: "auto" }}
-                  _hover={{ bg: "rgba(247, 243, 238, 0.1)" }}
-                >
-                  <a href="#servicos">
-                    Ver serviços
-                    <LuArrowDownRight />
                   </a>
                 </Button>
               </Flex>
@@ -634,22 +599,20 @@ export default function Home() {
                 alignItems="center"
               >
                 <Stack gap="6">
-                  <Kicker>Contabilidade que explica</Kicker>
+                  <Kicker>Sua empresa cresceu.</Kicker>
                   <Heading as="h2" textStyle="h2" color="brand.primary">
-                    Seu contador entrega a guia. Mas explica o que ela significa?
+                    Mas você entende melhor os números hoje?
                   </Heading>
                 </Stack>
                 <Stack gap="6">
                   <Text textStyle="body" color="fg.default">
-                    Cumprir prazos e obrigações é o ponto de partida. Na TSA, você
-                    também entende o que está acontecendo, quais decisões merecem
-                    atenção e como a contabilidade se conecta à realidade do seu
-                    negócio.
+                    À medida que o negócio fica mais complexo, receber informações não é suficiente. Você precisa conseguir entendê-las para decidir com mais segurança.
                   </Text>
                   <Stack gap="3">
-                    <CheckItem>Informação técnica traduzida com clareza</CheckItem>
-                    <CheckItem>Acesso real para perguntar e entender</CheckItem>
-                    <CheckItem>Orientação antes que a dúvida vire problema</CheckItem>
+                    <CheckItem>ocê recebe as guias, mas não entende por que os valores mudaram.</CheckItem>
+                    <CheckItem>Fatura mais, mas ainda tem dificuldade de saber o que realmente sobra.</CheckItem>
+                    <CheckItem>Só fala com a contabilidade quando existe uma obrigação ou problema</CheckItem>
+                    <CheckItem>Precisa tomar decisões importantes sem ter os números organizados e claros.</CheckItem>
                   </Stack>
                 </Stack>
               </Grid>
@@ -662,14 +625,13 @@ export default function Home() {
             <Reveal>
               <Stack gap={{ base: "10", md: "12" }}>
                 <Stack gap="4" maxW="900px">
-                  <Kicker color="accent.warm">Por que a TSA</Kicker>
+                  <Kicker color="accent.warm">Ainda não sabe por onde começar?</Kicker>
                   <Heading as="h2" textStyle="h2" color="fg.onBrand" fontStyle="italic">
-                    “Na TSA você não recebe apenas a contabilidade da sua empresa:
-                    recebe clareza para entender e orientação para decidir.”
+                    Você não precisa decidir o próximo passo sozinho.
                   </Heading>
                   <Text textStyle="body" color="fg.onBrand" maxW="64ch" opacity="0.9">
-                    Unimos rigor técnico a um atendimento próximo — para que o
-                    empresário não se sinta perdido quando o assunto é contabilidade.
+                    Cada empresa tem um momento diferente. Conte a sua situação e a TSA te ajuda a entender o que fazer a seguir, sem compromisso.
+
                   </Text>
                 </Stack>
                 <Grid
@@ -836,7 +798,7 @@ export default function Home() {
                           {...externalLinkProps}
                         >
                           <Box as="span" display={{ base: "none", sm: "inline" }}>
-                            Falar sobre contabilidade completa
+                            Explicar minha situação
                           </Box>
                           <Box as="span" display={{ base: "inline", sm: "none" }}>
                             Falar no WhatsApp
@@ -1038,133 +1000,60 @@ export default function Home() {
                 </Box>
               </Box>
 
-              <Stack gap="7">
+              <Stack gap="4">
                 <Kicker>Quem conduz</Kicker>
-                <Heading as="h2" textStyle="h2" color="brand.primary">
+                <Heading as="h2" textStyle="h2" color="brand.primary" mb="4">
                   Conhecimento técnico com atenção genuína a quem está do outro lado.
                 </Heading>
                 <Text textStyle="body" color="fg.default">
-                  A TSA nasceu durante a pandemia, quando a experiência contábil se
-                  encontrou com os desafios reais de empreender. O propósito ficou
-                  claro: trazer clareza onde existe dúvida e segurança para quem toma
-                  decisões todos os dias.
+                  Sou Thaise, contadora e gestora, com mais de 10 anos de experiência em
+                  Contabilidade, Gestão Financeira e Auditoria.
                 </Text>
                 <Text textStyle="body" color="fg.default">
-                  Mais de 10 anos de atuação na área, combinando formação, análise
-                  criteriosa e uma relação próxima com cada cliente — porque
-                  contabilidade boa também explica.
+                  Aprendi, ao longo desses anos, que contabilidade não deve ser só sobre
+                  impostos, guias e obrigações: ela precisa{" "}
+                  <Text as="em" fontWeight="semibold">
+                    ajudar o empresário a entender o negócio e decidir com clareza
+                  </Text>
+                  . Foi esse entendimento, amadurecido durante a pandemia ao lado de
+                  empresários enfrentando desafios reais, que deu origem à TSA.
                 </Text>
-
-                <Stack gap="3">
-                  {[
-                    "Graduação em Ciências Contábeis · Faculdades Integradas Simonsen",
-                    "MBA em Gestão Financeira e Auditoria Contábil · UCB",
-                    "Perícia Judicial Contábil · Escola de Administração Judiciária · PJERJ",
-                  ].map((credential) => (
-                    <HStack key={credential} gap="3" align="flex-start">
-                      <Box
-                        mt="2"
-                        boxSize="2"
-                        borderRadius="full"
-                        bg="accent.warm"
-                        flex="0 0 auto"
-                      />
-                      <Text textStyle="body" color="fg.default">
-                        {credential}
-                      </Text>
-                    </HStack>
-                  ))}
-                </Stack>
-              </Stack>
-            </Grid>
-          </Container>
-        </Box>
-
-        <Box as="section" py={{ base: "20", md: "28" }} bg="bg.surface">
-          <Container maxW="1200px" px={{ base: "5", md: "8" }}>
-            <Reveal>
-              <Stack gap={{ base: "10", md: "14" }}>
-                <Stack gap="5" maxW="720px">
-                  <Kicker>O que nos guia</Kicker>
-                  <Heading as="h2" textStyle="h2" color="brand.primary">
-                    Valores que o cliente sente na prática — não só no discurso.
-                  </Heading>
-                </Stack>
-                <SimpleGrid
-                  columns={{ base: 1, sm: 2, lg: 5 }}
-                  gap={{ base: "8", md: "6" }}
-                >
-                  {values.map((value, index) => (
+                <Text textStyle="body" color="fg.default">
+                  Sou formada em Ciências Contábeis, com MBA em Gestão Financeira e
+                  Auditoria Contábil e formação em Perícia Judicial Contábil.
+                </Text>
+                <Text textStyle="body" color="fg.default">
+                  Boa parte da minha visão profissional, porém, nasceu da prática:{" "}
+                  <Text as="em" fontWeight="semibold">
+                    acompanhando empresas em diferentes fases de crescimento.
+                  </Text>
+                </Text>
+                <Text textStyle="body" color="fg.default">
+                  Hoje, à frente da TSA, ofereço uma contabilidade mais próxima,
+                  estratégica e fácil de compreender. Quero que cada empresário saiba onde
+                  sua empresa está, o que os números dizem e quais decisões podem fortalecer
+                  o próximo passo.
+                </Text>
+                <SimpleGrid columns={{ base: 1, md: 3 }} gap={{ base: "6", md: "4" }} pt="3">
+                  {values.map((value) => (
                     <Stack
                       key={value.title}
                       gap="3"
                       borderTopWidth="2px"
                       borderColor="accent.warm"
-                      pt="5"
+                      pt="4"
                     >
-                      <Text textStyle="micro" color="fg.muted">
-                        0{index + 1}
-                      </Text>
                       <Heading as="h3" textStyle="h3" color="brand.primary">
                         {value.title}
                       </Heading>
-                      <Text textStyle="body" color="fg.default">
+                      <Text fontSize="0.875rem" lineHeight="1.6" color="fg.default">
                         {value.description}
                       </Text>
                     </Stack>
                   ))}
                 </SimpleGrid>
               </Stack>
-            </Reveal>
-          </Container>
-        </Box>
-
-        <Box as="section" py={{ base: "20", md: "28" }} bg="bg.canvas">
-          <Container maxW="1200px" px={{ base: "5", md: "8" }}>
-            <Reveal>
-              <Grid
-                templateColumns={{ base: "1fr", lg: "0.95fr 1.05fr" }}
-                gap={{ base: "12", lg: "20" }}
-              >
-                <Stack gap="6">
-                  <Kicker>Para quem a TSA existe</Kicker>
-                  <Heading as="h2" textStyle="h2" color="brand.primary">
-                    Prestadores de serviços e PMEs que querem entender o porquê das
-                    decisões.
-                  </Heading>
-                  <Text textStyle="body" color="fg.default">
-                    Especialmente negócios no Rio de Janeiro que estão formando equipe,
-                    profissionalizando processos ou cansaram de uma contabilidade
-                    distante e pouco orientadora.
-                  </Text>
-                </Stack>
-
-                <Stack gap="0" borderTopWidth="1px" borderColor="border.subtle">
-                  {audiences.map((audience) => (
-                    <Flex
-                      key={audience}
-                      align="center"
-                      justify="space-between"
-                      gap="4"
-                      py="4"
-                      borderBottomWidth="1px"
-                      borderColor="border.subtle"
-                    >
-                      <Text textStyle="cta" color="fg.default">
-                        {audience}
-                      </Text>
-                      <Box color="accent.warm" flex="0 0 auto">
-                        <LuArrowUpRight size="16" />
-                      </Box>
-                    </Flex>
-                  ))}
-                  <Text textStyle="body" color="fg.muted" pt="5">
-                    Para MEIs, o atendimento é direcionado à fase de crescimento e
-                    transição para uma estrutura empresarial.
-                  </Text>
-                </Stack>
-              </Grid>
-            </Reveal>
+            </Grid>
           </Container>
         </Box>
 
@@ -1184,13 +1073,11 @@ export default function Home() {
             >
               <Stack gap="8">
                 <Stack gap="5">
-                  <Kicker>Vamos começar pela sua dúvida</Kicker>
+                  <Kicker>O PRÓXIMO PASSO</Kicker>
                   <Heading as="h2" textStyle="h2" color="brand.primary">
-                    Vale a pena conversar com uma contabilidade que explica.
-                  </Heading>
+                    Vale a pena conversar com uma contabilidade que explica.   </Heading>
                   <Text textStyle="body" color="fg.default">
-                    A principal porta de entrada é o WhatsApp. Se preferir, deixe seus
-                    dados no formulário e a TSA retorna.
+                    Fale sobre o momento do seu CNPJ hoje: o que está em dia, o que falta e que tipo de suporte você precisa hoje. É por aí que a gente começa.
                   </Text>
                 </Stack>
 
