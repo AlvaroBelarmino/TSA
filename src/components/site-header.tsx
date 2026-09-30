@@ -17,7 +17,9 @@ const navItems = [
   ["Contato", "#contato"],
 ] as const
 
-export function SiteHeader({ whatsappNumber = "" }: SiteHeaderProps) {
+export function SiteHeader({
+  whatsappNumber = "",
+}: SiteHeaderProps) {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const normalizedNumber = whatsappNumber.replace(/\D/g, "")

@@ -34,8 +34,12 @@ const whatsappNumber = process.env.NEXT_PUBLIC_TSA_WHATSAPP_NUMBER?.replace(
   "",
 )
 const contactFormEndpoint = process.env.NEXT_PUBLIC_TSA_CONTACT_FORM_ENDPOINT
-const instagramUrl = process.env.NEXT_PUBLIC_TSA_INSTAGRAM_URL
-const linkedinUrl = process.env.NEXT_PUBLIC_TSA_LINKEDIN_URL
+const instagramUrl =
+  process.env.NEXT_PUBLIC_TSA_INSTAGRAM_URL ??
+  "https://www.instagram.com/tsa.gestaocontabil/"
+const linkedinUrl =
+  process.env.NEXT_PUBLIC_TSA_LINKEDIN_URL ??
+  "https://www.linkedin.com/in/thaise-oliveira/"
 
 const hasWhatsapp = Boolean(whatsappNumber)
 
@@ -273,11 +277,13 @@ function CheckItem({
 function ServiceCard({
   service,
   index,
+  href,
 }: {
   service: (typeof services)[number]
   index: number
+  href?: string
 }) {
-  return (
+  const card = (
     <Stack
       role="group"
       position="relative"
@@ -291,6 +297,7 @@ function ServiceCard({
       borderWidth="1px"
       borderColor="border.subtle"
       borderRadius="2xl"
+      cursor={href ? "pointer" : undefined}
       transform="translateY(0) rotate(0)"
       transformOrigin="center center"
       willChange="transform"
@@ -386,12 +393,33 @@ function ServiceCard({
       </Stack>
     </Stack>
   )
+
+  if (!href) return card
+
+  return (
+    <Link
+      href={href}
+      aria-label={`Ir para o formulário sobre ${service.title}`}
+      display="block"
+      h="full"
+      textDecoration="none"
+      _hover={{ textDecoration: "none" }}
+      _focusVisible={{
+        outline: "3px solid rgba(244, 132, 32, 0.65)",
+        outlineOffset: "4px",
+      }}
+    >
+      {card}
+    </Link>
+  )
 }
 
 export default function Home() {
   return (
     <Box overflowX="clip" maxW="100%">
-      <SiteHeader whatsappNumber={whatsappNumber} />
+      <SiteHeader
+        whatsappNumber={whatsappNumber}
+      />
 
       <Box as="main" minW="0" maxW="100%">
         <Box
@@ -671,6 +699,7 @@ export default function Home() {
 
               <Reveal>
                 <Box
+                  position="relative"
                   w="full"
                   minW="0"
                   maxW="100%"
@@ -680,7 +709,29 @@ export default function Home() {
                   overflow="hidden"
                   p={{ base: "5", sm: "7", md: "10" }}
                 >
+                  <Box position="absolute" inset="0" overflow="hidden" aria-hidden="true">
+                    <Image
+                      src="/BannerContabilidade.png"
+                      alt=""
+                      fill
+                      sizes="(min-width: 48rem) 1120px, 100vw"
+                      style={{
+                        objectFit: "cover",
+                        objectPosition: "center",
+                        transform: "scale(1.04)",
+                        filter: "blur(4px)",
+                      }}
+                    />
+                  </Box>
+                  <Box
+                    position="absolute"
+                    inset="0"
+                    bg="linear-gradient(100deg, rgba(0, 56, 88, 0.96) 0%, rgba(0, 56, 88, 0.89) 48%, rgba(0, 56, 88, 0.78) 100%)"
+                    aria-hidden="true"
+                  />
                   <Grid
+                    position="relative"
+                    zIndex="1"
                     templateColumns={{ base: "1fr", lg: "1.15fr 0.85fr" }}
                     gap={{ base: "6", md: "7" }}
                     alignItems="center"
@@ -777,7 +828,11 @@ export default function Home() {
                     delay={index * 60}
                     rotate={index % 2 === 0 ? -1.5 : 1.5}
                   >
-                    <ServiceCard service={service} index={index} />
+                    <ServiceCard
+                      service={service}
+                      index={index}
+                      href={index < 2 ? "#contato" : undefined}
+                    />
                   </Reveal>
                 ))}
               </SimpleGrid>
@@ -1039,41 +1094,87 @@ export default function Home() {
                   </Text>
                 </Stack>
 
-                <Button
-                  asChild
-                  size="lg"
-                  alignSelf={{ base: "stretch", sm: "flex-start" }}
-                  w={{ base: "full", sm: "auto" }}
-                  maxW="100%"
-                  bg="#25D366"
-                  color="white"
-                  borderRadius="full"
-                  px={{ base: "5", md: "7" }}
-                  h="auto"
-                  minH="12"
-                  whiteSpace="normal"
-                  _hover={{ bg: "#1EBE5D" }}
-                  css={{
-                    "& a": {
-                      display: "inline-flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      gap: "0.5rem",
-                      width: "100%",
-                      whiteSpace: "normal",
-                      textAlign: "center",
-                      lineHeight: "1.3",
-                      paddingBlock: "0.85rem",
-                    },
-                  }}
-                >
-                  <a href={whatsappHref} {...externalLinkProps}>
-                    Abrir conversa no WhatsApp
-                    <FaWhatsapp />
-                  </a>
-                </Button>
+                <Stack gap="3" align="flex-start" order="2">
+                  <Text textStyle="micro" color="brand.primary">
+                    Encontre a TSA nas redes
+                  </Text>
+                  <HStack
+                    gap="3"
+                    p="2"
+                    bg="bg.canvas"
+                    borderWidth="1px"
+                    borderColor="border.subtle"
+                    borderRadius="full"
+                    boxShadow="0 10px 24px rgba(0, 56, 88, 0.08)"
+                  >
+                    <Link
+                      href={whatsappHref}
+                      {...externalLinkProps}
+                      aria-label="WhatsApp da TSA"
+                      display="flex"
+                      alignItems="center"
+                      justifyContent="center"
+                      boxSize="11"
+                      borderRadius="full"
+                      bg="#25D366"
+                      color="white"
+                      boxShadow="0 4px 10px rgba(37, 211, 102, 0.28)"
+                      transition="transform 220ms ease, box-shadow 220ms ease, background 220ms ease"
+                      _hover={{
+                        bg: "#1EBE5D",
+                        transform: "translateY(-3px)",
+                        boxShadow: "0 8px 14px rgba(37, 211, 102, 0.34)",
+                      }}
+                    >
+                      <FaWhatsapp size="20" />
+                    </Link>
+                    <Link
+                      href={instagramUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label="Instagram da TSA"
+                      display="flex"
+                      alignItems="center"
+                      justifyContent="center"
+                      boxSize="11"
+                      borderRadius="full"
+                      bg="linear-gradient(135deg, #833AB4 0%, #E1306C 52%, #FCAF45 100%)"
+                      color="white"
+                      boxShadow="0 4px 10px rgba(225, 48, 108, 0.26)"
+                      transition="transform 220ms ease, box-shadow 220ms ease"
+                      _hover={{
+                        transform: "translateY(-3px)",
+                        boxShadow: "0 8px 14px rgba(225, 48, 108, 0.34)",
+                      }}
+                    >
+                      <LuInstagram size="20" />
+                    </Link>
+                    <Link
+                      href={linkedinUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label="LinkedIn da TSA"
+                      display="flex"
+                      alignItems="center"
+                      justifyContent="center"
+                      boxSize="11"
+                      borderRadius="full"
+                      bg="#0A66C2"
+                      color="white"
+                      boxShadow="0 4px 10px rgba(10, 102, 194, 0.26)"
+                      transition="transform 220ms ease, box-shadow 220ms ease, background 220ms ease"
+                      _hover={{
+                        bg: "#004182",
+                        transform: "translateY(-3px)",
+                        boxShadow: "0 8px 14px rgba(10, 102, 194, 0.34)",
+                      }}
+                    >
+                      <LuLinkedin size="20" />
+                    </Link>
+                  </HStack>
+                </Stack>
 
-                <Stack gap="5">
+                <Stack gap="5" order="1">
                   <ContactDetail icon={<LuMapPin />} title="Rio de Janeiro — RJ">
                     Atuação próxima e regional, com atendimento online
                   </ContactDetail>
@@ -1084,6 +1185,7 @@ export default function Home() {
                     Das 9h às 18h
                   </ContactDetail>
                 </Stack>
+
               </Stack>
 
               <Box
@@ -1135,77 +1237,6 @@ export default function Home() {
               <Text textStyle="h3" color="fg.onBrand" css={{ overflowWrap: "anywhere" }}>
                 Segurança para cuidar. Clareza para decidir.
               </Text>
-              <HStack gap="3" pt="1">
-                {instagramUrl ? (
-                  <Link
-                    href={instagramUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    aria-label="Instagram da TSA"
-                    display="flex"
-                    alignItems="center"
-                    justifyContent="center"
-                    boxSize="10"
-                    borderRadius="full"
-                    borderWidth="1px"
-                    borderColor="rgba(247,243,238,0.28)"
-                    color="fg.onBrand"
-                    _hover={{
-                      color: "brand.primary",
-                      bg: "accent.warm",
-                      borderColor: "accent.warm",
-                    }}
-                  >
-                    <LuInstagram size="19" />
-                  </Link>
-                ) : null}
-                {linkedinUrl ? (
-                  <Link
-                    href={linkedinUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    aria-label="LinkedIn da TSA"
-                    display="flex"
-                    alignItems="center"
-                    justifyContent="center"
-                    boxSize="10"
-                    borderRadius="full"
-                    borderWidth="1px"
-                    borderColor="rgba(247,243,238,0.28)"
-                    color="fg.onBrand"
-                    _hover={{
-                      color: "brand.primary",
-                      bg: "accent.warm",
-                      borderColor: "accent.warm",
-                    }}
-                  >
-                    <LuLinkedin size="19" />
-                  </Link>
-                ) : null}
-                {hasWhatsapp ? (
-                  <Link
-                    href={whatsappHref}
-                    target="_blank"
-                    rel="noreferrer"
-                    aria-label="WhatsApp da TSA"
-                    display="flex"
-                    alignItems="center"
-                    justifyContent="center"
-                    boxSize="10"
-                    borderRadius="full"
-                    borderWidth="1px"
-                    borderColor="rgba(247,243,238,0.28)"
-                    color="fg.onBrand"
-                    _hover={{
-                      color: "brand.primary",
-                      bg: "accent.warm",
-                      borderColor: "accent.warm",
-                    }}
-                  >
-                    <FaWhatsapp size={19} />
-                  </Link>
-                ) : null}
-              </HStack>
             </Stack>
 
             <Stack gap="4">
@@ -1265,6 +1296,32 @@ export default function Home() {
                 _hover={{ color: "accent.warm" }}
               >
                 <FaWhatsapp size={16} /> WhatsApp <LuArrowUpRight size="16" />
+              </Link>
+              <Link
+                href={instagramUrl}
+                target="_blank"
+                rel="noreferrer"
+                textStyle="cta"
+                color="fg.onBrand"
+                display="flex"
+                alignItems="center"
+                gap="2"
+                _hover={{ color: "accent.warm" }}
+              >
+                <LuInstagram size={16} /> Instagram <LuArrowUpRight size="16" />
+              </Link>
+              <Link
+                href={linkedinUrl}
+                target="_blank"
+                rel="noreferrer"
+                textStyle="cta"
+                color="fg.onBrand"
+                display="flex"
+                alignItems="center"
+                gap="2"
+                _hover={{ color: "accent.warm" }}
+              >
+                <LuLinkedin size={16} /> LinkedIn <LuArrowUpRight size="16" />
               </Link>
               <Text textStyle="body" color="fg.onBrand" opacity="0.88">
                 Conte o momento da sua empresa e vamos entender o próximo passo.
