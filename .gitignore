@@ -4,6 +4,7 @@
 # Next.js
 /.next/
 /out/
+/.open-next/
 
 # Builds e cobertura
 /build/
@@ -45,4 +46,3 @@ Thumbs.db
 
 # Certificados locais
 *.pem
-
