@@ -23,8 +23,8 @@ export function SiteHeader({ whatsappNumber = "" }: SiteHeaderProps) {
   const normalizedNumber = whatsappNumber.replace(/\D/g, "")
   const whatsappHref = normalizedNumber
     ? `https://wa.me/${normalizedNumber}?text=${encodeURIComponent(
-        "Olá! Gostaria de conversar com a TSA Gestão Contábil.",
-      )}`
+      "Olá! Gostaria de conversar com a TSA Gestão Contábil.",
+    )}`
     : "#contato"
 
   useEffect(() => {
@@ -70,7 +70,7 @@ export function SiteHeader({ whatsappNumber = "" }: SiteHeaderProps) {
               aspectRatio="870 / 630"
             >
               <Image
-                src="/logo-white.png"
+                src="/logo-white-reduzida.png"
                 alt=""
                 fill
                 priority
@@ -83,7 +83,7 @@ export function SiteHeader({ whatsappNumber = "" }: SiteHeaderProps) {
                 }}
               />
               <Image
-                src="/logo-dark.png"
+                src="/logo-dark-reduzida.png"
                 alt=""
                 fill
                 priority
@@ -92,7 +92,8 @@ export function SiteHeader({ whatsappNumber = "" }: SiteHeaderProps) {
                 style={{
                   objectFit: "contain",
                   opacity: scrolled || menuOpen ? 1 : 0,
-                  transition: "opacity 480ms ease-in-out",
+                  transform: "scale(0.79)",
+                  transition: "opacity 480ms ease-in-out, transform 480ms ease-in-out",
                 }}
               />
             </Box>

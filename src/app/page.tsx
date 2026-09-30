@@ -57,7 +57,6 @@ const whatsappHref = whatsappLink(
 )
 
 const featuredService = {
-  badge: "Serviço principal",
   title: "Contabilidade completa com acompanhamento próximo",
   description:
     "Rotinas contábeis e fiscais, apuração de impostos e obrigações acessórias — com explicação, acesso e orientação ao longo de toda a relação.",
@@ -73,76 +72,73 @@ const featuredService = {
 
 const services = [
   {
-    title: "Contabilidade e escrituração",
-    badge: "Rotina essencial",
+    title: "Contabilidade completa",
     description:
-      "Escrituração contábil e fiscal em dia, com visão clara da realidade da empresa.",
-    items: ["Escrituração", "Apuração de impostos", "Obrigações acessórias"],
-    image: "/servicos/contabilidade.png",
+      "Rotinas contábeis e fiscais com suporte e clareza em cada etapa.",
+    items: ["Escrituração contábil e fiscal", "Impostos e obrigações acessórias", "Folha e rotinas trabalhistas", "Orientação contínua para decidir"],
+    image: "/servicos/contabilidade-real.jpg",
     imageAlt:
-      "Livro contábil aberto com colunas de lançamentos ao lado de um demonstrativo impresso",
-    message:
-      "Olá! Vim pelo site da TSA e gostaria de falar sobre contabilidade e escrituração fiscal para a minha empresa.",
+      "Profissionais analisando documentos em um escritório",
+  },
+  {
+    title: "Contabilidade e escrituração",
+    description:
+      "Escrituração em dia, com clareza sobre a real situação da empresa.",
+    items: ["Demonstrativos contábeis", "Apuração de impostos", "Obrigações acessórias", "Balancetes mensais"],
+    image: "/servicos/escrituracao-real.jpg",
+    imageAlt:
+      "Documentos e gráficos organizados ao lado de um computador",
   },
   {
     title: "Folha e rotinas trabalhistas",
-    badge: "Destaque",
     description:
-      "Para empresas que já possuem equipe ou estão começando a contratar agora.",
-    items: ["Folha de pagamento", "Admissões e desligamentos", "eSocial"],
-    image: "/servicos/folha.png",
+      "Rotinas de folha organizadas e explicadas para sua equipe.",
+    items: ["Folha de pagamento", "Admissões e desligamentos", "eSocial", "Férias e rescisões"],
+    image: "/servicos/folha-real.jpg",
     imageAlt:
-      "Planilha de folha de pagamento impressa ao lado de um calendário e envelopes",
-    message:
-      "Olá! Vim pelo site da TSA e gostaria de falar sobre folha de pagamento e rotinas trabalhistas.",
+      "Equipe reunida para discutir informações em uma mesa de trabalho",
   },
   {
-    title: "Planejamento e orientação tributária",
-    badge: "Destaque",
+    title: "Planejamento tributário",
     description:
-      "Avaliação responsável da estrutura tributária, sempre dentro da legislação.",
-    items: ["Análise do regime", "Cenários e comparativos", "Próximos passos"],
-    image: "/servicos/tributario.png",
+      "Avaliação clara da estrutura tributária, dentro da legislação.",
+    items: [
+      "Análise do regime",
+      "Cenários e comparativos",
+      "Plano de ação tributário",
+      "Simulação de economia tributária",
+    ],
+    image: "/servicos/tributario-real.jpg",
     imageAlt:
-      "Balança de dois pratos ao lado de um relatório com análise comparativa de cenários",
-    message:
-      "Olá! Vim pelo site da TSA e gostaria de falar sobre planejamento e orientação tributária para a minha empresa.",
+      "Documentos fiscais com moedas e a palavra tax",
   },
   {
-    title: "Regularização e pendências fiscais",
-    badge: "Porta de entrada",
+    title: "Regularização fiscal",
     description:
-      "Organização das pendências para que o negócio siga com tranquilidade.",
-    items: ["Diagnóstico", "Pendências fiscais", "MEI com débitos"],
-    image: "/servicos/regularizacao.png",
+      "Organização das pendências para o negócio seguir com tranquilidade.",
+    items: [
+      "Diagnóstico",
+      "Parcelamento de débitos",
+      "MEI com débitos",
+      "Negociação de acordos",
+    ],
+    image: "/servicos/regularizacao-real.jpg",
     imageAlt:
-      "Relatório de situação fiscal com obrigações regularizadas e carimbo de regular",
-    message:
-      "Olá! Vim pelo site da TSA e gostaria de falar sobre regularização da minha empresa e pendências fiscais.",
+      "Duas pessoas se cumprimentando durante uma reunião de negócios",
   },
   {
-    title: "Abertura, alteração e encerramento",
-    badge: "Porta de entrada",
+    title: "Abertura e encerramento",
     description:
-      "Orientação em cada etapa para começar, reorganizar ou encerrar uma empresa.",
-    items: ["Abertura de CNPJ", "Alterações contratuais", "Encerramento"],
-    image: "/servicos/abertura.png",
+      "Orientação clara para começar, reorganizar ou encerrar a empresa.",
+    items: [
+      "Abertura de CNPJ",
+      "Alterações contratuais",
+      "Baixa de CNPJ",
+      "Licenças e registros",
+    ],
+    image: "/servicos/abertura-real.jpg",
     imageAlt:
-      "Certidão de abertura de empresa ao lado de chaves com chaveiro laranja e uma planta",
-    message:
-      "Olá! Vim pelo site da TSA e gostaria de falar sobre abertura, alteração ou encerramento de empresa.",
-  },
-  {
-    title: "Consultoria e assessoria contábil",
-    badge: "Diferencial TSA",
-    description:
-      "Suporte no dia a dia e apoio em decisões relacionadas à gestão do negócio.",
-    items: ["Dúvidas do dia a dia", "Leitura dos números", "Apoio em decisões"],
-    image: "/servicos/consultoria.png",
-    imageAlt:
-      "Caderno com anotações de uma reunião de consultoria ao lado de duas canecas de café",
-    message:
-      "Olá! Vim pelo site da TSA e gostaria de falar sobre consultoria e assessoria contábil.",
+      "Equipe unindo as mãos sobre documentos e gráficos",
   },
 ]
 
@@ -274,7 +270,13 @@ function CheckItem({
   )
 }
 
-function ServiceCard({ service }: { service: (typeof services)[number] }) {
+function ServiceCard({
+  service,
+  index,
+}: {
+  service: (typeof services)[number]
+  index: number
+}) {
   return (
     <Stack
       role="group"
@@ -289,9 +291,12 @@ function ServiceCard({ service }: { service: (typeof services)[number] }) {
       borderWidth="1px"
       borderColor="border.subtle"
       borderRadius="2xl"
-      transition="transform 280ms ease, box-shadow 280ms ease, border-color 280ms ease"
+      transform="translateY(0) rotate(0)"
+      transformOrigin="center center"
+      willChange="transform"
+      transition="transform 520ms cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 280ms ease, border-color 280ms ease"
       _hover={{
-        transform: "translateY(-6px)",
+        transform: `translateY(-9px) rotate(${index % 2 === 0 ? "-0.9deg" : "0.9deg"}) scale(1.008)`,
         borderColor: "rgba(0, 56, 88, 0.22)",
         boxShadow: "0 22px 50px rgba(0, 56, 88, 0.14)",
       }}
@@ -311,28 +316,19 @@ function ServiceCard({ service }: { service: (typeof services)[number] }) {
             style={{ objectFit: "cover" }}
           />
         </Box>
-        <Box position="absolute" top="4" left="4">
-          <Box
-            as="span"
-            display="inline-block"
-            bg="rgba(247, 243, 238, 0.92)"
-            color="brand.primary"
-            borderRadius="full"
-            px="3"
-            py="1.5"
-            fontFamily="body"
-            fontSize="10px"
-            fontWeight="semibold"
-            lineHeight="1"
-            letterSpacing="0.1em"
-            textTransform="uppercase"
-            whiteSpace="nowrap"
-            boxShadow="0 2px 12px rgba(0, 56, 88, 0.16)"
-            backdropFilter="blur(6px)"
-          >
-            {service.badge}
-          </Box>
-        </Box>
+        <Box
+          position="absolute"
+          inset="0"
+          pointerEvents="none"
+          background="linear-gradient(135deg, rgba(0, 56, 88, 0.3), rgba(0, 56, 88, 0.08))"
+          backdropFilter="saturate(0.88) contrast(1.04)"
+          transition="background 280ms ease, backdrop-filter 280ms ease"
+          _groupHover={{
+            background:
+              "linear-gradient(135deg, rgba(0, 56, 88, 0.18), rgba(0, 56, 88, 0.04))",
+            backdropFilter: "saturate(0.98) contrast(1.02)",
+          }}
+        />
       </Box>
 
       <Stack gap="0" flex="1" minW="0" px={{ base: "5", md: "7" }} pt="7" pb="6">
@@ -388,47 +384,6 @@ function ServiceCard({ service }: { service: (typeof services)[number] }) {
           ))}
         </Stack>
       </Stack>
-
-      <Link
-        href={whatsappLink(service.message)}
-        {...externalLinkProps}
-        aria-label={`Falar sobre ${service.title} no WhatsApp`}
-        fontFamily="body"
-        fontSize="0.8125rem"
-        fontWeight="semibold"
-        letterSpacing="0.02em"
-        display="flex"
-        alignItems="center"
-        justifyContent="space-between"
-        gap="3"
-        px={{ base: "5", md: "7" }}
-        py="4"
-        borderTopWidth="1px"
-        borderColor="border.subtle"
-        color="brand.primary"
-        minW="0"
-        transition="background 260ms ease, color 260ms ease"
-        _groupHover={{ bg: "brand.primary", color: "fg.onBrand" }}
-        _hover={{ textDecoration: "none" }}
-      >
-        <HStack gap="2.5" minW="0">
-          <Box flex="0 0 auto">
-            <FaWhatsapp size={16} aria-hidden="true" />
-          </Box>
-          <Text as="span" css={{ overflowWrap: "anywhere" }}>
-            Falar sobre esse serviço
-          </Text>
-        </HStack>
-        <Box
-          as="span"
-          display="inline-flex"
-          flex="0 0 auto"
-          transition="transform 240ms ease"
-          _groupHover={{ transform: "translate(3px, -3px)" }}
-        >
-          <LuArrowUpRight size="16" />
-        </Box>
-      </Link>
     </Stack>
   )
 }
@@ -444,52 +399,25 @@ export default function Home() {
           as="section"
           aria-labelledby="hero-title"
           position="relative"
-          minH="100svh"
+          minH={{ base: "auto", lg: "100svh" }}
           overflow="hidden"
           bg="brand.primary"
           color="fg.onBrand"
         >
-          <Box position="absolute" inset="0">
-            <Box display={{ base: "none", lg: "block" }} position="absolute" inset="0">
-              <Image
-                src="/InicioTotal.png"
-                alt={heroAlt}
-                fill
-                priority
-                quality={100}
-                sizes="(min-width: 64rem) 100vw, 0px"
-                style={{ objectFit: "cover", objectPosition: "center" }}
-              />
-            </Box>
-            <Box display={{ base: "block", lg: "none" }} position="absolute" inset="0">
-              <Image
-                src="/InicioTotal-mobile.png"
-                alt={heroAlt}
-                fill
-                priority
-                quality={100}
-                sizes="(max-width: 63.99rem) 100vw, 0px"
-                style={{ objectFit: "cover", objectPosition: "center" }}
-              />
-            </Box>
-            <Box
-              display={{ base: "block", lg: "none" }}
-              position="absolute"
-              inset="auto 0 0"
-              width="100%"
-              height="55%"
-              background="linear-gradient(0deg, rgba(0, 56, 88, 0.96) 0%, rgba(0, 56, 88, 0.72) 58%, rgba(0, 56, 88, 0) 100%)"
-              css={{
-                maskImage: "linear-gradient(0deg, black 0%, black 68%, transparent 100%)",
-                WebkitMaskImage:
-                  "linear-gradient(0deg, black 0%, black 68%, transparent 100%)",
-              }}
+          <Box display={{ base: "none", lg: "block" }} position="absolute" inset="0">
+            <Image
+              src="/BannerPrincipal.png"
+              alt={heroAlt}
+              fill
+              priority
+              quality={100}
+              sizes="(min-width: 64rem) 100vw, 0px"
+              style={{ objectFit: "cover", objectPosition: "center" }}
             />
             <Box
-              display={{ base: "none", lg: "block" }}
               position="absolute"
               inset="0 auto 0 0"
-              width="46%"
+              width="60%"
               height="100%"
               background="linear-gradient(90deg, rgba(0, 56, 88, 0.96) 0%, rgba(0, 56, 88, 0.78) 52%, rgba(0, 56, 88, 0) 100%)"
               css={{
@@ -500,29 +428,68 @@ export default function Home() {
             />
           </Box>
 
+          <Box
+            display={{ base: "block", lg: "none" }}
+            position="relative"
+            h={{ base: "44svh", sm: "46svh" }}
+            minH="340px"
+            overflow="hidden"
+          >
+            <Image
+              src="/BannerPrincipal.png"
+              alt={heroAlt}
+              fill
+              priority
+              quality={100}
+              sizes="(max-width: 63.99rem) 100vw, 0px"
+              style={{ objectFit: "cover", objectPosition: "center" }}
+            />
+            <Box
+              position="absolute"
+              inset="0"
+              background="linear-gradient(180deg, rgba(0, 56, 88, 0.58) 0%, rgba(0, 56, 88, 0.14) 28%, rgba(0, 56, 88, 0) 48%)"
+            />
+          </Box>
+
           <Container
             maxW="none"
             px={{ base: "5", md: "8", xl: "10" }}
             position="relative"
             zIndex="1"
-            minH="100svh"
-            display="flex"
-            alignItems={{ base: "flex-end", lg: "center" }}
-            pb={{ base: "16", lg: "0" }}
-            pt={{ base: "28", lg: "0" }}
+            minH={{ base: "auto", lg: "100svh" }}
+            display={{ base: "block", lg: "flex" }}
+            alignItems="center"
+            mt={{ base: "-10", lg: "0" }}
+            pt={{ base: "10", lg: "0" }}
+            pb={{ base: "14", lg: "0" }}
+            bg={{ base: "bg.surface", lg: "transparent" }}
+            color={{ base: "fg.default", lg: "fg.onBrand" }}
+            borderTopLeftRadius={{ base: "3xl", lg: "0" }}
+            borderTopRightRadius={{ base: "3xl", lg: "0" }}
           >
-            <Stack gap={{ base: "5", md: "6" }} maxW="680px" w="full" minW="0">
+            <Stack
+              gap={{ base: "4", md: "6" }}
+              maxW={{ base: "34rem", lg: "680px" }}
+              w="full"
+              minW="0"
+            >
               <Kicker color="accent.warm">CONTABILIDADE PARA EMPRESAS EM CRESCIMENTO</Kicker>
               <Heading
                 id="hero-title"
                 as="h1"
                 textStyle="h1"
-                color="fg.onBrand"
+                color={{ base: "brand.primary", lg: "fg.onBrand" }}
+                fontSize={{ base: "clamp(2.25rem, 10vw, 3rem)", md: "h1" }}
                 css={{ textWrap: "balance", overflowWrap: "anywhere" }}
               >
                 Sua contabilidade deve trazer clareza, não mais dúvidas.
               </Heading>
-              <Text textStyle="body" color="fg.onBrand" maxW="48ch" opacity="0.92">
+              <Text
+                textStyle="body"
+                color={{ base: "fg.default", lg: "fg.onBrand" }}
+                maxW={{ base: "34ch", md: "48ch" }}
+                opacity="0.92"
+              >
                 Organizamos, acompanhamos e traduzimos os números da sua empresa para que você entenda melhor o negócio e tome decisões com mais segurança.
 
               </Text>
@@ -535,6 +502,7 @@ export default function Home() {
                   borderRadius="full"
                   px={{ base: "5", md: "7" }}
                   w={{ base: "full", sm: "auto" }}
+                  minH="12"
                   _hover={{ bg: "fg.onBrand" }}
                 >
                   <a href={whatsappHref} {...externalLinkProps}>
@@ -609,7 +577,7 @@ export default function Home() {
                     À medida que o negócio fica mais complexo, receber informações não é suficiente. Você precisa conseguir entendê-las para decidir com mais segurança.
                   </Text>
                   <Stack gap="3">
-                    <CheckItem>ocê recebe as guias, mas não entende por que os valores mudaram.</CheckItem>
+                    <CheckItem>Você recebe as guias, mas não entende por que os valores mudaram.</CheckItem>
                     <CheckItem>Fatura mais, mas ainda tem dificuldade de saber o que realmente sobra.</CheckItem>
                     <CheckItem>Só fala com a contabilidade quando existe uma obrigação ou problema</CheckItem>
                     <CheckItem>Precisa tomar decisões importantes sem ter os números organizados e claros.</CheckItem>
@@ -720,20 +688,6 @@ export default function Home() {
                     minW="0"
                   >
                     <Stack gap="5" minW="0" w="full">
-                      <HStack gap="3" wrap="wrap">
-                        <Box
-                          as="span"
-                          borderWidth="1px"
-                          borderColor="accent.warm"
-                          color="accent.warm"
-                          borderRadius="full"
-                          px="3"
-                          py="1"
-                          textStyle="micro"
-                        >
-                          {featuredService.badge}
-                        </Box>
-                      </HStack>
                       <Heading
                         as="h3"
                         fontFamily="heading"
@@ -818,8 +772,12 @@ export default function Home() {
                 w="full"
               >
                 {services.map((service, index) => (
-                  <Reveal key={service.title} delay={index * 60}>
-                    <ServiceCard service={service} />
+                  <Reveal
+                    key={service.title}
+                    delay={index * 60}
+                    rotate={index % 2 === 0 ? -1.5 : 1.5}
+                  >
+                    <ServiceCard service={service} index={index} />
                   </Reveal>
                 ))}
               </SimpleGrid>

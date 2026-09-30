@@ -7,9 +7,10 @@ type RevealProps = {
   children: ReactNode
   delay?: number
   y?: number
+  rotate?: number
 }
 
-export function Reveal({ children, delay = 0, y = 24 }: RevealProps) {
+export function Reveal({ children, delay = 0, y = 24, rotate = 0 }: RevealProps) {
   const ref = useRef<HTMLDivElement>(null)
   const [visible, setVisible] = useState(false)
 
@@ -43,7 +44,11 @@ export function Reveal({ children, delay = 0, y = 24 }: RevealProps) {
       maxW="100%"
       minW="0"
       opacity={visible ? 1 : 0}
-      transform={visible ? "translateY(0)" : `translateY(${y}px)`}
+      transform={
+        visible
+          ? "translateY(0) rotate(0deg)"
+          : `translateY(${y}px) rotate(${rotate}deg)`
+      }
       transition={`opacity 700ms cubic-bezier(0.22, 1, 0.36, 1) ${delay}ms, transform 700ms cubic-bezier(0.22, 1, 0.36, 1) ${delay}ms`}
       css={{
         "@media (prefers-reduced-motion: reduce)": {
