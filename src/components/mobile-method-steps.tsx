@@ -8,7 +8,7 @@ type MethodStep = {
   icon: string
 }
 
-const mobileStickyTops = ["6.5rem", "7.25rem", "8rem", "8.75rem"]
+const mobileStickyTop = "6.5rem"
 
 const mobileCardThemes = [
   {
@@ -17,7 +17,6 @@ const mobileCardThemes = [
     accent: "#F48420",
     title: "#003858",
     body: "#1F2430",
-    label: "#003858",
     iconBackground: "#FFF8F1",
     watermark: "rgba(0, 56, 88, 0.055)",
   },
@@ -27,7 +26,6 @@ const mobileCardThemes = [
     accent: "#F48420",
     title: "#003858",
     body: "#1F2430",
-    label: "#8F4911",
     iconBackground: "rgba(255, 255, 255, 0.72)",
     watermark: "rgba(244, 132, 32, 0.1)",
   },
@@ -37,7 +35,6 @@ const mobileCardThemes = [
     accent: "#5F736B",
     title: "#003858",
     body: "#1F2430",
-    label: "#465C54",
     iconBackground: "rgba(255, 255, 255, 0.72)",
     watermark: "rgba(95, 115, 107, 0.11)",
   },
@@ -47,7 +44,6 @@ const mobileCardThemes = [
     accent: "#F48420",
     title: "#F7F3EE",
     body: "rgba(247, 243, 238, 0.88)",
-    label: "#F7F3EE",
     iconBackground: "#F7F3EE",
     watermark: "rgba(247, 243, 238, 0.075)",
   },
@@ -72,7 +68,7 @@ export function MobileMethodSteps({ steps }: { steps: MethodStep[] }) {
             key={step.number}
             data-method-step
             position={{ base: "sticky", md: "relative" }}
-            top={{ base: mobileStickyTops[index], md: "auto" }}
+            top={{ base: mobileStickyTop, md: "auto" }}
             zIndex={{ base: index + 1, md: "auto" }}
             minH={{ base: "292px", md: "auto" }}
             mb={{ base: index === steps.length - 1 ? "0" : "42vh", md: "0" }}
@@ -129,38 +125,24 @@ export function MobileMethodSteps({ steps }: { steps: MethodStep[] }) {
             />
 
             <Flex
-              display={{ base: "flex", md: "contents" }}
+              boxSize={{ base: "14", md: "12" }}
+              borderWidth="1px"
+              borderColor={{ base: theme.accent, md: "rgba(244, 132, 32, 0.45)" }}
+              borderRadius="full"
               align="center"
-              justify="space-between"
-              gap="4"
+              justify="center"
+              bg={{ base: theme.iconBackground, md: "bg.canvas" }}
+              boxShadow={{ base: "inset 0 0 0 5px rgba(255, 255, 255, 0.28)", md: "none" }}
               position="relative"
               zIndex="1"
             >
-              <Flex
-                boxSize={{ base: "14", md: "12" }}
-                borderWidth="1px"
-                borderColor={{ base: theme.accent, md: "rgba(244, 132, 32, 0.45)" }}
-                borderRadius="full"
-                align="center"
-                justify="center"
-                bg={{ base: theme.iconBackground, md: "bg.canvas" }}
-                boxShadow={{ base: "inset 0 0 0 5px rgba(255, 255, 255, 0.28)", md: "none" }}
-              >
-                <Image
-                  src={step.icon}
-                  alt=""
-                  width={829}
-                  height={829}
-                  style={{ width: "22px", height: "22px", objectFit: "contain" }}
-                />
-              </Flex>
-              <Text
-                display={{ base: "block", md: "none" }}
-                textStyle="micro"
-                color={theme.label}
-              >
-                Etapa {step.number} de {String(steps.length).padStart(2, "0")}
-              </Text>
+              <Image
+                src={step.icon}
+                alt=""
+                width={829}
+                height={829}
+                style={{ width: "22px", height: "22px", objectFit: "contain" }}
+              />
             </Flex>
 
             <Text
@@ -190,6 +172,7 @@ export function MobileMethodSteps({ steps }: { steps: MethodStep[] }) {
           </Stack>
         )
       })}
+      <Box display={{ base: "block", md: "none" }} h="48vh" aria-hidden="true" />
     </SimpleGrid>
   )
 }
