@@ -1,9 +1,5 @@
-"use client"
-
 import { Box, Flex, Heading, SimpleGrid, Stack, Text } from "@chakra-ui/react"
-import { keyframes } from "@emotion/react"
 import Image from "next/image"
-import { type CSSProperties, useEffect, useRef } from "react"
 
 type MethodStep = {
   number: string
@@ -12,68 +8,15 @@ type MethodStep = {
   icon: string
 }
 
-const parallaxDepths = [48, 36, 44, 32]
-
-const mobileStepParallax = keyframes`
-  from {
-    transform: translate3d(0, var(--method-parallax-start), 0);
-  }
-
-  to {
-    transform: translate3d(0, var(--method-parallax-end), 0);
-  }
-`
+const mobileStickyTops = ["6.5rem", "7.25rem", "8rem", "8.75rem"]
 
 export function MobileMethodSteps({ steps }: { steps: MethodStep[] }) {
-  const containerRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia(
-      "(max-width: 47.997rem) and (prefers-reduced-motion: no-preference)",
-    )
-    const container = containerRef.current
-    const supportsScrollTimeline = CSS.supports("animation-timeline: view()")
-
-    if (!container) return
-
-    const updateOffsets = () => {
-      if (!mediaQuery.matches || supportsScrollTimeline) {
-        container.querySelectorAll<HTMLElement>("[data-method-step]").forEach((step) => {
-          step.style.removeProperty("--method-parallax-offset")
-        })
-        return
-      }
-
-      const viewportCenter = window.innerHeight / 2
-
-      container.querySelectorAll<HTMLElement>("[data-method-step]").forEach((step, index) => {
-        const bounds = step.getBoundingClientRect()
-        const distanceFromCenter = bounds.top + bounds.height / 2 - viewportCenter
-        const progress = Math.max(-1, Math.min(1, distanceFromCenter / window.innerHeight))
-        const depth = parallaxDepths[index] ?? 0
-
-        step.style.setProperty("--method-parallax-offset", `${progress * depth}px`)
-      })
-    }
-
-    updateOffsets()
-    window.addEventListener("scroll", updateOffsets, { passive: true })
-    window.addEventListener("resize", updateOffsets)
-    mediaQuery.addEventListener("change", updateOffsets)
-
-    return () => {
-      window.removeEventListener("scroll", updateOffsets)
-      window.removeEventListener("resize", updateOffsets)
-      mediaQuery.removeEventListener("change", updateOffsets)
-    }
-  }, [])
-
   return (
     <SimpleGrid
-      ref={containerRef}
       columns={{ base: 1, md: 2, lg: 4 }}
+      display={{ base: "block", md: "grid" }}
       gap="0"
-      borderTopWidth="1px"
+      borderTopWidth={{ base: "0", md: "1px" }}
       borderColor="border.subtle"
       minW="0"
       w="full"
@@ -82,38 +25,30 @@ export function MobileMethodSteps({ steps }: { steps: MethodStep[] }) {
         <Stack
           key={step.number}
           data-method-step
-          style={
-            {
-              "--method-parallax-start": `${parallaxDepths[index] ?? 0}px`,
-              "--method-parallax-end": `-${parallaxDepths[index] ?? 0}px`,
-            } as CSSProperties
-          }
-          position="relative"
-          pt="9"
-          pb="8"
-          px={{ base: "0", lg: index === 0 ? "0" : "7" }}
-          pr={{ base: "0", lg: "7" }}
-          borderBottomWidth={{ base: "1px", lg: "0" }}
-          borderLeftWidth={{ base: "0", lg: index === 0 ? "0" : "1px" }}
+          position={{ base: "sticky", md: "relative" }}
+          top={{ base: mobileStickyTops[index], md: "auto" }}
+          zIndex={{ base: index + 1, md: "auto" }}
+          minH={{ base: "270px", md: "auto" }}
+          mb={{ base: index === steps.length - 1 ? "0" : "42vh", md: "0" }}
+          pt={{ base: "7", md: "9" }}
+          pb={{ base: "7", md: "8" }}
+          px={{ base: "6", md: "0", lg: index === 0 ? "0" : "7" }}
+          pr={{ base: "6", md: "0", lg: "7" }}
+          bg={{ base: "bg.surface", md: "transparent" }}
+          borderWidth={{ base: "1px", md: "0" }}
+          borderBottomWidth={{ base: "1px", md: "1px", lg: "0" }}
+          borderLeftWidth={{ base: "1px", md: "0", lg: index === 0 ? "0" : "1px" }}
           borderColor="border.subtle"
+          borderRadius={{ base: "2xl", md: "0" }}
+          boxShadow={{ base: "0 18px 45px rgba(0, 56, 88, 0.14)", md: "none" }}
           gap="4"
           minW="0"
-          css={{
-            "@media (max-width: 47.997rem) and (prefers-reduced-motion: no-preference)": {
-              transform: "translate3d(0, var(--method-parallax-offset, 0px), 0)",
-              willChange: "transform",
-              "@supports (animation-timeline: view())": {
-                animation: `${mobileStepParallax} 1ms linear both`,
-                animationRange: "entry 0% exit 100%",
-                animationTimeline: "view(block)",
-              },
-            },
-          }}
         >
           <Box
             position="absolute"
-            top="-7px"
-            left={{ base: "0", lg: index === 0 ? "0" : "7" }}
+            top={{ base: "6", md: "-7px" }}
+            left={{ base: "auto", md: "0", lg: index === 0 ? "0" : "7" }}
+            right={{ base: "6", md: "auto" }}
             boxSize={index === 3 ? "4" : "3.5"}
             borderRadius="full"
             bg={index === 3 ? "brand.primary" : "accent.warm"}
