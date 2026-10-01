@@ -1,6 +1,7 @@
 "use client"
 
-import { Box, Button, Container, Flex, HStack, IconButton, Link, Stack } from "@chakra-ui/react"
+import { Box, Button, Container, Flex, HStack, IconButton, Stack } from "@chakra-ui/react"
+import { ScrollLink } from "@/components/scroll-link"
 import Image from "next/image"
 import { useEffect, useState } from "react"
 import { LuArrowUpRight, LuMenu, LuX } from "react-icons/lu"
@@ -10,11 +11,11 @@ interface SiteHeaderProps {
 }
 
 const navItems = [
-  ["Início", "#inicio"],
-  ["Serviços", "#servicos"],
-  ["Método", "#metodo"],
-  ["Sobre", "#sobre"],
-  ["Contato", "#contato"],
+  ["Início", "inicio"],
+  ["Serviços", "servicos"],
+  ["Método", "metodo"],
+  ["Sobre", "sobre"],
+  ["Contato", "contato"],
 ] as const
 
 export function SiteHeader({
@@ -30,7 +31,13 @@ export function SiteHeader({
     : "#contato"
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 32)
+    const onScroll = () => {
+      setScrolled(window.scrollY > 32)
+
+      if (window.scrollY > 32) {
+        setMenuOpen(false)
+      }
+    }
     onScroll()
     window.addEventListener("scroll", onScroll, { passive: true })
     return () => window.removeEventListener("scroll", onScroll)
@@ -51,11 +58,23 @@ export function SiteHeader({
       position="fixed"
       inset="0 0 auto"
       zIndex="sticky"
-      bg={scrolled || menuOpen ? "rgba(247, 243, 238, 0.94)" : "transparent"}
+      bg={
+        menuOpen
+          ? "bg.canvas"
+          : scrolled
+            ? { base: "bg.canvas", lg: "rgba(247, 243, 238, 0.94)" }
+            : "transparent"
+      }
       borderBottomWidth="1px"
       borderColor={scrolled || menuOpen ? "border.subtle" : "transparent"}
-      backdropFilter={scrolled || menuOpen ? "blur(14px)" : "none"}
-      transition="background 480ms ease-in-out, border-color 480ms ease-in-out, backdrop-filter 480ms ease-in-out"
+      backdropFilter={
+        menuOpen ? "none" : scrolled ? { base: "none", lg: "blur(14px)" } : "none"
+      }
+      transition={
+        menuOpen
+          ? "border-color 200ms ease-in-out"
+          : "background 480ms ease-in-out, border-color 480ms ease-in-out, backdrop-filter 480ms ease-in-out"
+      }
     >
       <Container maxW="1440px" px={{ base: "5", md: "8", xl: "12" }} minW="0">
         <Flex
@@ -65,7 +84,7 @@ export function SiteHeader({
           gap="3"
           minW="0"
         >
-          <Link href="#inicio" aria-label="TSA Gestão Contábil — início" flexShrink="0">
+          <ScrollLink target="inicio" aria-label="TSA Gestão Contábil — início" flexShrink="0">
             <Box
               position="relative"
               width="clamp(88px, 22vw, 148px)"
@@ -99,7 +118,7 @@ export function SiteHeader({
                 }}
               />
             </Box>
-          </Link>
+          </ScrollLink>
 
           <HStack
             as="nav"
@@ -107,29 +126,29 @@ export function SiteHeader({
             gap="8"
             display={{ base: "none", lg: "flex" }}
           >
-            {navItems.map(([label, href]) => (
-              <Link
-                key={href}
-                href={href}
+            {navItems.map(([label, target]) => (
+              <ScrollLink
+                key={target}
+                target={target}
                 textStyle="cta"
                 color={scrolled ? "brand.primary" : "fg.onBrand"}
                 transition="color 480ms ease-in-out"
                 _hover={{ color: "accent.warm" }}
               >
                 {label}
-              </Link>
+              </ScrollLink>
             ))}
           </HStack>
 
           <HStack gap="2" flexShrink="0" minW="0">
             <Button
               asChild
+              display={{ base: "none", lg: "inline-flex" }}
               bg={scrolled || menuOpen ? "brand.primary" : "accent.warm"}
               color={scrolled || menuOpen ? "fg.onBrand" : "brand.primary"}
               borderRadius="full"
-              px={{ base: "3", md: "6" }}
-              flexShrink="1"
-              maxW={{ base: "46vw", sm: "none" }}
+              px="6"
+              flexShrink="0"
               _hover={{ bg: scrolled || menuOpen ? "accent.balance" : "fg.onBrand" }}
               transition="background-color 480ms ease-in-out, color 480ms ease-in-out"
             >
@@ -138,12 +157,7 @@ export function SiteHeader({
                 target={normalizedNumber ? "_blank" : undefined}
                 rel={normalizedNumber ? "noreferrer" : undefined}
               >
-                <Box as="span" display={{ base: "none", sm: "inline" }}>
-                  Falar no WhatsApp
-                </Box>
-                <Box as="span" display={{ base: "inline", sm: "none" }}>
-                  WhatsApp
-                </Box>
+                Falar no WhatsApp
                 <LuArrowUpRight />
               </a>
             </Button>
@@ -170,16 +184,35 @@ export function SiteHeader({
           py="5"
         >
           <Stack gap="4">
-            {navItems.map(([label, href]) => (
-              <Link
-                key={href}
-                href={href}
+            {navItems.map(([label, target]) => (
+              <ScrollLink
+                key={target}
+                target={target}
                 textStyle="cta"
                 onClick={() => setMenuOpen(false)}
               >
                 {label}
-              </Link>
+              </ScrollLink>
             ))}
+            <Button
+              asChild
+              alignSelf="flex-start"
+              bg="brand.primary"
+              color="fg.onBrand"
+              borderRadius="full"
+              px="5"
+              _hover={{ bg: "accent.balance" }}
+            >
+              <a
+                href={whatsappHref}
+                target={normalizedNumber ? "_blank" : undefined}
+                rel={normalizedNumber ? "noreferrer" : undefined}
+                onClick={() => setMenuOpen(false)}
+              >
+                Falar no WhatsApp
+                <LuArrowUpRight />
+              </a>
+            </Button>
           </Stack>
         </Box>
       </Container>

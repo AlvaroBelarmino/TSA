@@ -1,5 +1,7 @@
 import { ContactForm } from "@/components/contact-form"
+import { MobileMethodSteps } from "@/components/mobile-method-steps"
 import { Reveal } from "@/components/reveal"
+import { ScrollLink } from "@/components/scroll-link"
 import { SiteHeader } from "@/components/site-header"
 import SolnixAssinatura from "@/components/solnixAssinatura"
 import { WhatsappFloat } from "@/components/whatsapp-float"
@@ -21,6 +23,8 @@ import { FaWhatsapp } from "react-icons/fa"
 import {
   LuArrowDownRight,
   LuArrowUpRight,
+  LuCalendarDays,
+  LuChartNoAxesCombined,
   LuCheck,
   LuClock3,
   LuInstagram,
@@ -188,6 +192,24 @@ const values = [
   },
 ]
 
+const experienceHighlights = [
+  {
+    value: "+10 anos",
+    label: "de experiência na área contábil",
+    icon: LuCalendarDays,
+  },
+  {
+    value: "MBA",
+    label: "em gestão financeira e auditoria",
+    icon: LuChartNoAxesCombined,
+  },
+  {
+    value: "RJ",
+    label: "atendimento online e próximo",
+    icon: LuMapPin,
+  },
+]
+
 const sectionAnchorOffset = { base: "76px", md: "88px" }
 
 function Kicker({
@@ -277,11 +299,11 @@ function CheckItem({
 function ServiceCard({
   service,
   index,
-  href,
+  target,
 }: {
   service: (typeof services)[number]
   index: number
-  href?: string
+  target?: string
 }) {
   const card = (
     <Stack
@@ -297,7 +319,7 @@ function ServiceCard({
       borderWidth="1px"
       borderColor="border.subtle"
       borderRadius="2xl"
-      cursor={href ? "pointer" : undefined}
+      cursor={target ? "pointer" : undefined}
       transform="translateY(0) rotate(0)"
       transformOrigin="center center"
       willChange="transform"
@@ -394,11 +416,11 @@ function ServiceCard({
     </Stack>
   )
 
-  if (!href) return card
+  if (!target) return card
 
   return (
-    <Link
-      href={href}
+    <ScrollLink
+      target={target}
       aria-label={`Ir para o formulário sobre ${service.title}`}
       display="block"
       h="full"
@@ -410,7 +432,7 @@ function ServiceCard({
       }}
     >
       {card}
-    </Link>
+    </ScrollLink>
   )
 }
 
@@ -544,6 +566,84 @@ export default function Home() {
         </Box>
 
         <Box
+          display={{ base: "block", md: "none" }}
+          position="relative"
+          overflow="hidden"
+          bg="bg.brand"
+          color="fg.onBrand"
+        >
+          <Image
+            src="/experiencia-mobile-v1.png"
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            style={{ objectFit: "cover", objectPosition: "center" }}
+          />
+          <Box
+            position="absolute"
+            inset="0"
+            bg="linear-gradient(90deg, rgba(0, 56, 88, 0.96) 0%, rgba(0, 56, 88, 0.84) 58%, rgba(0, 56, 88, 0.18) 100%)"
+            aria-hidden="true"
+          />
+          <Container position="relative" zIndex="1" px="5" py="12">
+            <Stack gap="8">
+              <Kicker color="fg.onBrand">NOSSA EXPERIÊNCIA NA ÁREA CONTÁBIL</Kicker>
+              <Stack gap="0">
+                {experienceHighlights.map(({ value, label, icon: Icon }, index) => (
+                  <Flex
+                    key={value}
+                    gap="5"
+                    align="center"
+                    py={index === 0 ? "0" : "7"}
+                    pb={index === experienceHighlights.length - 1 ? "0" : "7"}
+                    borderBottomWidth={
+                      index === experienceHighlights.length - 1 ? "0" : "1px"
+                    }
+                    borderColor="rgba(247,243,238,0.2)"
+                  >
+                    <Flex
+                      boxSize="24"
+                      flexShrink="0"
+                      align="center"
+                      justify="center"
+                      borderWidth="2px"
+                      borderColor="rgba(53, 163, 196, 0.38)"
+                      borderRadius="full"
+                      color="accent.warm"
+                    >
+                      <Icon size="35" strokeWidth="1.8" aria-hidden="true" />
+                    </Flex>
+                    <Stack gap="2" minW="0">
+                      <Text
+                        fontFamily="heading"
+                        fontSize="clamp(2.5rem, 12vw, 3.5rem)"
+                        fontWeight="semibold"
+                        lineHeight="1"
+                        color="fg.onBrand"
+                      >
+                        {value}
+                      </Text>
+                      <Text
+                        textStyle="micro"
+                        fontSize="0.8125rem"
+                        lineHeight="1.55"
+                        letterSpacing="0.14em"
+                        color="fg.onBrand"
+                        maxW="25ch"
+                      >
+                        {label}
+                      </Text>
+                    </Stack>
+                  </Flex>
+                ))}
+              </Stack>
+            </Stack>
+          </Container>
+        </Box>
+
+        <Box
+          display={{ base: "none", md: "block" }}
           bg="bg.brand"
           color="fg.onBrand"
           borderTopWidth="1px"
@@ -555,11 +655,7 @@ export default function Home() {
               py={{ base: "8", md: "10" }}
               gap={{ base: "7", md: "0" }}
             >
-              {[
-                ["+10 anos", "de experiência na área contábil"],
-                ["MBA", "em Gestão Financeira e Auditoria"],
-                ["RJ", "atendimento online e próximo"],
-              ].map(([value, label], index) => (
+              {experienceHighlights.map(({ value, label }, index) => (
                 <Stack
                   key={value}
                   gap="1"
@@ -586,7 +682,16 @@ export default function Home() {
           </Container>
         </Box>
 
-        <Box as="section" py={{ base: "20", md: "28" }} bg="bg.surface">
+        <Box
+          as="section"
+          position="relative"
+          zIndex="1"
+          mt={{ base: "-6", md: "0" }}
+          py={{ base: "14", md: "28" }}
+          bg="bg.surface"
+          borderTopLeftRadius={{ base: "3xl", md: "0" }}
+          borderTopRightRadius={{ base: "3xl", md: "0" }}
+        >
           <Container maxW="1200px" px={{ base: "5", md: "8" }}>
             <Reveal>
               <Grid
@@ -602,7 +707,12 @@ export default function Home() {
                 </Stack>
                 <Stack gap="6">
                   <Text textStyle="body" color="fg.default">
-                    À medida que o negócio fica mais complexo, receber informações não é suficiente. Você precisa conseguir entendê-las para decidir com mais segurança.
+                    <Box as="span" display={{ base: "inline", md: "none" }}>
+                      À medida que o negócio fica mais complexo, receber informações não é suficiente. Você precisa de clareza, análise e segurança.
+                    </Box>
+                    <Box as="span" display={{ base: "none", md: "inline" }}>
+                      À medida que o negócio fica mais complexo, receber informações não é suficiente. Você precisa conseguir entendê-las para decidir com mais segurança.
+                    </Box>
                   </Text>
                   <Stack gap="3">
                     <CheckItem>Você recebe as guias, mas não entende por que os valores mudaram.</CheckItem>
@@ -831,7 +941,7 @@ export default function Home() {
                     <ServiceCard
                       service={service}
                       index={index}
-                      href={index < 2 ? "#contato" : undefined}
+                      target={index < 2 ? "contato" : undefined}
                     />
                   </Reveal>
                 ))}
@@ -863,10 +973,10 @@ export default function Home() {
                   flexShrink="0"
                   _hover={{ bg: "brand.primary", color: "fg.onBrand" }}
                 >
-                  <a href="#contato">
+                  <ScrollLink target="contato">
                     Explicar minha situação
                     <LuArrowDownRight />
-                  </a>
+                  </ScrollLink>
                 </Button>
               </Flex>
             </Stack>
@@ -903,69 +1013,7 @@ export default function Home() {
               </Grid>
 
               <Reveal>
-                <SimpleGrid
-                  columns={{ base: 1, md: 2, lg: 4 }}
-                  gap="0"
-                  borderTopWidth="1px"
-                  borderColor="border.subtle"
-                  minW="0"
-                  w="full"
-                >
-                  {methodSteps.map((step, index) => (
-                    <Stack
-                      key={step.number}
-                      position="relative"
-                      pt="9"
-                      pb="8"
-                      px={{ base: "0", lg: index === 0 ? "0" : "7" }}
-                      pr={{ base: "0", lg: "7" }}
-                      borderBottomWidth={{ base: "1px", lg: "0" }}
-                      borderLeftWidth={{ base: "0", lg: index === 0 ? "0" : "1px" }}
-                      borderColor="border.subtle"
-                      gap="4"
-                      minW="0"
-                    >
-                      <Box
-                        position="absolute"
-                        top="-7px"
-                        left={{ base: "0", lg: index === 0 ? "0" : "7" }}
-                        boxSize={index === 3 ? "4" : "3.5"}
-                        borderRadius="full"
-                        bg={index === 3 ? "brand.primary" : "accent.warm"}
-                      />
-                      <Flex
-                        boxSize="12"
-                        borderWidth="1px"
-                        borderColor="rgba(244, 132, 32, 0.45)"
-                        borderRadius="full"
-                        align="center"
-                        justify="center"
-                        bg="bg.canvas"
-                      >
-                        <Image
-                          src={step.icon}
-                          alt=""
-                          width={829}
-                          height={829}
-                          style={{
-                            width: "22px",
-                            height: "22px",
-                            objectFit: "contain",
-                          }}
-                        />
-                      </Flex>
-                      <Text textStyle="micro" color="brand.primary">
-                        {step.number}
-                      </Text>
-                      <Heading as="h3" textStyle="h3" color="brand.primary">
-                        {step.title}
-                      </Heading>
-                      <Text textStyle="body" color="fg.default">
-                        {step.description}
-                      </Text>
-                    </Stack>
-                  ))}
-                </SimpleGrid>
+                <MobileMethodSteps steps={methodSteps} />
               </Reveal>
             </Stack>
           </Container>
@@ -1245,21 +1293,21 @@ export default function Home() {
               </Text>
               <Stack gap="2">
                 {[
-                  ["Início", "#inicio"],
-                  ["Serviços", "#servicos"],
-                  ["Método Clareza", "#metodo"],
-                  ["Sobre", "#sobre"],
-                  ["Contato", "#contato"],
-                ].map(([label, href]) => (
-                  <Link
-                    key={href}
-                    href={href}
+                  ["Início", "inicio"],
+                  ["Serviços", "servicos"],
+                  ["Método Clareza", "metodo"],
+                  ["Sobre", "sobre"],
+                  ["Contato", "contato"],
+                ].map(([label, target]) => (
+                  <ScrollLink
+                    key={target}
+                    target={target}
                     textStyle="cta"
                     color="fg.onBrand"
                     _hover={{ color: "accent.warm" }}
                   >
                     {label}
-                  </Link>
+                  </ScrollLink>
                 ))}
               </Stack>
             </Stack>
