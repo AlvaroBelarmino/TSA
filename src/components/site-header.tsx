@@ -30,7 +30,13 @@ export function SiteHeader({
     : "#contato"
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 32)
+    const onScroll = () => {
+      setScrolled(window.scrollY > 32)
+
+      if (window.scrollY > 32) {
+        setMenuOpen(false)
+      }
+    }
     onScroll()
     window.addEventListener("scroll", onScroll, { passive: true })
     return () => window.removeEventListener("scroll", onScroll)
@@ -136,12 +142,12 @@ export function SiteHeader({
           <HStack gap="2" flexShrink="0" minW="0">
             <Button
               asChild
+              display={{ base: "none", lg: "inline-flex" }}
               bg={scrolled || menuOpen ? "brand.primary" : "accent.warm"}
               color={scrolled || menuOpen ? "fg.onBrand" : "brand.primary"}
               borderRadius="full"
-              px={{ base: "3", md: "6" }}
-              flexShrink="1"
-              maxW={{ base: "46vw", sm: "none" }}
+              px="6"
+              flexShrink="0"
               _hover={{ bg: scrolled || menuOpen ? "accent.balance" : "fg.onBrand" }}
               transition="background-color 480ms ease-in-out, color 480ms ease-in-out"
             >
@@ -150,12 +156,7 @@ export function SiteHeader({
                 target={normalizedNumber ? "_blank" : undefined}
                 rel={normalizedNumber ? "noreferrer" : undefined}
               >
-                <Box as="span" display={{ base: "none", sm: "inline" }}>
-                  Falar no WhatsApp
-                </Box>
-                <Box as="span" display={{ base: "inline", sm: "none" }}>
-                  WhatsApp
-                </Box>
+                Falar no WhatsApp
                 <LuArrowUpRight />
               </a>
             </Button>
@@ -192,6 +193,25 @@ export function SiteHeader({
                 {label}
               </Link>
             ))}
+            <Button
+              asChild
+              alignSelf="flex-start"
+              bg="brand.primary"
+              color="fg.onBrand"
+              borderRadius="full"
+              px="5"
+              _hover={{ bg: "accent.balance" }}
+            >
+              <a
+                href={whatsappHref}
+                target={normalizedNumber ? "_blank" : undefined}
+                rel={normalizedNumber ? "noreferrer" : undefined}
+                onClick={() => setMenuOpen(false)}
+              >
+                Falar no WhatsApp
+                <LuArrowUpRight />
+              </a>
+            </Button>
           </Stack>
         </Box>
       </Container>
