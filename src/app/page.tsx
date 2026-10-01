@@ -67,7 +67,7 @@ const whatsappHref = whatsappLink(
 const featuredService = {
   title: "Contabilidade completa com acompanhamento próximo",
   description:
-    "Rotinas contábeis e fiscais, apuração de impostos e obrigações acessórias — com explicação, acesso e orientação ao longo de toda a relação.",
+    "Rotinas contábeis e fiscais, apuração de impostos e obrigações acessórias, com explicação, acesso e orientação ao longo de toda a relação.",
   items: [
     "Escrituração contábil e fiscal",
     "Impostos e obrigações acessórias",
@@ -803,7 +803,7 @@ export default function Home() {
                 </Stack>
                 <Text textStyle="body" color="fg.default" minW="0">
                   Escolha o serviço que faz sentido para o seu momento e fale
-                  diretamente sobre ele — a conversa já começa no assunto certo.
+                  diretamente sobre ele. A conversa já começa no assunto certo.
                 </Text>
               </Grid>
 
@@ -1226,7 +1226,7 @@ export default function Home() {
                 </Stack>
 
                 <Stack gap="5" order="1">
-                  <ContactDetail icon={<LuMapPin />} title="Rio de Janeiro — RJ">
+                  <ContactDetail icon={<LuMapPin />} title="Rio de Janeiro, RJ">
                     Atuação próxima e regional, com atendimento online
                   </ContactDetail>
                   <ContactDetail icon={<LuMonitor />} title="Atendimento online">
@@ -1321,7 +1321,7 @@ export default function Home() {
               </Text>
               <Stack gap="2">
                 <Text textStyle="body" color="fg.onBrand">
-                  Rio de Janeiro — RJ
+                  Rio de Janeiro, RJ
                 </Text>
                 <Text textStyle="body" color="fg.onBrand">
                   Online e próximo

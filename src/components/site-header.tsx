@@ -84,7 +84,7 @@ export function SiteHeader({
           gap="3"
           minW="0"
         >
-          <ScrollLink target="inicio" aria-label="TSA Gestão Contábil — início" flexShrink="0">
+          <ScrollLink target="inicio" aria-label="TSA Gestão Contábil: início" flexShrink="0">
             <Box
               position="relative"
               width="clamp(88px, 22vw, 148px)"

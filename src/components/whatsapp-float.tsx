@@ -29,7 +29,7 @@ export function WhatsappFloat({ href }: WhatsappFloatProps) {
         href={href}
         target="_blank"
         rel="noreferrer"
-        aria-label="Abrir WhatsApp da TSA — você tem 1 mensagem"
+        aria-label="Abrir WhatsApp da TSA: você tem 1 mensagem"
         position="relative"
         display="flex"
         alignItems="center"
