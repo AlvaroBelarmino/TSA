@@ -1,8 +1,9 @@
 "use client"
 
 import { Box, Flex, Heading, SimpleGrid, Stack, Text } from "@chakra-ui/react"
+import { keyframes } from "@emotion/react"
 import Image from "next/image"
-import { useEffect, useRef } from "react"
+import { type CSSProperties, useEffect, useRef } from "react"
 
 type MethodStep = {
   number: string
@@ -10,6 +11,18 @@ type MethodStep = {
   description: string
   icon: string
 }
+
+const parallaxDepths = [48, 36, 44, 32]
+
+const mobileStepParallax = keyframes`
+  from {
+    transform: translate3d(0, var(--method-parallax-start), 0);
+  }
+
+  to {
+    transform: translate3d(0, var(--method-parallax-end), 0);
+  }
+`
 
 export function MobileMethodSteps({ steps }: { steps: MethodStep[] }) {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -19,15 +32,12 @@ export function MobileMethodSteps({ steps }: { steps: MethodStep[] }) {
       "(max-width: 47.997rem) and (prefers-reduced-motion: no-preference)",
     )
     const container = containerRef.current
+    const supportsScrollTimeline = CSS.supports("animation-timeline: view()")
 
     if (!container) return
 
-    let frameId = 0
-
     const updateOffsets = () => {
-      frameId = 0
-
-      if (!mediaQuery.matches) {
+      if (!mediaQuery.matches || supportsScrollTimeline) {
         container.querySelectorAll<HTMLElement>("[data-method-step]").forEach((step) => {
           step.style.removeProperty("--method-parallax-offset")
         })
@@ -40,26 +50,21 @@ export function MobileMethodSteps({ steps }: { steps: MethodStep[] }) {
         const bounds = step.getBoundingClientRect()
         const distanceFromCenter = bounds.top + bounds.height / 2 - viewportCenter
         const progress = Math.max(-1, Math.min(1, distanceFromCenter / window.innerHeight))
-        const depth = [18, -14, 16, -12][index] ?? 0
+        const depth = parallaxDepths[index] ?? 0
 
         step.style.setProperty("--method-parallax-offset", `${progress * depth}px`)
       })
     }
 
-    const requestUpdate = () => {
-      if (!frameId) frameId = window.requestAnimationFrame(updateOffsets)
-    }
-
-    requestUpdate()
-    window.addEventListener("scroll", requestUpdate, { passive: true })
-    window.addEventListener("resize", requestUpdate)
-    mediaQuery.addEventListener("change", requestUpdate)
+    updateOffsets()
+    window.addEventListener("scroll", updateOffsets, { passive: true })
+    window.addEventListener("resize", updateOffsets)
+    mediaQuery.addEventListener("change", updateOffsets)
 
     return () => {
-      window.cancelAnimationFrame(frameId)
-      window.removeEventListener("scroll", requestUpdate)
-      window.removeEventListener("resize", requestUpdate)
-      mediaQuery.removeEventListener("change", requestUpdate)
+      window.removeEventListener("scroll", updateOffsets)
+      window.removeEventListener("resize", updateOffsets)
+      mediaQuery.removeEventListener("change", updateOffsets)
     }
   }, [])
 
@@ -77,6 +82,12 @@ export function MobileMethodSteps({ steps }: { steps: MethodStep[] }) {
         <Stack
           key={step.number}
           data-method-step
+          style={
+            {
+              "--method-parallax-start": `${parallaxDepths[index] ?? 0}px`,
+              "--method-parallax-end": `-${parallaxDepths[index] ?? 0}px`,
+            } as CSSProperties
+          }
           position="relative"
           pt="9"
           pb="8"
@@ -91,6 +102,11 @@ export function MobileMethodSteps({ steps }: { steps: MethodStep[] }) {
             "@media (max-width: 47.997rem) and (prefers-reduced-motion: no-preference)": {
               transform: "translate3d(0, var(--method-parallax-offset, 0px), 0)",
               willChange: "transform",
+              "@supports (animation-timeline: view())": {
+                animation: `${mobileStepParallax} 1ms linear both`,
+                animationRange: "entry 0% exit 100%",
+                animationTimeline: "view(block)",
+              },
             },
           }}
         >
