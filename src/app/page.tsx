@@ -1,4 +1,5 @@
 import { ContactForm } from "@/components/contact-form"
+import { MobileMethodSteps } from "@/components/mobile-method-steps"
 import { Reveal } from "@/components/reveal"
 import { SiteHeader } from "@/components/site-header"
 import SolnixAssinatura from "@/components/solnixAssinatura"
@@ -903,69 +904,7 @@ export default function Home() {
               </Grid>
 
               <Reveal>
-                <SimpleGrid
-                  columns={{ base: 1, md: 2, lg: 4 }}
-                  gap="0"
-                  borderTopWidth="1px"
-                  borderColor="border.subtle"
-                  minW="0"
-                  w="full"
-                >
-                  {methodSteps.map((step, index) => (
-                    <Stack
-                      key={step.number}
-                      position="relative"
-                      pt="9"
-                      pb="8"
-                      px={{ base: "0", lg: index === 0 ? "0" : "7" }}
-                      pr={{ base: "0", lg: "7" }}
-                      borderBottomWidth={{ base: "1px", lg: "0" }}
-                      borderLeftWidth={{ base: "0", lg: index === 0 ? "0" : "1px" }}
-                      borderColor="border.subtle"
-                      gap="4"
-                      minW="0"
-                    >
-                      <Box
-                        position="absolute"
-                        top="-7px"
-                        left={{ base: "0", lg: index === 0 ? "0" : "7" }}
-                        boxSize={index === 3 ? "4" : "3.5"}
-                        borderRadius="full"
-                        bg={index === 3 ? "brand.primary" : "accent.warm"}
-                      />
-                      <Flex
-                        boxSize="12"
-                        borderWidth="1px"
-                        borderColor="rgba(244, 132, 32, 0.45)"
-                        borderRadius="full"
-                        align="center"
-                        justify="center"
-                        bg="bg.canvas"
-                      >
-                        <Image
-                          src={step.icon}
-                          alt=""
-                          width={829}
-                          height={829}
-                          style={{
-                            width: "22px",
-                            height: "22px",
-                            objectFit: "contain",
-                          }}
-                        />
-                      </Flex>
-                      <Text textStyle="micro" color="brand.primary">
-                        {step.number}
-                      </Text>
-                      <Heading as="h3" textStyle="h3" color="brand.primary">
-                        {step.title}
-                      </Heading>
-                      <Text textStyle="body" color="fg.default">
-                        {step.description}
-                      </Text>
-                    </Stack>
-                  ))}
-                </SimpleGrid>
+                <MobileMethodSteps steps={methodSteps} />
               </Reveal>
             </Stack>
           </Container>
