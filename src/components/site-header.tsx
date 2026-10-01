@@ -1,6 +1,7 @@
 "use client"
 
-import { Box, Button, Container, Flex, HStack, IconButton, Link, Stack } from "@chakra-ui/react"
+import { Box, Button, Container, Flex, HStack, IconButton, Stack } from "@chakra-ui/react"
+import { ScrollLink } from "@/components/scroll-link"
 import Image from "next/image"
 import { useEffect, useState } from "react"
 import { LuArrowUpRight, LuMenu, LuX } from "react-icons/lu"
@@ -10,11 +11,11 @@ interface SiteHeaderProps {
 }
 
 const navItems = [
-  ["Início", "#inicio"],
-  ["Serviços", "#servicos"],
-  ["Método", "#metodo"],
-  ["Sobre", "#sobre"],
-  ["Contato", "#contato"],
+  ["Início", "inicio"],
+  ["Serviços", "servicos"],
+  ["Método", "metodo"],
+  ["Sobre", "sobre"],
+  ["Contato", "contato"],
 ] as const
 
 export function SiteHeader({
@@ -83,7 +84,7 @@ export function SiteHeader({
           gap="3"
           minW="0"
         >
-          <Link href="#inicio" aria-label="TSA Gestão Contábil — início" flexShrink="0">
+          <ScrollLink target="inicio" aria-label="TSA Gestão Contábil — início" flexShrink="0">
             <Box
               position="relative"
               width="clamp(88px, 22vw, 148px)"
@@ -117,7 +118,7 @@ export function SiteHeader({
                 }}
               />
             </Box>
-          </Link>
+          </ScrollLink>
 
           <HStack
             as="nav"
@@ -125,17 +126,17 @@ export function SiteHeader({
             gap="8"
             display={{ base: "none", lg: "flex" }}
           >
-            {navItems.map(([label, href]) => (
-              <Link
-                key={href}
-                href={href}
+            {navItems.map(([label, target]) => (
+              <ScrollLink
+                key={target}
+                target={target}
                 textStyle="cta"
                 color={scrolled ? "brand.primary" : "fg.onBrand"}
                 transition="color 480ms ease-in-out"
                 _hover={{ color: "accent.warm" }}
               >
                 {label}
-              </Link>
+              </ScrollLink>
             ))}
           </HStack>
 
@@ -183,15 +184,15 @@ export function SiteHeader({
           py="5"
         >
           <Stack gap="4">
-            {navItems.map(([label, href]) => (
-              <Link
-                key={href}
-                href={href}
+            {navItems.map(([label, target]) => (
+              <ScrollLink
+                key={target}
+                target={target}
                 textStyle="cta"
                 onClick={() => setMenuOpen(false)}
               >
                 {label}
-              </Link>
+              </ScrollLink>
             ))}
             <Button
               asChild

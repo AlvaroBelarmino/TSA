@@ -39,7 +39,7 @@ const mobileCardThemes = [
     watermark: "rgba(95, 115, 107, 0.11)",
   },
   {
-    background: "linear-gradient(145deg, #06496A 0%, #003858 68%, #002C46 100%)",
+    background: "linear-gradient(145deg, #277691 0%, #0D5A75 68%, #064966 100%)",
     border: "rgba(255, 255, 255, 0.14)",
     accent: "#F48420",
     title: "#F7F3EE",
