@@ -1,11 +1,10 @@
 "use client"
 
-import { Button, type ButtonProps } from "@chakra-ui/react"
+import { chakra, type HTMLChakraProps } from "@chakra-ui/react"
 import { forwardRef, type MouseEvent } from "react"
 
-interface ScrollLinkProps extends Omit<ButtonProps, "type"> {
+interface ScrollLinkProps extends Omit<HTMLChakraProps<"button">, "type"> {
   target: string
-  onClick?: (event: MouseEvent<HTMLButtonElement>) => void
 }
 
 export const ScrollLink = forwardRef<HTMLButtonElement, ScrollLinkProps>(
@@ -39,13 +38,17 @@ export const ScrollLink = forwardRef<HTMLButtonElement, ScrollLinkProps>(
     }
 
     return (
-      <Button
+      <chakra.button
         ref={ref}
         type="button"
-        variant="plain"
+        appearance="none"
+        bg="transparent"
+        borderWidth="0"
+        cursor="pointer"
+        font="inherit"
         minW="0"
-        h="auto"
         p="0"
+        textAlign="inherit"
         {...props}
         onClick={handleClick}
       />
