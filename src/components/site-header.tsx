@@ -51,11 +51,23 @@ export function SiteHeader({
       position="fixed"
       inset="0 0 auto"
       zIndex="sticky"
-      bg={scrolled || menuOpen ? "rgba(247, 243, 238, 0.94)" : "transparent"}
+      bg={
+        menuOpen
+          ? "bg.canvas"
+          : scrolled
+            ? { base: "bg.canvas", lg: "rgba(247, 243, 238, 0.94)" }
+            : "transparent"
+      }
       borderBottomWidth="1px"
       borderColor={scrolled || menuOpen ? "border.subtle" : "transparent"}
-      backdropFilter={scrolled || menuOpen ? "blur(14px)" : "none"}
-      transition="background 480ms ease-in-out, border-color 480ms ease-in-out, backdrop-filter 480ms ease-in-out"
+      backdropFilter={
+        menuOpen ? "none" : scrolled ? { base: "none", lg: "blur(14px)" } : "none"
+      }
+      transition={
+        menuOpen
+          ? "border-color 200ms ease-in-out"
+          : "background 480ms ease-in-out, border-color 480ms ease-in-out, backdrop-filter 480ms ease-in-out"
+      }
     >
       <Container maxW="1440px" px={{ base: "5", md: "8", xl: "12" }} minW="0">
         <Flex
