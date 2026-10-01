@@ -962,10 +962,15 @@ export default function Home() {
                   Não encontrou exatamente o que precisa? Conte sua situação e a TSA
                   indica o caminho contábil mais adequado.
                 </Text>
-                <Button
-                  asChild
-                  variant="outline"
+                <ScrollLink
+                  target="contato"
+                  display="inline-flex"
+                  alignItems="center"
+                  justifyContent="center"
+                  gap="2"
+                  minH="10"
                   borderColor="brand.primary"
+                  borderWidth="1px"
                   color="brand.primary"
                   borderRadius="full"
                   px="6"
@@ -973,11 +978,9 @@ export default function Home() {
                   flexShrink="0"
                   _hover={{ bg: "brand.primary", color: "fg.onBrand" }}
                 >
-                  <ScrollLink target="contato">
-                    Explicar minha situação
-                    <LuArrowDownRight />
-                  </ScrollLink>
-                </Button>
+                  Explicar minha situação
+                  <LuArrowDownRight />
+                </ScrollLink>
               </Flex>
             </Stack>
           </Container>
