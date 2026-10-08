@@ -22,22 +22,22 @@ interface ContactFormProps {
 const fieldStyles = {
   width: "full",
   minW: "0",
-  bg: "bg.surface",
-  borderColor: "border.subtle",
-  color: "fg.default",
+  minH: "12",
+  bg: "rgba(255, 255, 255, 0.04)",
+  borderColor: "rgba(247, 243, 238, 0.42)",
+  color: "fg.onBrand",
+  borderRadius: "0",
   _focusVisible: {
-    borderColor: "brand.primary",
-    boxShadow: "0 0 0 1px var(--chakra-colors-brand-primary)",
+    borderColor: "accent.warm",
+    boxShadow: "0 0 0 2px rgba(244, 132, 32, 0.4)",
   },
+  _hover: { borderColor: "fg.onBrand" },
 }
 
-export function ContactForm({
-  whatsappNumber = "",
-  formEndpoint = "",
-}: ContactFormProps) {
-  const [submissionState, setSubmissionState] = useState<
-    "idle" | "sending" | "success" | "error"
-  >("idle")
+export function ContactForm({ whatsappNumber = "", formEndpoint = "" }: ContactFormProps) {
+  const [submissionState, setSubmissionState] = useState<"idle" | "sending" | "success" | "error">(
+    "idle",
+  )
   const normalizedNumber = whatsappNumber.replace(/\D/g, "")
   const hasWhatsapp = normalizedNumber.length > 0
   const hasFormEndpoint = formEndpoint.trim().length > 0
@@ -93,12 +93,21 @@ export function ContactForm({
   }
 
   return (
-    <form onSubmit={handleSubmit} aria-label="Solicitar contato da TSA" style={{ width: "100%", maxWidth: "100%" }}>
+    <form
+      onSubmit={handleSubmit}
+      aria-label="Solicitar contato da TSA"
+      style={{ width: "100%", maxWidth: "100%" }}
+    >
       <Stack gap="5">
-        <Grid minW="0" width="full" templateColumns={{ base: "minmax(0, 1fr)", md: "minmax(0, 1fr) minmax(0, 1fr)" }} gap="5">
+        <Grid
+          minW="0"
+          width="full"
+          templateColumns={{ base: "minmax(0, 1fr)", md: "minmax(0, 1fr) minmax(0, 1fr)" }}
+          gap="5"
+        >
           <Field.Root required>
             <Field.Label>Nome</Field.Label>
-            <Input name="name" autoComplete="name" {...fieldStyles} />
+            <Input name="name" autoComplete="name" required {...fieldStyles} />
           </Field.Root>
 
           <Field.Root required>
@@ -108,18 +117,19 @@ export function ContactForm({
               type="tel"
               inputMode="tel"
               autoComplete="tel"
+              required
               {...fieldStyles}
             />
           </Field.Root>
 
           <Field.Root required>
             <Field.Label>E-mail</Field.Label>
-            <Input name="email" type="email" autoComplete="email" {...fieldStyles} />
+            <Input name="email" type="email" autoComplete="email" required {...fieldStyles} />
           </Field.Root>
 
           <Field.Root required>
             <Field.Label>Tipo de negócio ou atividade</Field.Label>
-            <Input name="business" {...fieldStyles} />
+            <Input name="business" required {...fieldStyles} />
           </Field.Root>
 
           <Field.Root required>
@@ -160,9 +170,7 @@ export function ContactForm({
                 Abertura, alteração ou encerramento de empresa
               </option>
               <option value="Regularização">Regularização</option>
-              <option value="Folha e rotinas trabalhistas">
-                Folha e rotinas trabalhistas
-              </option>
+              <option value="Folha e rotinas trabalhistas">Folha e rotinas trabalhistas</option>
               <option value="Planejamento tributário">Planejamento tributário</option>
               <option value="Consultoria contábil">Consultoria contábil</option>
               <option value="Outra orientação">Outra orientação</option>
@@ -173,7 +181,7 @@ export function ContactForm({
 
         <Field.Root>
           <Field.Label>Conte brevemente o que está acontecendo</Field.Label>
-          <Textarea name="message" minH="120px" resize="vertical" {...fieldStyles} />
+          <Textarea name="message" resize="vertical" {...fieldStyles} minH="120px" />
         </Field.Root>
 
         <Button
@@ -181,15 +189,17 @@ export function ContactForm({
           alignSelf="stretch"
           w={{ base: "full", sm: "auto" }}
           size="lg"
-          bg="brand.primary"
-          color="fg.onBrand"
-          borderRadius="full"
+          bg="accent.warm"
+          color="brand.primary"
+          borderRadius="0"
           px={{ base: "5", md: "7" }}
           h="auto"
           minH="12"
           whiteSpace="normal"
           disabled={!isConfigured || submissionState === "sending"}
-          _hover={{ bg: "accent.warm", color: "brand.primary" }}
+          _hover={{ bg: "#f99132", transform: "translateY(-2px)" }}
+          _active={{ transform: "translateY(0) scale(0.99)" }}
+          transition="background 200ms ease, transform 200ms ease"
         >
           {submissionState === "sending"
             ? "Enviando..."
@@ -203,19 +213,19 @@ export function ContactForm({
 
         <Box aria-live="polite">
           {submissionState === "success" && (
-            <Text textStyle="micro" color="accent.balance">
+            <Text textStyle="micro" color="fg.onBrand">
               Informações enviadas. A TSA entrará em contato.
             </Text>
           )}
           {submissionState === "error" && (
-            <Text textStyle="micro" color="brand.primary" role="alert">
+            <Text textStyle="micro" color="fg.onBrand" role="alert">
               Não foi possível enviar agora. Tente novamente em alguns instantes.
             </Text>
           )}
         </Box>
 
         {!isConfigured && (
-          <Text textStyle="micro" color="fg.muted" maxW="60ch">
+          <Text textStyle="micro" color="fg.onBrand" maxW="60ch">
             O envio será ativado assim que o número comercial da TSA for definido.
           </Text>
         )}

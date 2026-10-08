@@ -8,9 +8,10 @@ type RevealProps = {
   delay?: number
   y?: number
   rotate?: number
+  variant?: "rise" | "slide" | "image"
 }
 
-export function Reveal({ children, delay = 0, y = 24, rotate = 0 }: RevealProps) {
+export function Reveal({ children, delay = 0, y = 24, rotate = 0, variant = "rise" }: RevealProps) {
   const ref = useRef<HTMLDivElement>(null)
   const [visible, setVisible] = useState(false)
 
@@ -41,15 +42,20 @@ export function Reveal({ children, delay = 0, y = 24, rotate = 0 }: RevealProps)
     <Box
       ref={ref}
       width="full"
+      height="full"
       maxW="100%"
       minW="0"
       opacity={visible ? 1 : 0}
       transform={
         visible
-          ? "translateY(0) rotate(0deg)"
-          : `translateY(${y}px) rotate(${rotate}deg)`
+          ? "translate3d(0, 0, 0) rotate(0deg)"
+          : variant === "rise"
+            ? `translate3d(0, ${y}px, 0) rotate(${rotate}deg)`
+            : variant === "slide"
+              ? "translate3d(24px, 0, 0)"
+              : "translate3d(0, 18px, 0) scale(1.025)"
       }
-      transition={`opacity 700ms cubic-bezier(0.22, 1, 0.36, 1) ${delay}ms, transform 700ms cubic-bezier(0.22, 1, 0.36, 1) ${delay}ms`}
+      transition={`opacity ${variant === "image" ? 900 : 650}ms cubic-bezier(0.22, 1, 0.36, 1) ${delay}ms, transform ${variant === "image" ? 900 : 650}ms cubic-bezier(0.22, 1, 0.36, 1) ${delay}ms`}
       css={{
         "@media (prefers-reduced-motion: reduce)": {
           opacity: 1,

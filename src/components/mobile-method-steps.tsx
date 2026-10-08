@@ -1,5 +1,9 @@
-import { Box, Flex, Heading, SimpleGrid, Stack, Text } from "@chakra-ui/react"
+"use client"
+
+import { Reveal } from "@/components/reveal"
+import { Box, Grid, Heading, Text } from "@chakra-ui/react"
 import Image from "next/image"
+import { useEffect, useRef } from "react"
 
 type MethodStep = {
   number: string
@@ -8,171 +12,192 @@ type MethodStep = {
   icon: string
 }
 
-const mobileStickyTop = "6.5rem"
-
-const mobileCardThemes = [
-  {
-    background: "linear-gradient(145deg, #FFFFFF 0%, #FAF7F2 100%)",
-    border: "rgba(0, 56, 88, 0.12)",
-    accent: "#F48420",
-    title: "#003858",
-    body: "#1F2430",
-    iconBackground: "#FFF8F1",
-    watermark: "rgba(0, 56, 88, 0.055)",
-  },
-  {
-    background: "linear-gradient(145deg, #FFF8F0 0%, #FBE8D5 100%)",
-    border: "rgba(244, 132, 32, 0.22)",
-    accent: "#F48420",
-    title: "#003858",
-    body: "#1F2430",
-    iconBackground: "rgba(255, 255, 255, 0.72)",
-    watermark: "rgba(244, 132, 32, 0.1)",
-  },
-  {
-    background: "linear-gradient(145deg, #F2F6F3 0%, #DEE8E3 100%)",
-    border: "rgba(95, 115, 107, 0.25)",
-    accent: "#5F736B",
-    title: "#003858",
-    body: "#1F2430",
-    iconBackground: "rgba(255, 255, 255, 0.72)",
-    watermark: "rgba(95, 115, 107, 0.11)",
-  },
-  {
-    background: "linear-gradient(145deg, #277691 0%, #0D5A75 68%, #064966 100%)",
-    border: "rgba(255, 255, 255, 0.14)",
-    accent: "#F48420",
-    title: "#F7F3EE",
-    body: "rgba(247, 243, 238, 0.88)",
-    iconBackground: "#F7F3EE",
-    watermark: "rgba(247, 243, 238, 0.075)",
-  },
-]
-
 export function MobileMethodSteps({ steps }: { steps: MethodStep[] }) {
+  const timelineRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const timeline = timelineRef.current
+    if (!timeline) return
+
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)")
+    let frame = 0
+
+    const updateNumberProgress = (progress: number) => {
+      const timelineRect = timeline.getBoundingClientRect()
+      const horizontal = window.matchMedia("(min-width: 62rem)").matches
+      const endpoint = horizontal
+        ? timelineRect.left + timelineRect.width * progress
+        : timelineRect.top + timelineRect.height * progress
+
+      timeline.querySelectorAll<HTMLElement>("[data-method-number]").forEach((number) => {
+        const numberRect = number.getBoundingClientRect()
+        const start = horizontal ? numberRect.left : numberRect.top
+        const size = horizontal ? numberRect.width : numberRect.height
+        const numberProgress = Math.min(Math.max((endpoint - start) / Math.max(size, 1), 0), 1)
+
+        number.style.setProperty("--number-progress", numberProgress.toFixed(4))
+      })
+    }
+
+    const updateProgress = () => {
+      frame = 0
+
+      if (reducedMotion.matches) {
+        timeline.style.setProperty("--method-progress", "1")
+        updateNumberProgress(1)
+        return
+      }
+
+      const horizontal = window.matchMedia("(min-width: 62rem)").matches
+      const section = horizontal ? timeline.closest("section") : null
+      const rect = (section ?? timeline).getBoundingClientRect()
+      const start = horizontal ? window.innerHeight * 0.6 : window.innerHeight * 0.7
+      const distance = horizontal
+        ? Math.max(rect.height * 0.55, 1)
+        : Math.max(rect.height + start - window.innerHeight * 0.22, 1)
+      const progress = Math.min(Math.max((start - rect.top) / distance, 0), 1)
+
+      timeline.style.setProperty("--method-progress", progress.toFixed(4))
+      updateNumberProgress(progress)
+    }
+
+    const requestUpdate = () => {
+      if (frame) return
+      frame = window.requestAnimationFrame(updateProgress)
+    }
+
+    updateProgress()
+    window.addEventListener("scroll", requestUpdate, { passive: true })
+    window.addEventListener("resize", requestUpdate)
+    reducedMotion.addEventListener("change", requestUpdate)
+
+    return () => {
+      if (frame) window.cancelAnimationFrame(frame)
+      window.removeEventListener("scroll", requestUpdate)
+      window.removeEventListener("resize", requestUpdate)
+      reducedMotion.removeEventListener("change", requestUpdate)
+    }
+  }, [])
+
   return (
-    <SimpleGrid
-      columns={{ base: 1, md: 2, lg: 4 }}
-      display={{ base: "block", md: "grid" }}
+    <Grid
+      ref={timelineRef}
+      as="ol"
+      position="relative"
+      templateColumns={{ base: "1fr", lg: "repeat(4, minmax(0, 1fr))" }}
       gap="0"
-      borderTopWidth={{ base: "0", md: "1px" }}
-      borderColor="border.subtle"
-      minW="0"
-      w="full"
+      m="0"
+      p="0"
+      listStyleType="none"
+      _before={{
+        content: '""',
+        position: "absolute",
+        top: { base: "0", lg: "1.28rem" },
+        bottom: { base: "0", lg: "auto" },
+        left: { base: "1.3rem", lg: "0" },
+        right: { base: "auto", lg: "0" },
+        w: { base: "1px", lg: "auto" },
+        h: { base: "auto", lg: "1px" },
+        bg: "rgba(0, 56, 88, 0.18)",
+        zIndex: "0",
+      }}
+      _after={{
+        content: '""',
+        position: "absolute",
+        top: { base: "0", lg: "1.28rem" },
+        bottom: { base: "0", lg: "auto" },
+        left: { base: "1.3rem", lg: "0" },
+        w: { base: "1px", lg: "100%" },
+        h: { base: "100%", lg: "1px" },
+        bg: "accent.warm",
+        zIndex: "0",
+        transformOrigin: { base: "top", lg: "left" },
+        transform: {
+          base: "scaleY(var(--method-progress, 0))",
+          lg: "scaleX(var(--method-progress, 0))",
+        },
+      }}
+      css={{
+        "@media (prefers-reduced-motion: reduce)": {
+          "&::after": { transform: "none" },
+        },
+      }}
     >
-      {steps.map((step, index) => {
-        const theme = mobileCardThemes[index] ?? mobileCardThemes[0]
-
-        return (
-          <Stack
-            key={step.number}
-            data-method-step
-            position={{ base: "sticky", md: "relative" }}
-            top={{ base: mobileStickyTop, md: "auto" }}
-            zIndex={{ base: index + 1, md: "auto" }}
-            minH={{ base: "292px", md: "auto" }}
-            mb={{ base: index === steps.length - 1 ? "0" : "42vh", md: "0" }}
-            pt={{ base: "8", md: "9" }}
-            pb={{ base: "7", md: "8" }}
-            px={{ base: "7", md: "0", lg: index === 0 ? "0" : "7" }}
-            pr={{ base: "7", md: "0", lg: "7" }}
-            background={{ base: theme.background, md: "transparent" }}
-            borderWidth={{ base: "1px", md: "0" }}
-            borderBottomWidth={{ base: "1px", md: "1px", lg: "0" }}
-            borderLeftWidth={{ base: "1px", md: "0", lg: index === 0 ? "0" : "1px" }}
-            borderColor={{ base: theme.border, md: "border.subtle" }}
-            borderRadius={{ base: "3xl", md: "0" }}
-            boxShadow={{
-              base: "0 24px 60px rgba(0, 56, 88, 0.18), 0 5px 14px rgba(0, 56, 88, 0.08)",
-              md: "none",
-            }}
-            overflow="hidden"
-            gap="5"
-            minW="0"
-          >
-            <Box
-              display={{ base: "block", md: "none" }}
-              position="absolute"
-              top="0"
-              left="0"
-              h="4px"
-              w={`${((index + 1) / steps.length) * 100}%`}
-              bg={theme.accent}
-              borderTopRightRadius="full"
-            />
-            <Text
-              display={{ base: "block", md: "none" }}
-              position="absolute"
-              right="4"
-              bottom="-5"
-              fontFamily="heading"
-              fontSize="7.5rem"
-              fontWeight="semibold"
-              lineHeight="1"
-              color={theme.watermark}
-              aria-hidden="true"
-            >
-              {step.number}
-            </Text>
-            <Box
-              display={{ base: "none", md: "block" }}
-              position="absolute"
-              top="-7px"
-              left={{ md: "0", lg: index === 0 ? "0" : "7" }}
-              boxSize={index === 3 ? "4" : "3.5"}
-              borderRadius="full"
-              bg={index === 3 ? "brand.primary" : "accent.warm"}
-            />
-
-            <Flex
-              boxSize={{ base: "14", md: "12" }}
-              borderWidth="1px"
-              borderColor={{ base: theme.accent, md: "rgba(244, 132, 32, 0.45)" }}
-              borderRadius="full"
-              align="center"
-              justify="center"
-              bg={{ base: theme.iconBackground, md: "bg.canvas" }}
-              boxShadow={{ base: "inset 0 0 0 5px rgba(255, 255, 255, 0.28)", md: "none" }}
-              position="relative"
-              zIndex="1"
-            >
-              <Image
-                src={step.icon}
-                alt=""
-                width={829}
-                height={829}
-                style={{ width: "22px", height: "22px", objectFit: "contain" }}
-              />
-            </Flex>
-
-            <Text
-              display={{ base: "none", md: "block" }}
-              textStyle="micro"
-              color="brand.primary"
-            >
-              {step.number}
-            </Text>
-            <Heading
-              as="h3"
-              textStyle="h3"
-              color={{ base: theme.title, md: "brand.primary" }}
-              position="relative"
-              zIndex="1"
-            >
-              {step.title}
-            </Heading>
-            <Text
-              textStyle="body"
-              color={{ base: theme.body, md: "fg.default" }}
-              position="relative"
-              zIndex="1"
-            >
-              {step.description}
-            </Text>
-          </Stack>
-        )
-      })}
-      <Box display={{ base: "block", md: "none" }} h="48vh" aria-hidden="true" />
-    </SimpleGrid>
+      {steps.map((step, index) => (
+        <Box
+          as="li"
+          key={step.number}
+          position="relative"
+          zIndex="1"
+          minW="0"
+          pr={{ base: "0", lg: "7" }}
+          pb={{ base: index === steps.length - 1 ? "0" : "10", lg: "0" }}
+          role="group"
+        >
+          <Reveal delay={index * 90} y={16}>
+            <Box position="relative" minH={{ base: "8rem", lg: "auto" }} pt={{ base: "0", lg: "3.6rem" }} pl={{ base: "4.2rem", lg: "0" }}>
+              <Box
+                as="span"
+                data-method-number
+                position="absolute"
+                zIndex="2"
+                top="0"
+                left="0"
+                display="grid"
+                placeItems="center"
+                boxSize="2.6rem"
+                borderRadius="full"
+                bg="conic-gradient(#f48420 calc(var(--number-progress, 0) * 1turn), rgba(0, 56, 88, 0.18) 0)"
+                boxShadow="0 0 0 8px #F7F3EE"
+                color="#c85d06"
+                fontFamily="heading"
+                fontSize="0.9rem"
+                transition="background 250ms ease, color 250ms ease, transform 250ms ease"
+                _before={{
+                  content: '""',
+                  position: "absolute",
+                  inset: "1.5px",
+                  zIndex: "0",
+                  borderRadius: "full",
+                  bg: "bg.canvas",
+                  transition: "background 250ms ease",
+                }}
+                _groupHover={{
+                  color: "white",
+                  transform: "scale(1.08)",
+                  _before: { bg: "accent.warm" },
+                }}
+              >
+                <Box as="span" position="relative" zIndex="1">
+                  {step.number}
+                </Box>
+              </Box>
+              <Box
+                display="grid"
+                placeItems="center"
+                boxSize={{ base: "2.7rem", lg: "3.5rem" }}
+                mb={{ base: "3", lg: "5" }}
+                border="1px solid rgba(0, 56, 88, 0.13)"
+                borderRadius="full"
+              >
+                <Image
+                  src={step.icon}
+                  alt=""
+                  width={829}
+                  height={829}
+                  style={{ width: "1.7rem", height: "1.7rem", objectFit: "contain" }}
+                />
+              </Box>
+              <Heading as="h3" maxW={{ base: "38ch", lg: "14ch" }} color="brand.primary" fontSize="clamp(1.35rem, 1.8vw, 1.9rem)" lineHeight="1.2">
+                {step.title}
+              </Heading>
+              <Text mt="2.5" maxW={{ base: "38ch", lg: "27ch" }} color="#29475b" fontSize="0.87rem" lineHeight="1.55">
+                {step.description}
+              </Text>
+            </Box>
+          </Reveal>
+        </Box>
+      ))}
+    </Grid>
   )
 }
