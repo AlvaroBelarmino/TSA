@@ -31,7 +31,7 @@ export function SiteHeader({
 
   useEffect(() => {
     const onScroll = () => {
-      const scrollThreshold = window.innerWidth < 1024 ? 0 : 520
+      const scrollThreshold = window.innerWidth < 1024 ? 0 : 700
       setScrolled(window.scrollY > scrollThreshold)
 
       if (window.scrollY > scrollThreshold) {
