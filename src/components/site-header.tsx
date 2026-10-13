@@ -52,7 +52,7 @@ export function SiteHeader({
   }, [menuOpen])
 
   const compactSurface = scrolled
-  const darkSurface = compactSurface && !menuOpen
+  const darkSurface = compactSurface
 
   return (
     <Box
@@ -80,7 +80,6 @@ export function SiteHeader({
         backdropFilter={darkSurface ? "blur(14px)" : "none"}
         borderRadius={compactSurface ? (menuOpen ? "2xl" : "full") : "0"}
         boxShadow={compactSurface ? "0 12px 32px rgba(0, 56, 88, 0.16)" : "none"}
-        overflow={compactSurface && menuOpen ? "hidden" : "visible"}
         transition="background 480ms ease-in-out, border-color 480ms ease-in-out, backdrop-filter 480ms ease-in-out, width 420ms cubic-bezier(0.22, 1, 0.36, 1), top 420ms cubic-bezier(0.22, 1, 0.36, 1), border-radius 420ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 420ms ease-in-out"
       >
         <Container maxW="1440px" px={{ base: "5", md: "8", xl: "12" }} minW="0">
@@ -184,15 +183,24 @@ export function SiteHeader({
         </Flex>
         <Box
           display={{ base: "block", lg: "none" }}
+          position="absolute"
+          top="calc(100% + 8px)"
+          left="0"
+          right="0"
           maxH={menuOpen ? "420px" : "0"}
           opacity={menuOpen ? 1 : 0}
           overflow="hidden"
           pointerEvents={menuOpen ? "auto" : "none"}
+          visibility={menuOpen ? "visible" : "hidden"}
+          transform={menuOpen ? "translateY(0)" : "translateY(-8px)"}
+          bg="bg.canvas"
           color="brand.primary"
-          borderTopWidth={menuOpen ? "1px" : "0"}
           borderColor="border.subtle"
+          borderWidth="1px"
+          borderRadius="2xl"
+          boxShadow="0 12px 32px rgba(0, 56, 88, 0.14)"
           py={menuOpen ? "5" : "0"}
-          transition="max-height 360ms cubic-bezier(0.22, 1, 0.36, 1), opacity 180ms ease, padding 360ms ease, border-color 180ms ease"
+          transition="max-height 360ms cubic-bezier(0.22, 1, 0.36, 1), opacity 180ms ease, padding 360ms ease, transform 360ms cubic-bezier(0.22, 1, 0.36, 1), visibility 360ms ease"
         >
           <Stack gap="4">
             {navItems.map(([label, target]) => (
