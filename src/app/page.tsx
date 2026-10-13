@@ -449,7 +449,7 @@ export default function Home() {
           as="section"
           aria-labelledby="hero-title"
           position="relative"
-          minH={{ base: "auto", lg: "100svh" }}
+          minH={{ base: "auto", lg: "calc(100svh - 88px)" }}
           overflow="hidden"
           bg="brand.primary"
           color="fg.onBrand"

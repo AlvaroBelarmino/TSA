@@ -52,7 +52,7 @@ export function SiteHeader({
   return (
     <Box
       as="header"
-      position="fixed"
+      position="sticky"
       inset="0 0 auto"
       zIndex="sticky"
       bg={menuOpen ? "bg.canvas" : "rgba(247, 243, 238, 0.78)"}
