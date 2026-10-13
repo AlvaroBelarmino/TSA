@@ -58,19 +58,27 @@ export function SiteHeader({
     <Box
       as="header"
       position="sticky"
-      top={darkSurface ? { base: "8px", md: "12px" } : "0"}
+      top="0"
       zIndex="sticky"
-      w={darkSurface ? { base: "calc(100% - 24px)", md: "calc(100% - 48px)" } : "100%"}
-      mx="auto"
-      bg={darkSurface ? "rgba(0, 56, 88, 0.84)" : menuOpen ? "bg.canvas" : "white"}
-      borderWidth="1px"
-      borderColor={scrolled || menuOpen ? "border.subtle" : "transparent"}
-      backdropFilter={darkSurface ? "blur(14px)" : "none"}
-      borderRadius={darkSurface ? "full" : "0"}
-      boxShadow={darkSurface ? "0 12px 32px rgba(0, 56, 88, 0.16)" : "none"}
-      transition="background 480ms ease-in-out, border-color 480ms ease-in-out, backdrop-filter 480ms ease-in-out, width 360ms ease-in-out, top 360ms ease-in-out, border-radius 360ms ease-in-out, box-shadow 360ms ease-in-out"
+      minH={{ base: "76px", md: "88px" }}
+      pointerEvents="none"
     >
-      <Container maxW="1440px" px={{ base: "5", md: "8", xl: "12" }} minW="0">
+      <Box
+        position="absolute"
+        top={darkSurface ? { base: "8px", md: "12px" } : "0"}
+        left="50%"
+        transform="translateX(-50%)"
+        w={darkSurface ? { base: "calc(100% - 24px)", md: "calc(100% - 48px)" } : "100%"}
+        pointerEvents="auto"
+        bg={darkSurface ? "rgba(0, 56, 88, 0.84)" : menuOpen ? "bg.canvas" : "white"}
+        borderWidth="1px"
+        borderColor={scrolled || menuOpen ? "border.subtle" : "transparent"}
+        backdropFilter={darkSurface ? "blur(14px)" : "none"}
+        borderRadius={darkSurface ? "full" : "0"}
+        boxShadow={darkSurface ? "0 12px 32px rgba(0, 56, 88, 0.16)" : "none"}
+        transition="background 480ms ease-in-out, border-color 480ms ease-in-out, backdrop-filter 480ms ease-in-out, width 420ms cubic-bezier(0.22, 1, 0.36, 1), top 420ms cubic-bezier(0.22, 1, 0.36, 1), border-radius 420ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 420ms ease-in-out"
+      >
+        <Container maxW="1440px" px={{ base: "5", md: "8", xl: "12" }} minW="0">
         <Flex
           minH={darkSurface ? { base: "64px", md: "72px" } : { base: "76px", md: "88px" }}
           align="center"
@@ -208,7 +216,8 @@ export function SiteHeader({
             </Button>
           </Stack>
         </Box>
-      </Container>
+        </Container>
+      </Box>
     </Box>
   )
 }
