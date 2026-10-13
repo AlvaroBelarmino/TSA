@@ -57,17 +57,17 @@ export function SiteHeader({
   return (
     <Box
       as="header"
-      position="fixed"
-      inset="0 0 auto"
+      position={{ base: "fixed", lg: desktopScrolled ? "fixed" : "relative" }}
+      inset={{ base: "0 0 auto", lg: desktopScrolled ? "0 0 auto" : "auto" }}
       zIndex="sticky"
-      minH={{ base: "0", lg: "88px" }}
+      minH={{ base: "0", lg: desktopScrolled ? "0" : "88px" }}
       pointerEvents={{ base: "auto", lg: "none" }}
     >
       <Box
-        position={{ base: "relative", lg: "absolute" }}
+        position={{ base: "relative", lg: desktopScrolled ? "absolute" : "relative" }}
         top={{ base: "auto", lg: desktopScrolled ? "12px" : "0" }}
-        left={{ base: "auto", lg: "50%" }}
-        transform={{ base: "none", lg: "translateX(-50%)" }}
+        left={{ base: "auto", lg: desktopScrolled ? "50%" : "auto" }}
+        transform={{ base: "none", lg: desktopScrolled ? "translateX(-50%)" : "none" }}
         w={{
           base: "100%",
           lg: desktopScrolled ? "min(1280px, calc(100% - 96px))" : "100%",
