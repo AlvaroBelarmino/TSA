@@ -31,7 +31,7 @@ export function SiteHeader({
 
   useEffect(() => {
     const onScroll = () => {
-      const scrollThreshold = 0
+      const scrollThreshold = window.innerWidth < 1024 ? 0 : 520
       setScrolled(window.scrollY > scrollThreshold)
 
       if (window.scrollY > scrollThreshold) {
@@ -52,41 +52,44 @@ export function SiteHeader({
     return () => window.removeEventListener("keydown", onKey)
   }, [menuOpen])
 
-  const desktopScrolled = scrolled && !menuOpen
+  const darkSurface = scrolled && !menuOpen
 
   return (
     <Box
       as="header"
-      position={{ base: "fixed", lg: desktopScrolled ? "fixed" : "relative" }}
-      inset={{ base: "0 0 auto", lg: desktopScrolled ? "0 0 auto" : "auto" }}
+      position={{ base: "fixed", lg: "sticky" }}
+      top="0"
       zIndex="sticky"
-      minH={{ base: "0", lg: desktopScrolled ? "0" : "88px" }}
+      minH={{ base: "0", lg: "88px" }}
       pointerEvents={{ base: "auto", lg: "none" }}
     >
       <Box
-        position={{ base: "relative", lg: desktopScrolled ? "absolute" : "relative" }}
-        top={{ base: "auto", lg: desktopScrolled ? "12px" : "0" }}
-        left={{ base: "auto", lg: desktopScrolled ? "50%" : "auto" }}
-        transform={{ base: "none", lg: desktopScrolled ? "translateX(-50%)" : "none" }}
+        position={{ base: "relative", lg: "absolute" }}
+        top={{ base: "auto", lg: darkSurface ? "12px" : "0" }}
+        left={{ base: "auto", lg: "50%" }}
+        transform={{ base: "none", lg: "translateX(-50%)" }}
         w={{
           base: "100%",
-          lg: desktopScrolled ? "min(1280px, calc(100% - 96px))" : "100%",
+          lg: darkSurface ? "min(1280px, calc(100% - 96px))" : "100%",
         }}
         pointerEvents="auto"
         bg={{
           base: menuOpen ? "bg.canvas" : scrolled ? "bg.canvas" : "transparent",
-          lg: desktopScrolled ? "rgba(0, 56, 88, 0.84)" : menuOpen ? "bg.canvas" : "white",
+          lg: darkSurface ? "rgba(0, 56, 88, 0.84)" : menuOpen ? "bg.canvas" : "white",
         }}
         borderWidth={{ base: "0 0 1px", lg: "1px" }}
         borderColor={scrolled || menuOpen ? "border.subtle" : "transparent"}
-        backdropFilter={{ base: "none", lg: desktopScrolled ? "blur(14px)" : "none" }}
-        borderRadius={{ base: "0", lg: desktopScrolled ? "full" : "0" }}
-        boxShadow={{ base: "none", lg: desktopScrolled ? "0 12px 32px rgba(0, 56, 88, 0.16)" : "none" }}
-        transition="background-color 850ms cubic-bezier(0.16, 1, 0.3, 1), border-color 850ms cubic-bezier(0.16, 1, 0.3, 1), backdrop-filter 850ms cubic-bezier(0.16, 1, 0.3, 1), width 850ms cubic-bezier(0.16, 1, 0.3, 1), min-height 850ms cubic-bezier(0.16, 1, 0.3, 1), top 850ms cubic-bezier(0.16, 1, 0.3, 1), border-radius 850ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 850ms cubic-bezier(0.16, 1, 0.3, 1)"
+        backdropFilter={{ base: "none", lg: darkSurface ? "blur(14px)" : "none" }}
+        borderRadius={{ base: "0", lg: darkSurface ? "full" : "0" }}
+        boxShadow={{ base: "none", lg: darkSurface ? "0 12px 32px rgba(0, 56, 88, 0.16)" : "none" }}
+        transition={{
+          base: "background-color 850ms cubic-bezier(0.16, 1, 0.3, 1), border-color 850ms cubic-bezier(0.16, 1, 0.3, 1)",
+          lg: "background 480ms ease-in-out, border-color 480ms ease-in-out, backdrop-filter 480ms ease-in-out, width 420ms cubic-bezier(0.22, 1, 0.36, 1), top 420ms cubic-bezier(0.22, 1, 0.36, 1), border-radius 420ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 420ms ease-in-out",
+        }}
       >
         <Container maxW="1440px" px={{ base: "5", md: "8", xl: "12" }} minW="0">
         <Flex
-          minH={{ base: "76px", lg: desktopScrolled ? "72px" : "88px" }}
+          minH={{ base: "76px", lg: darkSurface ? "72px" : "88px" }}
           align="center"
           justify="space-between"
           gap="3"
@@ -101,8 +104,11 @@ export function SiteHeader({
               <Box
                 position="absolute"
                 inset="0"
-                opacity={{ base: scrolled || menuOpen ? 0 : 1, lg: desktopScrolled ? 1 : 0 }}
-                transition="opacity 850ms cubic-bezier(0.16, 1, 0.3, 1)"
+                opacity={{ base: scrolled || menuOpen ? 0 : 1, lg: darkSurface ? 1 : 0 }}
+                transition={{
+                  base: "opacity 850ms cubic-bezier(0.16, 1, 0.3, 1)",
+                  lg: "opacity 280ms ease-in-out",
+                }}
                 aria-hidden={scrolled || menuOpen}
               >
                 <Image
@@ -117,8 +123,11 @@ export function SiteHeader({
               <Box
                 position="absolute"
                 inset="0"
-                opacity={{ base: scrolled || menuOpen ? 1 : 0, lg: desktopScrolled ? 0 : 1 }}
-                transition="opacity 850ms cubic-bezier(0.16, 1, 0.3, 1), transform 850ms cubic-bezier(0.16, 1, 0.3, 1)"
+                opacity={{ base: scrolled || menuOpen ? 1 : 0, lg: darkSurface ? 0 : 1 }}
+                transition={{
+                  base: "opacity 850ms cubic-bezier(0.16, 1, 0.3, 1), transform 850ms cubic-bezier(0.16, 1, 0.3, 1)",
+                  lg: "opacity 280ms ease-in-out",
+                }}
                 transform="scale(0.79)"
                 aria-hidden={!(scrolled || menuOpen)}
               >
@@ -145,8 +154,11 @@ export function SiteHeader({
                 key={target}
                 target={target}
                 textStyle="cta"
-                color={{ base: scrolled ? "brand.primary" : "fg.onBrand", lg: desktopScrolled ? "fg.onBrand" : "brand.primary" }}
-                transition="color 850ms cubic-bezier(0.16, 1, 0.3, 1)"
+                color={{ base: scrolled ? "brand.primary" : "fg.onBrand", lg: darkSurface ? "fg.onBrand" : "brand.primary" }}
+                transition={{
+                  base: "color 850ms cubic-bezier(0.16, 1, 0.3, 1)",
+                  lg: "color 240ms ease-in-out",
+                }}
                 _hover={{ color: "accent.warm" }}
               >
                 {label}
@@ -158,13 +170,16 @@ export function SiteHeader({
             <Button
               asChild
               display={{ base: "none", lg: "inline-flex" }}
-              bg={{ base: scrolled || menuOpen ? "brand.primary" : "accent.warm", lg: desktopScrolled ? "accent.warm" : "brand.primary" }}
-              color={{ base: scrolled || menuOpen ? "fg.onBrand" : "brand.primary", lg: desktopScrolled ? "brand.primary" : "fg.onBrand" }}
+              bg={{ base: scrolled || menuOpen ? "brand.primary" : "accent.warm", lg: darkSurface ? "accent.warm" : "brand.primary" }}
+              color={{ base: scrolled || menuOpen ? "fg.onBrand" : "brand.primary", lg: darkSurface ? "brand.primary" : "fg.onBrand" }}
               borderRadius="full"
               px="6"
               flexShrink="0"
-              _hover={{ bg: desktopScrolled ? "fg.onBrand" : "accent.balance" }}
-              transition="background-color 850ms cubic-bezier(0.16, 1, 0.3, 1), color 850ms cubic-bezier(0.16, 1, 0.3, 1)"
+              _hover={{ bg: darkSurface ? "fg.onBrand" : "accent.balance" }}
+              transition={{
+                base: "background-color 850ms cubic-bezier(0.16, 1, 0.3, 1), color 850ms cubic-bezier(0.16, 1, 0.3, 1)",
+                lg: "background-color 240ms ease-in-out",
+              }}
             >
               <a
                 href={whatsappHref}
@@ -181,7 +196,7 @@ export function SiteHeader({
               aria-expanded={menuOpen}
               onClick={() => setMenuOpen((open) => !open)}
               variant="ghost"
-              color={{ base: scrolled || menuOpen ? "brand.primary" : "fg.onBrand", lg: "brand.primary" }}
+              color={{ base: scrolled || menuOpen ? "brand.primary" : "fg.onBrand", lg: darkSurface ? "fg.onBrand" : "brand.primary" }}
               _hover={{
                 bg: scrolled || menuOpen ? "rgba(0,56,88,0.08)" : "rgba(247,243,238,0.12)",
               }}
