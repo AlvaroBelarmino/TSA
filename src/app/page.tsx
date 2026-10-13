@@ -65,34 +65,44 @@ const whatsappHref = whatsappLink(
 )
 
 const featuredService = {
-  title: "Contabilidade completa com acompanhamento próximo",
+  title: "Contabilidade",
   description:
-    "Rotinas contábeis e fiscais, apuração de impostos e obrigações acessórias, com explicação, acesso e orientação ao longo de toda a relação.",
+    "Rotina contábil completa, com suporte especializado em todas as etapas.",
   items: [
-    "Escrituração contábil e fiscal",
-    "Impostos e obrigações acessórias",
-    "Folha e rotinas trabalhistas",
-    "Orientação contínua para decidir",
+    "Classificação das receitas e despesas",
+    "Balancete mensal",
+    "Demonstrações Financeiras",
+    "Escrituração contábil / fiscal",
   ],
   message:
-    "Olá! Vim pelo site da TSA e gostaria de falar sobre a Contabilidade completa com acompanhamento próximo para a minha empresa.",
+    "Olá! Vim pelo site da TSA e gostaria de falar sobre Contabilidade para a minha empresa.",
 }
 
 const services = [
   {
-    title: "Contabilidade completa",
+    title: "Contabilidade",
     description:
-      "Rotinas contábeis e fiscais com suporte e clareza em cada etapa.",
-    items: ["Escrituração contábil e fiscal", "Impostos e obrigações acessórias", "Folha e rotinas trabalhistas", "Orientação contínua para decidir"],
+      "Rotina contábil completa, com suporte especializado em todas as etapas.",
+    items: [
+      "Classificação das receitas e despesas",
+      "Balancete mensal",
+      "Demonstrações Financeiras",
+      "Escrituração contábil / fiscal",
+    ],
     image: "/servicos/contabilidade-real.jpg",
     imageAlt:
       "Profissionais analisando documentos em um escritório",
   },
   {
-    title: "Contabilidade e escrituração",
+    title: "Fiscal e tributário",
     description:
-      "Escrituração em dia, com clareza sobre a real situação da empresa.",
-    items: ["Demonstrativos contábeis", "Apuração de impostos", "Obrigações acessórias", "Balancetes mensais"],
+      "Atuamos no controle e na gestão das obrigações tributárias.",
+    items: [
+      "Emissão de nota fiscal",
+      "Apuração de impostos",
+      "Obrigações acessórias",
+      "PER/DCOMP e compensação de tributos",
+    ],
     image: "/servicos/escrituracao-real.jpg",
     imageAlt:
       "Documentos e gráficos organizados ao lado de um computador",
@@ -107,7 +117,7 @@ const services = [
       "Equipe reunida para discutir informações em uma mesa de trabalho",
   },
   {
-    title: "Planejamento tributário",
+    title: "Consultoria e planejamento",
     description:
       "Avaliação clara da estrutura tributária, dentro da legislação.",
     items: [
@@ -135,7 +145,7 @@ const services = [
       "Duas pessoas se cumprimentando durante uma reunião de negócios",
   },
   {
-    title: "Abertura e encerramento",
+    title: "Societário e legalização",
     description:
       "Orientação clara para começar, reorganizar ou encerrar a empresa.",
     items: [
