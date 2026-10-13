@@ -32,9 +32,9 @@ export function SiteHeader({
 
   useEffect(() => {
     const onScroll = () => {
-      setScrolled(window.scrollY > 160)
+      setScrolled(window.scrollY > 520)
 
-      if (window.scrollY > 160) {
+      if (window.scrollY > 520) {
         setMenuOpen(false)
       }
     }
