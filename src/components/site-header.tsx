@@ -31,7 +31,7 @@ export function SiteHeader({
 
   useEffect(() => {
     const onScroll = () => {
-      const scrollThreshold = window.innerWidth < 1024 ? 0 : 50
+      const scrollThreshold = window.innerWidth < 1024 ? 32 : 520
       setScrolled(window.scrollY > scrollThreshold)
 
       if (window.scrollY > scrollThreshold) {
@@ -83,7 +83,7 @@ export function SiteHeader({
         borderRadius={{ base: "0", lg: darkSurface ? "full" : "0" }}
         boxShadow={{ base: "none", lg: darkSurface ? "0 12px 32px rgba(0, 56, 88, 0.16)" : "none" }}
         transition={{
-          base: "background-color 850ms cubic-bezier(0.16, 1, 0.3, 1), border-color 850ms cubic-bezier(0.16, 1, 0.3, 1)",
+          base: "background 480ms ease-in-out, border-color 480ms ease-in-out, backdrop-filter 480ms ease-in-out",
           lg: "background 480ms ease-in-out, border-color 480ms ease-in-out, backdrop-filter 480ms ease-in-out, width 420ms cubic-bezier(0.22, 1, 0.36, 1), top 420ms cubic-bezier(0.22, 1, 0.36, 1), border-radius 420ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 420ms ease-in-out",
         }}
       >
@@ -98,7 +98,7 @@ export function SiteHeader({
           <ScrollLink target="inicio" aria-label="TSA Gestão Contábil: início" flexShrink="0">
             <Box
               position="relative"
-              width={{ base: "84px", md: "clamp(64px, 15vw, 104px)" }}
+              width="clamp(64px, 15vw, 104px)"
               aspectRatio="870 / 630"
             >
               <Box
@@ -106,7 +106,7 @@ export function SiteHeader({
                 inset="0"
                 opacity={{ base: scrolled || menuOpen ? 0 : 1, lg: darkSurface ? 1 : 0 }}
                 transition={{
-                  base: "opacity 850ms cubic-bezier(0.16, 1, 0.3, 1)",
+                  base: "opacity 480ms ease-in-out",
                   lg: "opacity 280ms ease-in-out",
                 }}
                 aria-hidden={scrolled || menuOpen}
@@ -125,7 +125,7 @@ export function SiteHeader({
                 inset="0"
                 opacity={{ base: scrolled || menuOpen ? 1 : 0, lg: darkSurface ? 0 : 1 }}
                 transition={{
-                  base: "opacity 850ms cubic-bezier(0.16, 1, 0.3, 1), transform 850ms cubic-bezier(0.16, 1, 0.3, 1)",
+                  base: "opacity 480ms ease-in-out, transform 480ms ease-in-out",
                   lg: "opacity 280ms ease-in-out",
                 }}
                 transform="scale(0.79)"
@@ -156,7 +156,7 @@ export function SiteHeader({
                 textStyle="cta"
                 color={{ base: scrolled ? "brand.primary" : "fg.onBrand", lg: darkSurface ? "fg.onBrand" : "brand.primary" }}
                 transition={{
-                  base: "color 850ms cubic-bezier(0.16, 1, 0.3, 1)",
+                  base: "color 480ms ease-in-out",
                   lg: "color 240ms ease-in-out",
                 }}
                 _hover={{ color: "accent.warm" }}
@@ -177,7 +177,7 @@ export function SiteHeader({
               flexShrink="0"
               _hover={{ bg: darkSurface ? "fg.onBrand" : "accent.balance" }}
               transition={{
-                base: "background-color 850ms cubic-bezier(0.16, 1, 0.3, 1), color 850ms cubic-bezier(0.16, 1, 0.3, 1)",
+                base: "background-color 480ms ease-in-out, color 480ms ease-in-out",
                 lg: "background-color 240ms ease-in-out",
               }}
             >
