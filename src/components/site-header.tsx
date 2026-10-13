@@ -13,7 +13,6 @@ interface SiteHeaderProps {
 const navItems = [
   ["Início", "inicio"],
   ["Serviços", "servicos"],
-  ["Método", "metodo"],
   ["Sobre", "sobre"],
   ["Contato", "contato"],
 ] as const

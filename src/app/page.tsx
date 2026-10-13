@@ -1,5 +1,4 @@
 import { ContactForm } from "@/components/contact-form"
-import { MobileMethodSteps } from "@/components/mobile-method-steps"
 import { Reveal } from "@/components/reveal"
 import { ScrollLink } from "@/components/scroll-link"
 import { SiteHeader } from "@/components/site-header"
@@ -160,33 +159,6 @@ const services = [
   },
 ]
 
-const methodSteps = [
-  {
-    number: "01",
-    title: "Diagnóstico",
-    description: "Você entende exatamente onde sua empresa está hoje, sem letras miúdas.",
-    icon: "/icons/bussola.png",
-  },
-  {
-    number: "02",
-    title: "Organização",
-    description: "Suas informações ficam em ordem, sem você precisar correr atrás.",
-    icon: "/icons/funil.png",
-  },
-  {
-    number: "03",
-    title: "Direção",
-    description: "Você recebe recomendações claras pra decidir com segurança.",
-    icon: "/icons/farol.png",
-  },
-  {
-    number: "04",
-    title: "Acompanhamento",
-    description: "Você tem alguém por perto antes que a dúvida vire problema.",
-    icon: "/icons/ponte.png",
-  },
-]
-
 const values = [
   {
     title: "Missão",
@@ -236,39 +208,6 @@ function Kicker({
         {children}
       </Text>
     </HStack>
-  )
-}
-
-function DotTrail() {
-  const dots = [
-    { size: "3", color: "accent.balance" },
-    { size: "3.5", color: "fg.muted" },
-    { size: "4", color: "accent.warm" },
-    { size: "5", color: "accent.warm" },
-    { size: "6", color: "brand.primary" },
-  ]
-
-  return (
-    <Box position="relative" w="full" maxW="300px" h="7" aria-hidden="true">
-      <Box
-        position="absolute"
-        left="0"
-        right="0"
-        top="50%"
-        h="1px"
-        bg="border.subtle"
-      />
-      <Flex position="absolute" inset="0" align="center" justify="space-between">
-        {dots.map((dot, index) => (
-          <Box
-            key={`${dot.size}-${index}`}
-            boxSize={dot.size}
-            borderRadius="full"
-            bg={dot.color}
-          />
-        ))}
-      </Flex>
-    </Box>
   )
 }
 
@@ -997,42 +936,6 @@ export default function Home() {
         </Box>
 
         <Box
-          id="metodo"
-          as="section"
-          scrollMarginTop={sectionAnchorOffset}
-          py={{ base: "20", md: "28" }}
-          bg="bg.surface"
-        >
-          <Container maxW="1200px" px={{ base: "5", md: "8" }}>
-            <Stack gap={{ base: "12", md: "16" }}>
-              <Grid
-                templateColumns={{ base: "1fr", lg: "1fr 0.8fr" }}
-                gap="10"
-                alignItems="end"
-              >
-                <Stack gap="5" maxW="730px">
-                  <Kicker>Um sistema próprio de trabalho</Kicker>
-                  <Heading as="h2" textStyle="h2" color="brand.primary">
-                    Método Clareza: da situação real à decisão segura.
-                  </Heading>
-                </Stack>
-                <Stack gap="6">
-                  <Text textStyle="body" color="fg.default">
-                    Quatro etapas organizam a relação com a TSA para que você saiba
-                    onde está, o que precisa ser feito e quais são os próximos passos.
-                  </Text>
-                  <DotTrail />
-                </Stack>
-              </Grid>
-
-              <Reveal>
-                <MobileMethodSteps steps={methodSteps} />
-              </Reveal>
-            </Stack>
-          </Container>
-        </Box>
-
-        <Box
           id="sobre"
           as="section"
           scrollMarginTop={sectionAnchorOffset}
@@ -1308,7 +1211,6 @@ export default function Home() {
                 {[
                   ["Início", "inicio"],
                   ["Serviços", "servicos"],
-                  ["Método Clareza", "metodo"],
                   ["Sobre", "sobre"],
                   ["Contato", "contato"],
                 ].map(([label, target]) => (
