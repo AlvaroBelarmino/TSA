@@ -63,7 +63,7 @@ export function SiteHeader({
           ? "bg.canvas"
           : scrolled
             ? { base: "bg.canvas", lg: "rgba(247, 243, 238, 0.94)" }
-            : "transparent"
+            : "brand.primary"
       }
       borderBottomWidth="1px"
       borderColor={scrolled || menuOpen ? "border.subtle" : "transparent"}
