@@ -80,7 +80,7 @@ export function SiteHeader({
       >
         <Container maxW="1440px" px={{ base: "5", md: "8", xl: "12" }} minW="0">
         <Flex
-          minH={darkSurface ? { base: "64px", md: "72px" } : { base: "76px", md: "88px" }}
+          minH={darkSurface ? { base: "56px", md: "64px" } : { base: "76px", md: "88px" }}
           align="center"
           justify="space-between"
           gap="3"
@@ -89,7 +89,7 @@ export function SiteHeader({
           <ScrollLink target="inicio" aria-label="TSA Gestão Contábil: início" flexShrink="0">
             <Box
               position="relative"
-              width="clamp(64px, 15vw, 104px)"
+              width={darkSurface ? "82px" : "clamp(64px, 15vw, 104px)"}
               aspectRatio="870 / 630"
             >
               <Image
@@ -125,7 +125,7 @@ export function SiteHeader({
           <HStack
             as="nav"
             aria-label="Navegação principal"
-            gap="8"
+            gap={darkSurface ? "6" : "8"}
             display={{ base: "none", lg: "flex" }}
           >
             {navItems.map(([label, target]) => (
@@ -148,7 +148,7 @@ export function SiteHeader({
               bg={darkSurface ? "accent.warm" : "brand.primary"}
               color={darkSurface ? "brand.primary" : "fg.onBrand"}
               borderRadius="full"
-              px="6"
+              px={darkSurface ? "5" : "6"}
               flexShrink="0"
               _hover={{ bg: darkSurface ? "fg.onBrand" : "accent.balance" }}
               transition="background-color 240ms ease-in-out"
