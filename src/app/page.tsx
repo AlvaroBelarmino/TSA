@@ -457,10 +457,8 @@ export default function Home() {
           <Box
             display={{ base: "none", lg: "block" }}
             position="absolute"
-            inset="0 0 0 auto"
-            width="58%"
+            inset="0"
             overflow="hidden"
-            css={{ clipPath: "polygon(14% 0, 100% 0, 100% 100%, 0 100%)" }}
           >
             <Image
               src="/BannerPrincipal.png"
@@ -468,7 +466,7 @@ export default function Home() {
               fill
               priority
               quality={100}
-              sizes="(min-width: 64rem) 58vw, 0px"
+              sizes="(min-width: 64rem) 100vw, 0px"
               style={{ objectFit: "cover", objectPosition: "center" }}
             />
           </Box>
@@ -512,6 +510,10 @@ export default function Home() {
               maxW={{ base: "34rem", lg: "560px" }}
               w="full"
               minW="0"
+              px={{ base: "0", lg: "8" }}
+              py={{ base: "0", lg: "10" }}
+              bg={{ base: "transparent", lg: "rgba(0, 56, 88, 0.94)" }}
+              borderRightRadius={{ base: "0", lg: "3xl" }}
             >
               <Kicker color="accent.warm">CONTABILIDADE PARA EMPRESAS EM CRESCIMENTO</Kicker>
               <Heading
