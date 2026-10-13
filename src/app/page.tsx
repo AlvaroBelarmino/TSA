@@ -986,34 +986,25 @@ export default function Home() {
                   Sou Thaise, contadora, com mais de 10 anos de experiência na área contábil.
                 </Text>
                 <Text textStyle="body" color="fg.default">
-                  Ao longo dessa trajetória, aprendi que a contabilidade vai muito além de
-                  impostos, guias e obrigações. Ela precisa ser uma ferramenta para{" "}
+                  Acredito que a contabilidade vai muito além de impostos, guias e obrigações.
+                  Ela deve ser uma ferramenta para{" "}
                   <Text as="span" fontWeight="semibold">
-                    ajudar o empresário a compreender o próprio negócio, enxergar oportunidades
-                    e tomar decisões com mais segurança e clareza.
+                    ajudar o empresário a compreender o próprio negócio e tomar decisões com mais
+                    segurança e clareza.
                   </Text>
                 </Text>
                 <Text textStyle="body" color="fg.default">
-                  Foi a partir dessa visão, construída e amadurecida ao longo da minha
-                  trajetória, que nasceu a TSA. Especialmente durante a pandemia, acompanhei
-                  de perto empresários enfrentando desafios reais, tomando decisões difíceis e
-                  buscando caminhos para manter seus negócios sustentáveis e preparados para o
-                  futuro.
+                  Foi dessa visão, amadurecida ao acompanhar empresários durante a pandemia, que
+                  nasceu a TSA. Sou formada em Ciências Contábeis, com MBA em Gestão Financeira e
+                  Auditoria Contábil e formação em Perícia Judicial Contábil.
                 </Text>
                 <Text textStyle="body" color="fg.default">
-                  Sou formada em Ciências Contábeis, com MBA em Gestão Financeira e Auditoria
-                  Contábil e formação em Perícia Judicial Contábil.
-                </Text>
-                <Text textStyle="body" color="fg.default">
-                  Boa parte da minha visão profissional, nasceu da prática:{" "}
+                  Boa parte da minha visão profissional nasceu da prática,{" "}
                   <Text as="span" fontWeight="semibold">
                     acompanhando empresas em diferentes fases de crescimento.
                   </Text>
-                </Text>
-                <Text textStyle="body" color="fg.default">
-                  Hoje, à frente da TSA, ofereço uma contabilidade mais próxima, estratégica e
-                  fácil de compreender. Quero que cada empresário saiba onde sua empresa está,
-                  o que os números dizem e quais decisões podem fortalecer o próximo passo.
+                  Hoje, à frente da TSA, ofereço uma contabilidade próxima, estratégica e fácil
+                  de compreender.
                 </Text>
                 <SimpleGrid columns={{ base: 1, md: 3 }} gap={{ base: "6", md: "4" }} pt="3">
                   {values.map((value) => (
