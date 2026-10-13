@@ -392,7 +392,7 @@ export default function Home() {
         whatsappNumber={whatsappNumber}
       />
 
-      <Box as="main" minW="0" maxW="100%">
+      <Box as="main" minW="0" maxW="100%" pt={{ base: "0", lg: "88px" }}>
         <Box
           id="inicio"
           as="section"
