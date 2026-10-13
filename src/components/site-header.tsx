@@ -52,27 +52,23 @@ export function SiteHeader({
     return () => window.removeEventListener("keydown", onKey)
   }, [menuOpen])
 
+  const darkSurface = scrolled && !menuOpen
+
   return (
     <Box
       as="header"
       position="sticky"
       inset="0 0 auto"
       zIndex="sticky"
-      bg={
-        menuOpen
-          ? "bg.canvas"
-          : scrolled
-            ? "rgba(247, 243, 238, 0.92)"
-            : "white"
-      }
+      bg={darkSurface ? "brand.primary" : menuOpen ? "bg.canvas" : "white"}
       borderBottomWidth="1px"
       borderColor={scrolled || menuOpen ? "border.subtle" : "transparent"}
-      backdropFilter={menuOpen ? "none" : scrolled ? "blur(14px)" : "none"}
+      backdropFilter={darkSurface ? "blur(14px)" : "none"}
       transition="background 480ms ease-in-out, border-color 480ms ease-in-out, backdrop-filter 480ms ease-in-out"
     >
       <Container maxW="1440px" px={{ base: "5", md: "8", xl: "12" }} minW="0">
         <Flex
-          minH={{ base: "76px", md: "88px" }}
+          minH={darkSurface ? { base: "64px", md: "72px" } : { base: "76px", md: "88px" }}
           align="center"
           justify="space-between"
           gap="3"
@@ -90,10 +86,11 @@ export function SiteHeader({
                 fill
                 priority
                 sizes="104px"
-                aria-hidden="true"
+                aria-hidden={!darkSurface}
                 style={{
                   objectFit: "contain",
-                  opacity: 0,
+                  opacity: darkSurface ? 1 : 0,
+                  transition: "opacity 280ms ease-in-out",
                 }}
               />
               <Image
@@ -102,11 +99,12 @@ export function SiteHeader({
                 fill
                 priority
                 sizes="104px"
-                aria-hidden="false"
+                aria-hidden={darkSurface}
                 style={{
                   objectFit: "contain",
-                  opacity: 1,
+                  opacity: darkSurface ? 0 : 1,
                   transform: "scale(0.79)",
+                  transition: "opacity 280ms ease-in-out",
                 }}
               />
             </Box>
@@ -123,7 +121,7 @@ export function SiteHeader({
                 key={target}
                 target={target}
                 textStyle="cta"
-                color="brand.primary"
+                color={darkSurface ? "fg.onBrand" : "brand.primary"}
                 _hover={{ color: "accent.warm" }}
               >
                 {label}
@@ -135,12 +133,12 @@ export function SiteHeader({
             <Button
               asChild
               display={{ base: "none", lg: "inline-flex" }}
-              bg="brand.primary"
-              color="fg.onBrand"
+              bg={darkSurface ? "accent.warm" : "brand.primary"}
+              color={darkSurface ? "brand.primary" : "fg.onBrand"}
               borderRadius="full"
               px="6"
               flexShrink="0"
-              _hover={{ bg: "accent.balance" }}
+              _hover={{ bg: darkSurface ? "fg.onBrand" : "accent.balance" }}
               transition="background-color 240ms ease-in-out"
             >
               <a
@@ -158,8 +156,10 @@ export function SiteHeader({
               aria-expanded={menuOpen}
               onClick={() => setMenuOpen((open) => !open)}
               variant="ghost"
-              color="brand.primary"
-              _hover={{ bg: "rgba(0,56,88,0.08)" }}
+              color={darkSurface ? "fg.onBrand" : "brand.primary"}
+              _hover={{
+                bg: darkSurface ? "rgba(247,243,238,0.12)" : "rgba(0,56,88,0.08)",
+              }}
             >
               {menuOpen ? <LuX size="22" /> : <LuMenu size="22" />}
             </IconButton>

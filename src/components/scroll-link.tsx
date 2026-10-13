@@ -23,10 +23,14 @@ export const ScrollLink = forwardRef<HTMLButtonElement, ScrollLinkProps>(
         return
       }
 
-      document.getElementById(target)?.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      })
+      if (target === "inicio") {
+        window.scrollTo({ top: 0, behavior: "smooth" })
+      } else {
+        document.getElementById(target)?.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        })
+      }
 
       if (window.location.hash) {
         window.history.replaceState(
