@@ -57,9 +57,8 @@ export function SiteHeader({
   return (
     <Box
       as="header"
-      position={{ base: "fixed", lg: "sticky" }}
-      top="0"
-      inset={{ base: "0 0 auto", lg: "auto" }}
+      position="fixed"
+      inset="0 0 auto"
       zIndex="sticky"
       minH={{ base: "0", lg: "88px" }}
       pointerEvents={{ base: "auto", lg: "none" }}
