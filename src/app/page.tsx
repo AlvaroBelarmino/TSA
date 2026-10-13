@@ -467,9 +467,14 @@ export default function Home() {
             <Box
               position="absolute"
               inset="0 auto 0 0"
-              width="68%"
+              width="60%"
               height="100%"
-              background="linear-gradient(90deg, rgba(0, 56, 88, 0.99) 0%, rgba(0, 56, 88, 0.96) 52%, rgba(0, 56, 88, 0.72) 78%, rgba(0, 56, 88, 0) 100%)"
+              background="linear-gradient(90deg, rgba(0, 56, 88, 0.96) 0%, rgba(0, 56, 88, 0.78) 52%, rgba(0, 56, 88, 0) 100%)"
+              css={{
+                maskImage: "linear-gradient(90deg, black 0%, black 68%, transparent 100%)",
+                WebkitMaskImage:
+                  "linear-gradient(90deg, black 0%, black 68%, transparent 100%)",
+              }}
             />
           </Box>
 
@@ -514,7 +519,7 @@ export default function Home() {
           >
             <Stack
               gap={{ base: "4", md: "6" }}
-              maxW={{ base: "34rem", lg: "600px" }}
+              maxW={{ base: "34rem", lg: "680px" }}
               w="full"
               minW="0"
             >
