@@ -51,8 +51,7 @@ export function SiteHeader({
     return () => window.removeEventListener("keydown", onKey)
   }, [menuOpen])
 
-  const compactSurface = scrolled
-  const darkSurface = compactSurface
+  const darkSurface = scrolled && !menuOpen
 
   return (
     <Box
@@ -65,12 +64,12 @@ export function SiteHeader({
     >
       <Box
         position="absolute"
-        top={compactSurface ? { base: "8px", md: "12px" } : "0"}
+        top={darkSurface ? { base: "8px", md: "12px" } : "0"}
         left="50%"
         transform="translateX(-50%)"
         w={
-          compactSurface
-            ? { base: "calc(100% - 32px)", md: "min(1280px, calc(100% - 96px))" }
+          darkSurface
+            ? { base: "calc(100% - 24px)", md: "min(1280px, calc(100% - 96px))" }
             : "100%"
         }
         pointerEvents="auto"
@@ -78,15 +77,13 @@ export function SiteHeader({
         borderWidth="1px"
         borderColor={scrolled || menuOpen ? "border.subtle" : "transparent"}
         backdropFilter={darkSurface ? "blur(14px)" : "none"}
-        borderRadius={compactSurface && !menuOpen ? "full" : "0"}
-        borderTopRadius={compactSurface && menuOpen ? "2xl" : undefined}
-        borderBottomRadius={compactSurface && menuOpen ? "0" : undefined}
-        boxShadow={compactSurface ? "0 12px 32px rgba(0, 56, 88, 0.16)" : "none"}
+        borderRadius={darkSurface ? "full" : "0"}
+        boxShadow={darkSurface ? "0 12px 32px rgba(0, 56, 88, 0.16)" : "none"}
         transition="background 480ms ease-in-out, border-color 480ms ease-in-out, backdrop-filter 480ms ease-in-out, width 420ms cubic-bezier(0.22, 1, 0.36, 1), top 420ms cubic-bezier(0.22, 1, 0.36, 1), border-radius 420ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 420ms ease-in-out"
       >
         <Container maxW="1440px" px={{ base: "5", md: "8", xl: "12" }} minW="0">
         <Flex
-          minH={compactSurface ? { base: "64px", md: "72px" } : { base: "76px", md: "88px" }}
+          minH={darkSurface ? { base: "64px", md: "72px" } : { base: "76px", md: "88px" }}
           align="center"
           justify="space-between"
           gap="3"
@@ -174,38 +171,21 @@ export function SiteHeader({
               aria-expanded={menuOpen}
               onClick={() => setMenuOpen((open) => !open)}
               variant="ghost"
-              bg="transparent"
               color={darkSurface ? "fg.onBrand" : "brand.primary"}
               _hover={{
                 bg: darkSurface ? "rgba(247,243,238,0.12)" : "rgba(0,56,88,0.08)",
               }}
-              _active={{ bg: "transparent" }}
             >
               {menuOpen ? <LuX size="22" /> : <LuMenu size="22" />}
             </IconButton>
           </HStack>
         </Flex>
         <Box
-          display={{ base: "block", lg: "none" }}
-          position="absolute"
-          top="calc(100% - 1px)"
-          left="0"
-          right="0"
-          maxH={menuOpen ? "420px" : "0"}
-          opacity={menuOpen ? 1 : 0}
-          overflow="hidden"
-          pointerEvents={menuOpen ? "auto" : "none"}
-          visibility={menuOpen ? "visible" : "hidden"}
-          transform={menuOpen ? "translateY(0)" : "translateY(-8px)"}
-          bg="bg.canvas"
+          display={{ base: menuOpen ? "block" : "none", lg: "none" }}
           color="brand.primary"
+          borderTopWidth="1px"
           borderColor="border.subtle"
-          borderWidth="1px"
-          borderTopWidth="0"
-          borderBottomRadius="2xl"
-          boxShadow="0 12px 32px rgba(0, 56, 88, 0.14)"
-          py={menuOpen ? "5" : "0"}
-          transition="max-height 360ms cubic-bezier(0.22, 1, 0.36, 1), opacity 180ms ease, padding 360ms ease, transform 360ms cubic-bezier(0.22, 1, 0.36, 1), visibility 360ms ease"
+          py="5"
         >
           <Stack gap="4">
             {navItems.map(([label, target]) => (
