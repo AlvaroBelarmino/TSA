@@ -1049,7 +1049,7 @@ export default function Home() {
                   <Heading as="h2" textStyle="h2" color="brand.primary">
                     Vale a pena conversar com uma contabilidade que explica.   </Heading>
                   <Text textStyle="body" color="fg.default">
-                    Fale sobre o momento do seu CNPJ hoje: o que está em dia, o que falta e que tipo de suporte você precisa hoje. É por aí que a gente começa.
+                    Fale sobre o momento do seu CNPJ: o que está em dia, o que falta e que tipo de suporte você precisa hoje. É por aí que a gente começa.
                   </Text>
                 </Stack>
 
