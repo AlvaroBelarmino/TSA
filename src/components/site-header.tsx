@@ -87,7 +87,7 @@ export function SiteHeader({
           <ScrollLink target="inicio" aria-label="TSA Gestão Contábil: início" flexShrink="0">
             <Box
               position="relative"
-              width="clamp(72px, 18vw, 120px)"
+              width="clamp(64px, 15vw, 104px)"
               aspectRatio="870 / 630"
             >
               <Image
@@ -95,7 +95,7 @@ export function SiteHeader({
                 alt=""
                 fill
                 priority
-                sizes="148px"
+                sizes="104px"
                 aria-hidden={scrolled || menuOpen}
                 style={{
                   objectFit: "contain",
@@ -108,7 +108,7 @@ export function SiteHeader({
                 alt=""
                 fill
                 priority
-                sizes="148px"
+                sizes="104px"
                 aria-hidden={!(scrolled || menuOpen)}
                 style={{
                   objectFit: "contain",
