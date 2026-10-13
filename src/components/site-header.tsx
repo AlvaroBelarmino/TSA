@@ -68,7 +68,11 @@ export function SiteHeader({
         top={darkSurface ? { base: "8px", md: "12px" } : "0"}
         left="50%"
         transform="translateX(-50%)"
-        w={darkSurface ? { base: "calc(100% - 24px)", md: "calc(100% - 48px)" } : "100%"}
+        w={
+          darkSurface
+            ? { base: "calc(100% - 32px)", md: "min(1280px, calc(100% - 96px))" }
+            : "100%"
+        }
         pointerEvents="auto"
         bg={darkSurface ? "rgba(0, 56, 88, 0.84)" : menuOpen ? "bg.canvas" : "white"}
         borderWidth="1px"
