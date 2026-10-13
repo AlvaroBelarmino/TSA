@@ -82,7 +82,7 @@ export function SiteHeader({
         backdropFilter={{ base: "none", lg: desktopScrolled ? "blur(14px)" : "none" }}
         borderRadius={{ base: "0", lg: desktopScrolled ? "full" : "0" }}
         boxShadow={{ base: "none", lg: desktopScrolled ? "0 12px 32px rgba(0, 56, 88, 0.16)" : "none" }}
-        transition="background 480ms ease-in-out, border-color 480ms ease-in-out, backdrop-filter 480ms ease-in-out, width 420ms cubic-bezier(0.22, 1, 0.36, 1), top 420ms cubic-bezier(0.22, 1, 0.36, 1), border-radius 420ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 420ms ease-in-out"
+        transition="background-color 480ms ease-in-out, border-color 480ms ease-in-out, backdrop-filter 480ms ease-in-out, width 420ms cubic-bezier(0.22, 1, 0.36, 1), min-height 420ms cubic-bezier(0.22, 1, 0.36, 1), top 420ms cubic-bezier(0.22, 1, 0.36, 1), border-radius 420ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 420ms ease-in-out"
       >
         <Container maxW="1440px" px={{ base: "5", md: "8", xl: "12" }} minW="0">
         <Flex
