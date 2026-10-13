@@ -82,7 +82,7 @@ export function SiteHeader({
         backdropFilter={{ base: "none", lg: desktopScrolled ? "blur(14px)" : "none" }}
         borderRadius={{ base: "0", lg: desktopScrolled ? "full" : "0" }}
         boxShadow={{ base: "none", lg: desktopScrolled ? "0 12px 32px rgba(0, 56, 88, 0.16)" : "none" }}
-        transition="background-color 420ms cubic-bezier(0.22, 1, 0.36, 1), border-color 420ms cubic-bezier(0.22, 1, 0.36, 1), backdrop-filter 420ms cubic-bezier(0.22, 1, 0.36, 1), width 420ms cubic-bezier(0.22, 1, 0.36, 1), min-height 420ms cubic-bezier(0.22, 1, 0.36, 1), top 420ms cubic-bezier(0.22, 1, 0.36, 1), border-radius 420ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 420ms cubic-bezier(0.22, 1, 0.36, 1)"
+        transition="background-color 700ms cubic-bezier(0.16, 1, 0.3, 1), border-color 700ms cubic-bezier(0.16, 1, 0.3, 1), backdrop-filter 700ms cubic-bezier(0.16, 1, 0.3, 1), width 700ms cubic-bezier(0.16, 1, 0.3, 1), min-height 700ms cubic-bezier(0.16, 1, 0.3, 1), top 700ms cubic-bezier(0.16, 1, 0.3, 1), border-radius 700ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 700ms cubic-bezier(0.16, 1, 0.3, 1)"
       >
         <Container maxW="1440px" px={{ base: "5", md: "8", xl: "12" }} minW="0">
         <Flex
@@ -102,7 +102,7 @@ export function SiteHeader({
                 position="absolute"
                 inset="0"
                 opacity={{ base: scrolled || menuOpen ? 0 : 1, lg: desktopScrolled ? 1 : 0 }}
-                transition="opacity 420ms cubic-bezier(0.22, 1, 0.36, 1)"
+                transition="opacity 700ms cubic-bezier(0.16, 1, 0.3, 1)"
                 aria-hidden={scrolled || menuOpen}
               >
                 <Image
@@ -118,7 +118,7 @@ export function SiteHeader({
                 position="absolute"
                 inset="0"
                 opacity={{ base: scrolled || menuOpen ? 1 : 0, lg: desktopScrolled ? 0 : 1 }}
-                transition="opacity 420ms cubic-bezier(0.22, 1, 0.36, 1), transform 420ms cubic-bezier(0.22, 1, 0.36, 1)"
+                transition="opacity 700ms cubic-bezier(0.16, 1, 0.3, 1), transform 700ms cubic-bezier(0.16, 1, 0.3, 1)"
                 transform="scale(0.79)"
                 aria-hidden={!(scrolled || menuOpen)}
               >
@@ -146,7 +146,7 @@ export function SiteHeader({
                 target={target}
                 textStyle="cta"
                 color={{ base: scrolled ? "brand.primary" : "fg.onBrand", lg: desktopScrolled ? "fg.onBrand" : "brand.primary" }}
-                transition="color 420ms cubic-bezier(0.22, 1, 0.36, 1)"
+                transition="color 700ms cubic-bezier(0.16, 1, 0.3, 1)"
                 _hover={{ color: "accent.warm" }}
               >
                 {label}
@@ -164,7 +164,7 @@ export function SiteHeader({
               px="6"
               flexShrink="0"
               _hover={{ bg: desktopScrolled ? "fg.onBrand" : "accent.balance" }}
-              transition="background-color 420ms cubic-bezier(0.22, 1, 0.36, 1), color 420ms cubic-bezier(0.22, 1, 0.36, 1)"
+              transition="background-color 700ms cubic-bezier(0.16, 1, 0.3, 1), color 700ms cubic-bezier(0.16, 1, 0.3, 1)"
             >
               <a
                 href={whatsappHref}
