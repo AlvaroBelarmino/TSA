@@ -55,7 +55,7 @@ export function SiteHeader({
       position="fixed"
       inset="0 0 auto"
       zIndex="sticky"
-      bg={menuOpen ? "bg.canvas" : "rgba(247, 243, 238, 0.9)"}
+      bg={menuOpen ? "bg.canvas" : "rgba(247, 243, 238, 0.78)"}
       borderBottomWidth="1px"
       borderColor="border.subtle"
       backdropFilter={menuOpen ? "none" : "blur(14px)"}
