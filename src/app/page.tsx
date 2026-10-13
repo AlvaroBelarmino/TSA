@@ -454,22 +454,27 @@ export default function Home() {
           bg="brand.primary"
           color="fg.onBrand"
         >
-          <Box
-            display={{ base: "none", lg: "block" }}
-            position="absolute"
-            inset="0 0 0 auto"
-            width="58%"
-            overflow="hidden"
-            css={{ clipPath: "polygon(14% 0, 100% 0, 100% 100%, 0 100%)" }}
-          >
+          <Box display={{ base: "none", lg: "block" }} position="absolute" inset="0">
             <Image
               src="/BannerPrincipal.png"
               alt={heroAlt}
               fill
               priority
               quality={100}
-              sizes="(min-width: 64rem) 58vw, 0px"
+              sizes="(min-width: 64rem) 100vw, 0px"
               style={{ objectFit: "cover", objectPosition: "center" }}
+            />
+            <Box
+              position="absolute"
+              inset="0 auto 0 0"
+              width="60%"
+              height="100%"
+              background="linear-gradient(90deg, rgba(0, 56, 88, 0.96) 0%, rgba(0, 56, 88, 0.78) 52%, rgba(0, 56, 88, 0) 100%)"
+              css={{
+                maskImage: "linear-gradient(90deg, black 0%, black 68%, transparent 100%)",
+                WebkitMaskImage:
+                  "linear-gradient(90deg, black 0%, black 68%, transparent 100%)",
+              }}
             />
           </Box>
 
@@ -488,6 +493,11 @@ export default function Home() {
               quality={100}
               sizes="(max-width: 63.99rem) 100vw, 0px"
               style={{ objectFit: "cover", objectPosition: "center" }}
+            />
+            <Box
+              position="absolute"
+              inset="0"
+              background="linear-gradient(180deg, rgba(0, 56, 88, 0.58) 0%, rgba(0, 56, 88, 0.14) 28%, rgba(0, 56, 88, 0) 48%)"
             />
           </Box>
 
@@ -509,7 +519,7 @@ export default function Home() {
           >
             <Stack
               gap={{ base: "4", md: "6" }}
-              maxW={{ base: "34rem", lg: "560px" }}
+              maxW={{ base: "34rem", lg: "680px" }}
               w="full"
               minW="0"
             >
