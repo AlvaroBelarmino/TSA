@@ -21,7 +21,6 @@ const navItems = [
 export function SiteHeader({
   whatsappNumber = "",
 }: SiteHeaderProps) {
-  const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const normalizedNumber = whatsappNumber.replace(/\D/g, "")
   const whatsappHref = normalizedNumber
@@ -32,8 +31,6 @@ export function SiteHeader({
 
   useEffect(() => {
     const onScroll = () => {
-      setScrolled(window.scrollY > 32)
-
       if (window.scrollY > 32) {
         setMenuOpen(false)
       }
@@ -58,23 +55,11 @@ export function SiteHeader({
       position="fixed"
       inset="0 0 auto"
       zIndex="sticky"
-      bg={
-        menuOpen
-          ? "bg.canvas"
-          : scrolled
-            ? { base: "bg.canvas", lg: "rgba(247, 243, 238, 0.94)" }
-            : "brand.primary"
-      }
+      bg={menuOpen ? "bg.canvas" : "rgba(247, 243, 238, 0.9)"}
       borderBottomWidth="1px"
-      borderColor={scrolled || menuOpen ? "border.subtle" : "transparent"}
-      backdropFilter={
-        menuOpen ? "none" : scrolled ? { base: "none", lg: "blur(14px)" } : "none"
-      }
-      transition={
-        menuOpen
-          ? "border-color 200ms ease-in-out"
-          : "background 480ms ease-in-out, border-color 480ms ease-in-out, backdrop-filter 480ms ease-in-out"
-      }
+      borderColor="border.subtle"
+      backdropFilter={menuOpen ? "none" : "blur(14px)"}
+      transition="background 480ms ease-in-out, border-color 480ms ease-in-out, backdrop-filter 480ms ease-in-out"
     >
       <Container maxW="1440px" px={{ base: "5", md: "8", xl: "12" }} minW="0">
         <Flex
@@ -96,11 +81,10 @@ export function SiteHeader({
                 fill
                 priority
                 sizes="104px"
-                aria-hidden={scrolled || menuOpen}
+                aria-hidden="true"
                 style={{
                   objectFit: "contain",
-                  opacity: scrolled || menuOpen ? 0 : 1,
-                  transition: "opacity 480ms ease-in-out",
+                  opacity: 0,
                 }}
               />
               <Image
@@ -109,12 +93,11 @@ export function SiteHeader({
                 fill
                 priority
                 sizes="104px"
-                aria-hidden={!(scrolled || menuOpen)}
+                aria-hidden="false"
                 style={{
                   objectFit: "contain",
-                  opacity: scrolled || menuOpen ? 1 : 0,
+                  opacity: 1,
                   transform: "scale(0.79)",
-                  transition: "opacity 480ms ease-in-out, transform 480ms ease-in-out",
                 }}
               />
             </Box>
@@ -131,8 +114,7 @@ export function SiteHeader({
                 key={target}
                 target={target}
                 textStyle="cta"
-                color={scrolled ? "brand.primary" : "fg.onBrand"}
-                transition="color 480ms ease-in-out"
+                color="brand.primary"
                 _hover={{ color: "accent.warm" }}
               >
                 {label}
@@ -144,13 +126,13 @@ export function SiteHeader({
             <Button
               asChild
               display={{ base: "none", lg: "inline-flex" }}
-              bg={scrolled || menuOpen ? "brand.primary" : "accent.warm"}
-              color={scrolled || menuOpen ? "fg.onBrand" : "brand.primary"}
+              bg="brand.primary"
+              color="fg.onBrand"
               borderRadius="full"
               px="6"
               flexShrink="0"
-              _hover={{ bg: scrolled || menuOpen ? "accent.balance" : "fg.onBrand" }}
-              transition="background-color 480ms ease-in-out, color 480ms ease-in-out"
+              _hover={{ bg: "accent.balance" }}
+              transition="background-color 240ms ease-in-out"
             >
               <a
                 href={whatsappHref}
@@ -167,10 +149,8 @@ export function SiteHeader({
               aria-expanded={menuOpen}
               onClick={() => setMenuOpen((open) => !open)}
               variant="ghost"
-              color={scrolled || menuOpen ? "brand.primary" : "fg.onBrand"}
-              _hover={{
-                bg: scrolled || menuOpen ? "rgba(0,56,88,0.08)" : "rgba(247,243,238,0.12)",
-              }}
+              color="brand.primary"
+              _hover={{ bg: "rgba(0,56,88,0.08)" }}
             >
               {menuOpen ? <LuX size="22" /> : <LuMenu size="22" />}
             </IconButton>
