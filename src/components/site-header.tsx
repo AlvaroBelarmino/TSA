@@ -32,9 +32,9 @@ export function SiteHeader({
 
   useEffect(() => {
     const onScroll = () => {
-      setScrolled(window.scrollY > 32)
+      setScrolled(window.scrollY > 160)
 
-      if (window.scrollY > 32) {
+      if (window.scrollY > 160) {
         setMenuOpen(false)
       }
     }
@@ -58,13 +58,17 @@ export function SiteHeader({
     <Box
       as="header"
       position="sticky"
-      inset="0 0 auto"
+      top={darkSurface ? { base: "8px", md: "12px" } : "0"}
       zIndex="sticky"
-      bg={darkSurface ? "brand.primary" : menuOpen ? "bg.canvas" : "white"}
-      borderBottomWidth="1px"
+      w={darkSurface ? { base: "calc(100% - 24px)", md: "calc(100% - 48px)" } : "100%"}
+      mx="auto"
+      bg={darkSurface ? "rgba(0, 56, 88, 0.84)" : menuOpen ? "bg.canvas" : "white"}
+      borderWidth="1px"
       borderColor={scrolled || menuOpen ? "border.subtle" : "transparent"}
       backdropFilter={darkSurface ? "blur(14px)" : "none"}
-      transition="background 480ms ease-in-out, border-color 480ms ease-in-out, backdrop-filter 480ms ease-in-out"
+      borderRadius={darkSurface ? "full" : "0"}
+      boxShadow={darkSurface ? "0 12px 32px rgba(0, 56, 88, 0.16)" : "none"}
+      transition="background 480ms ease-in-out, border-color 480ms ease-in-out, backdrop-filter 480ms ease-in-out, width 360ms ease-in-out, top 360ms ease-in-out, border-radius 360ms ease-in-out, box-shadow 360ms ease-in-out"
     >
       <Container maxW="1440px" px={{ base: "5", md: "8", xl: "12" }} minW="0">
         <Flex
