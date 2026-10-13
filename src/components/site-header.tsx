@@ -59,7 +59,10 @@ export function SiteHeader({
       as="header"
       position={{ base: "fixed", lg: "sticky" }}
       top="0"
+      left={{ base: "0", lg: "auto" }}
+      right={{ base: "0", lg: "auto" }}
       zIndex="sticky"
+      w={{ base: "100%", lg: "auto" }}
       minH={{ base: "0", lg: "88px" }}
       pointerEvents={{ base: "auto", lg: "none" }}
     >
