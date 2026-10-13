@@ -91,12 +91,19 @@ export function SiteHeader({
         <Flex
           minH={{ base: "76px", lg: darkSurface ? "72px" : "88px" }}
           w="full"
+          position="relative"
           align="center"
           justify="space-between"
           gap="3"
           minW="0"
         >
-          <ScrollLink target="inicio" aria-label="TSA Gestão Contábil: início" flexShrink="0">
+          <ScrollLink
+            target="inicio"
+            aria-label="TSA Gestão Contábil: início"
+            position={{ base: "absolute", lg: "static" }}
+            left={{ base: "0", lg: "auto" }}
+            flexShrink="0"
+          >
             <Box
               position="relative"
               width={{ base: "84px", md: "clamp(64px, 15vw, 104px)" }}
@@ -167,7 +174,14 @@ export function SiteHeader({
             ))}
           </HStack>
 
-          <HStack gap="2" flexShrink="0" minW="0" marginStart="auto">
+          <HStack
+            gap="2"
+            flexShrink="0"
+            minW="0"
+            marginStart="auto"
+            position={{ base: "absolute", lg: "static" }}
+            right={{ base: "0", lg: "auto" }}
+          >
             <Button
               asChild
               display={{ base: "none", lg: "inline-flex" }}
