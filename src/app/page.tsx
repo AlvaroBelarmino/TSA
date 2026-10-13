@@ -462,7 +462,7 @@ export default function Home() {
               priority
               quality={100}
               sizes="(min-width: 64rem) 100vw, 0px"
-              style={{ objectFit: "cover", objectPosition: "center" }}
+              style={{ objectFit: "cover", objectPosition: "center 18%" }}
             />
             <Box
               position="absolute"
