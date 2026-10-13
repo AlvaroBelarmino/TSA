@@ -87,7 +87,7 @@ export function SiteHeader({
           <ScrollLink target="inicio" aria-label="TSA Gestão Contábil: início" flexShrink="0">
             <Box
               position="relative"
-              width="clamp(64px, 15vw, 104px)"
+              width={{ base: "84px", md: "clamp(64px, 15vw, 104px)" }}
               aspectRatio="870 / 630"
             >
               <Image
