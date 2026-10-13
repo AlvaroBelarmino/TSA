@@ -21,6 +21,7 @@ const navItems = [
 export function SiteHeader({
   whatsappNumber = "",
 }: SiteHeaderProps) {
+  const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const normalizedNumber = whatsappNumber.replace(/\D/g, "")
   const whatsappHref = normalizedNumber
@@ -31,6 +32,8 @@ export function SiteHeader({
 
   useEffect(() => {
     const onScroll = () => {
+      setScrolled(window.scrollY > 32)
+
       if (window.scrollY > 32) {
         setMenuOpen(false)
       }
@@ -55,10 +58,16 @@ export function SiteHeader({
       position="sticky"
       inset="0 0 auto"
       zIndex="sticky"
-      bg={menuOpen ? "bg.canvas" : "rgba(247, 243, 238, 0.78)"}
+      bg={
+        menuOpen
+          ? "bg.canvas"
+          : scrolled
+            ? "rgba(247, 243, 238, 0.92)"
+            : "white"
+      }
       borderBottomWidth="1px"
-      borderColor="border.subtle"
-      backdropFilter={menuOpen ? "none" : "blur(14px)"}
+      borderColor={scrolled || menuOpen ? "border.subtle" : "transparent"}
+      backdropFilter={menuOpen ? "none" : scrolled ? "blur(14px)" : "none"}
       transition="background 480ms ease-in-out, border-color 480ms ease-in-out, backdrop-filter 480ms ease-in-out"
     >
       <Container maxW="1440px" px={{ base: "5", md: "8", xl: "12" }} minW="0">
