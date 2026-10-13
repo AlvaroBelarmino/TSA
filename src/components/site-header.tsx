@@ -31,7 +31,7 @@ export function SiteHeader({
 
   useEffect(() => {
     const onScroll = () => {
-      const scrollThreshold = window.innerWidth < 1024 ? 8 : 32
+      const scrollThreshold = window.innerWidth < 1024 ? 8 : 520
       setScrolled(window.scrollY > scrollThreshold)
 
       if (window.scrollY > scrollThreshold) {
@@ -52,33 +52,42 @@ export function SiteHeader({
     return () => window.removeEventListener("keydown", onKey)
   }, [menuOpen])
 
+  const desktopScrolled = scrolled && !menuOpen
+
   return (
     <Box
       as="header"
-      position="fixed"
-      inset="0 0 auto"
+      position={{ base: "fixed", lg: "sticky" }}
+      top="0"
+      inset={{ base: "0 0 auto", lg: "auto" }}
       zIndex="sticky"
-      bg={
-        menuOpen
-          ? "bg.canvas"
-          : scrolled
-            ? { base: "bg.canvas", lg: "rgba(247, 243, 238, 0.94)" }
-            : "transparent"
-      }
-      borderBottomWidth="1px"
-      borderColor={scrolled || menuOpen ? "border.subtle" : "transparent"}
-      backdropFilter={
-        menuOpen ? "none" : scrolled ? { base: "none", lg: "blur(14px)" } : "none"
-      }
-      transition={
-        menuOpen
-          ? "border-color 200ms ease-in-out"
-          : "background 480ms ease-in-out, border-color 480ms ease-in-out, backdrop-filter 480ms ease-in-out"
-      }
+      minH={{ base: "0", lg: "88px" }}
+      pointerEvents={{ base: "auto", lg: "none" }}
     >
-      <Container maxW="1440px" px={{ base: "5", md: "8", xl: "12" }} minW="0">
+      <Box
+        position={{ base: "relative", lg: "absolute" }}
+        top={{ base: "auto", lg: desktopScrolled ? "12px" : "0" }}
+        left={{ base: "auto", lg: "50%" }}
+        transform={{ base: "none", lg: "translateX(-50%)" }}
+        w={{
+          base: "100%",
+          lg: desktopScrolled ? "min(1280px, calc(100% - 96px))" : "100%",
+        }}
+        pointerEvents="auto"
+        bg={{
+          base: menuOpen ? "bg.canvas" : scrolled ? "bg.canvas" : "transparent",
+          lg: desktopScrolled ? "rgba(0, 56, 88, 0.84)" : menuOpen ? "bg.canvas" : "white",
+        }}
+        borderWidth={{ base: "0 0 1px", lg: "1px" }}
+        borderColor={scrolled || menuOpen ? "border.subtle" : "transparent"}
+        backdropFilter={{ base: "none", lg: desktopScrolled ? "blur(14px)" : "none" }}
+        borderRadius={{ base: "0", lg: desktopScrolled ? "full" : "0" }}
+        boxShadow={{ base: "none", lg: desktopScrolled ? "0 12px 32px rgba(0, 56, 88, 0.16)" : "none" }}
+        transition="background 480ms ease-in-out, border-color 480ms ease-in-out, backdrop-filter 480ms ease-in-out, width 420ms cubic-bezier(0.22, 1, 0.36, 1), top 420ms cubic-bezier(0.22, 1, 0.36, 1), border-radius 420ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 420ms ease-in-out"
+      >
+        <Container maxW="1440px" px={{ base: "5", md: "8", xl: "12" }} minW="0">
         <Flex
-          minH={{ base: "76px", md: "88px" }}
+          minH={{ base: "76px", lg: desktopScrolled ? "72px" : "88px" }}
           align="center"
           justify="space-between"
           gap="3"
@@ -90,33 +99,39 @@ export function SiteHeader({
               width={{ base: "84px", md: "clamp(64px, 15vw, 104px)" }}
               aspectRatio="870 / 630"
             >
-              <Image
-                src="/logo-white-reduzida.png"
-                alt=""
-                fill
-                priority
-                sizes="104px"
+              <Box
+                position="absolute"
+                inset="0"
+                opacity={{ base: scrolled || menuOpen ? 0 : 1, lg: desktopScrolled ? 1 : 0 }}
+                transition="opacity 480ms ease-in-out"
                 aria-hidden={scrolled || menuOpen}
-                style={{
-                  objectFit: "contain",
-                  opacity: scrolled || menuOpen ? 0 : 1,
-                  transition: "opacity 480ms ease-in-out",
-                }}
-              />
-              <Image
-                src="/logo-dark-reduzida.png"
-                alt=""
-                fill
-                priority
-                sizes="104px"
+              >
+                <Image
+                  src="/logo-white-reduzida.png"
+                  alt=""
+                  fill
+                  priority
+                  sizes="104px"
+                  style={{ objectFit: "contain" }}
+                />
+              </Box>
+              <Box
+                position="absolute"
+                inset="0"
+                opacity={{ base: scrolled || menuOpen ? 1 : 0, lg: desktopScrolled ? 0 : 1 }}
+                transition="opacity 480ms ease-in-out, transform 480ms ease-in-out"
+                transform="scale(0.79)"
                 aria-hidden={!(scrolled || menuOpen)}
-                style={{
-                  objectFit: "contain",
-                  opacity: scrolled || menuOpen ? 1 : 0,
-                  transform: "scale(0.79)",
-                  transition: "opacity 480ms ease-in-out, transform 480ms ease-in-out",
-                }}
-              />
+              >
+                <Image
+                  src="/logo-dark-reduzida.png"
+                  alt=""
+                  fill
+                  priority
+                  sizes="104px"
+                  style={{ objectFit: "contain" }}
+                />
+              </Box>
             </Box>
           </ScrollLink>
 
@@ -131,7 +146,7 @@ export function SiteHeader({
                 key={target}
                 target={target}
                 textStyle="cta"
-                color={scrolled ? "brand.primary" : "fg.onBrand"}
+                color={{ base: scrolled ? "brand.primary" : "fg.onBrand", lg: desktopScrolled ? "fg.onBrand" : "brand.primary" }}
                 transition="color 480ms ease-in-out"
                 _hover={{ color: "accent.warm" }}
               >
@@ -144,12 +159,12 @@ export function SiteHeader({
             <Button
               asChild
               display={{ base: "none", lg: "inline-flex" }}
-              bg={scrolled || menuOpen ? "brand.primary" : "accent.warm"}
-              color={scrolled || menuOpen ? "fg.onBrand" : "brand.primary"}
+              bg={{ base: scrolled || menuOpen ? "brand.primary" : "accent.warm", lg: desktopScrolled ? "accent.warm" : "brand.primary" }}
+              color={{ base: scrolled || menuOpen ? "fg.onBrand" : "brand.primary", lg: desktopScrolled ? "brand.primary" : "fg.onBrand" }}
               borderRadius="full"
               px="6"
               flexShrink="0"
-              _hover={{ bg: scrolled || menuOpen ? "accent.balance" : "fg.onBrand" }}
+              _hover={{ bg: desktopScrolled ? "fg.onBrand" : "accent.balance" }}
               transition="background-color 480ms ease-in-out, color 480ms ease-in-out"
             >
               <a
@@ -167,7 +182,7 @@ export function SiteHeader({
               aria-expanded={menuOpen}
               onClick={() => setMenuOpen((open) => !open)}
               variant="ghost"
-              color={scrolled || menuOpen ? "brand.primary" : "fg.onBrand"}
+              color={{ base: scrolled || menuOpen ? "brand.primary" : "fg.onBrand", lg: "brand.primary" }}
               _hover={{
                 bg: scrolled || menuOpen ? "rgba(0,56,88,0.08)" : "rgba(247,243,238,0.12)",
               }}
@@ -215,7 +230,8 @@ export function SiteHeader({
             </Button>
           </Stack>
         </Box>
-      </Container>
+        </Container>
+      </Box>
     </Box>
   )
 }
