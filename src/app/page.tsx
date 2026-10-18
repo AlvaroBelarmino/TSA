@@ -219,9 +219,15 @@ function CheckItem({
   onBrand?: boolean
 }) {
   return (
-    <HStack gap="3" align="flex-start" minW="0" w="full">
+    <HStack
+      gap="3"
+      align="flex-start"
+      minW="0"
+      w="full"
+      fontSize="cta"
+      lineHeight="1.2"
+    >
       <Flex
-        mt="1"
         boxSize="5"
         flex="0 0 auto"
         borderRadius="full"
@@ -229,11 +235,13 @@ function CheckItem({
         color={onBrand ? "brand.primary" : "accent.warm"}
         align="center"
         justify="center"
+        css={{ marginTop: "calc((1lh - 1.25rem) / 2)" }}
       >
         <LuCheck size="12" />
       </Flex>
       <Text
-        textStyle="cta"
+        fontSize="inherit"
+        lineHeight="inherit"
         fontWeight="regular"
         color={onBrand ? "fg.onBrand" : "fg.default"}
         minW="0"
