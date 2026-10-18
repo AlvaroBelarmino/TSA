@@ -26,10 +26,13 @@ import {
   LuChartNoAxesCombined,
   LuCheck,
   LuClock3,
+  LuFileText,
   LuInstagram,
   LuLinkedin,
   LuMapPin,
   LuMonitor,
+  LuShieldCheck,
+  LuTarget,
 } from "react-icons/lu"
 
 const whatsappNumber = process.env.NEXT_PUBLIC_TSA_WHATSAPP_NUMBER?.replace(
@@ -47,7 +50,7 @@ const linkedinUrl =
 const hasWhatsapp = Boolean(whatsappNumber)
 
 const heroAlt =
-  "Profissional da TSA Gestão Contábil em um escritório acolhedor e organizado"
+  "Thaise, à frente da TSA Gestão Contábil, em seu escritório"
 
 function whatsappLink(message: string) {
   return whatsappNumber
@@ -77,6 +80,10 @@ const featuredService = {
     "Olá! Vim pelo site da TSA e gostaria de falar sobre Contabilidade para a minha empresa.",
 }
 
+function serviceMessage(title: string) {
+  return `Olá! Vim pelo site da TSA Gestão Contábil e cliquei no serviço de ${title}. Gostaria de conversar sobre isso para a minha empresa.`
+}
+
 const services = [
   {
     title: "Contabilidade",
@@ -91,6 +98,7 @@ const services = [
     image: "/servicos/contabilidade-real.jpg",
     imageAlt:
       "Profissionais analisando documentos em um escritório",
+    message: serviceMessage("Contabilidade"),
   },
   {
     title: "Fiscal e tributário",
@@ -105,6 +113,7 @@ const services = [
     image: "/servicos/escrituracao-real.jpg",
     imageAlt:
       "Documentos e gráficos organizados ao lado de um computador",
+    message: serviceMessage("Fiscal e tributário"),
   },
   {
     title: "Folha e rotinas trabalhistas",
@@ -114,6 +123,7 @@ const services = [
     image: "/servicos/folha-real.jpg",
     imageAlt:
       "Equipe reunida para discutir informações em uma mesa de trabalho",
+    message: serviceMessage("Folha e rotinas trabalhistas"),
   },
   {
     title: "Consultoria e planejamento",
@@ -128,6 +138,7 @@ const services = [
     image: "/servicos/tributario-real.jpg",
     imageAlt:
       "Documentos fiscais com moedas e a palavra tax",
+    message: serviceMessage("Consultoria e planejamento"),
   },
   {
     title: "Regularização fiscal",
@@ -142,6 +153,7 @@ const services = [
     image: "/servicos/regularizacao-real.jpg",
     imageAlt:
       "Duas pessoas se cumprimentando durante uma reunião de negócios",
+    message: serviceMessage("Regularização fiscal"),
   },
   {
     title: "Societário e legalização",
@@ -156,6 +168,7 @@ const services = [
     image: "/servicos/abertura-real.jpg",
     imageAlt:
       "Equipe unindo as mãos sobre documentos e gráficos",
+    message: serviceMessage("Societário e legalização"),
   },
 ]
 
@@ -192,21 +205,53 @@ const experienceHighlights = [
   },
 ]
 
+const heroPillars = [
+  { label: "Organização", icon: LuFileText },
+  { label: "Clareza", icon: LuChartNoAxesCombined },
+  { label: "Decisão", icon: LuTarget },
+]
+
 const sectionAnchorOffset = { base: "76px", md: "88px" }
 
 function Kicker({
   children,
   color = "brand.primary",
+  center = false,
 }: {
   children: React.ReactNode
-  color?: string
+  color?: React.ComponentProps<typeof Text>["color"]
+  center?: boolean | { base?: boolean; lg?: boolean }
 }) {
+  const centered =
+    typeof center === "boolean"
+      ? { base: center, lg: center }
+      : { base: false, lg: false, ...center }
+
   return (
-    <HStack gap="4" minW="0" align="center">
+    <HStack
+      gap="4"
+      minW="0"
+      align="center"
+      justify={{ base: centered.base ? "center" : "flex-start", lg: centered.lg ? "center" : "flex-start" }}
+      w={{ base: centered.base ? "full" : "auto", lg: centered.lg ? "full" : "auto" }}
+    >
       <Box w="10" h="1px" bg="accent.warm" flex="0 0 auto" aria-hidden="true" />
-      <Text textStyle="micro" color={color} minW="0" css={{ overflowWrap: "anywhere" }}>
+      <Text
+        textStyle="micro"
+        color={color}
+        minW="0"
+        textAlign={{ base: centered.base ? "center" : "left", lg: centered.lg ? "center" : "left" }}
+      >
         {children}
       </Text>
+      <Box
+        display={{ base: centered.base ? "block" : "none", lg: centered.lg ? "block" : "none" }}
+        w="10"
+        h="1px"
+        bg="accent.warm"
+        flex="0 0 auto"
+        aria-hidden="true"
+      />
     </HStack>
   )
 }
@@ -256,11 +301,9 @@ function CheckItem({
 function ServiceCard({
   service,
   index,
-  target,
 }: {
   service: (typeof services)[number]
   index: number
-  target?: string
 }) {
   const card = (
     <Stack
@@ -276,7 +319,7 @@ function ServiceCard({
       borderWidth="1px"
       borderColor="border.subtle"
       borderRadius="2xl"
-      cursor={target ? "pointer" : undefined}
+      cursor="pointer"
       transform="translateY(0) rotate(0)"
       transformOrigin="center center"
       willChange="transform"
@@ -373,12 +416,10 @@ function ServiceCard({
     </Stack>
   )
 
-  if (!target) return card
-
   return (
-    <ScrollLink
-      target={target}
-      aria-label={`Ir para o formulário sobre ${service.title}`}
+    <Link
+      href={whatsappLink(service.message)}
+      aria-label={`Falar no WhatsApp sobre ${service.title}`}
       display="block"
       h="full"
       textDecoration="none"
@@ -387,9 +428,10 @@ function ServiceCard({
         outline: "3px solid rgba(244, 132, 32, 0.65)",
         outlineOffset: "4px",
       }}
+      {...externalLinkProps}
     >
       {card}
-    </ScrollLink>
+    </Link>
   )
 }
 
@@ -406,119 +448,159 @@ export default function Home() {
           as="section"
           aria-labelledby="hero-title"
           position="relative"
-          minH={{ base: "auto", lg: "calc(100svh - 88px)" }}
           overflow="hidden"
-          bg="brand.primary"
-          color="fg.onBrand"
+          bg="bg.canvas"
         >
-          <Box display={{ base: "none", lg: "block" }} position="absolute" inset="0">
+          <Box
+            display={{ base: "block", lg: "none" }}
+            position="absolute"
+            inset="0"
+            aria-hidden="true"
+          >
             <Image
-              src="/BannerPrincipal.png"
-              alt={heroAlt}
+              src="/hero-mesa.png"
+              alt=""
+              fill
+              priority
+              sizes="100vw"
+              style={{
+                objectFit: "cover",
+                objectPosition: "center",
+                filter: "blur(12px)",
+                transform: "scale(1.15)",
+              }}
+            />
+            <Box position="absolute" inset="0" bg="rgba(247, 243, 238, 0.58)" />
+          </Box>
+
+          <Box
+            display={{ base: "none", lg: "block" }}
+            position="absolute"
+            top="0"
+            right="0"
+            bottom="0"
+            w="48%"
+            aria-hidden="true"
+          >
+            <Image
+              src="/hero-mesa.png"
+              alt=""
               fill
               priority
               quality={100}
-              sizes="(min-width: 64rem) 100vw, 0px"
-              style={{ objectFit: "cover", objectPosition: "center 18%" }}
-            />
-            <Box
-              position="absolute"
-              inset="0 auto 0 0"
-              width="60%"
-              height="100%"
-              background="linear-gradient(90deg, rgba(0, 56, 88, 0.96) 0%, rgba(0, 56, 88, 0.78) 52%, rgba(0, 56, 88, 0) 100%)"
-              css={{
-                maskImage: "linear-gradient(90deg, black 0%, black 68%, transparent 100%)",
-                WebkitMaskImage:
-                  "linear-gradient(90deg, black 0%, black 68%, transparent 100%)",
+              sizes="48vw"
+              style={{
+                objectFit: "cover",
+                objectPosition: "center",
               }}
             />
           </Box>
 
-          <Box
-            display={{ base: "block", lg: "none" }}
-            position="relative"
-            h={{ base: "44svh", sm: "46svh" }}
-            minH="340px"
-            overflow="hidden"
-          >
-            <Image
-              src="/BannerPrincipal.png"
-              alt={heroAlt}
-              fill
-              priority
-              quality={100}
-              sizes="(max-width: 63.99rem) 100vw, 0px"
-              style={{ objectFit: "cover", objectPosition: "center" }}
-            />
-            <Box
-              position="absolute"
-              inset="0"
-              background="linear-gradient(180deg, rgba(0, 56, 88, 0.58) 0%, rgba(0, 56, 88, 0.14) 28%, rgba(0, 56, 88, 0) 48%)"
-            />
-          </Box>
-
           <Container
-            maxW="none"
-            px={{ base: "5", md: "8", xl: "10" }}
             position="relative"
             zIndex="1"
-            minH={{ base: "auto", lg: "100svh" }}
-            display={{ base: "block", lg: "flex" }}
-            alignItems="center"
-            mt={{ base: "-10", lg: "0" }}
-            pt={{ base: "10", lg: "0" }}
-            pb={{ base: "14", lg: "0" }}
-            bg={{ base: "bg.surface", lg: "transparent" }}
-            color={{ base: "fg.default", lg: "fg.onBrand" }}
-            borderTopLeftRadius={{ base: "3xl", lg: "0" }}
-            borderTopRightRadius={{ base: "3xl", lg: "0" }}
+            maxW="1200px"
+            px={{ base: "5", md: "8" }}
+            pt={{ base: "32", lg: "20" }}
+            pb={{ base: "16", lg: "20" }}
           >
-            <Stack
-              gap={{ base: "4", md: "6" }}
-              maxW={{ base: "34rem", lg: "680px" }}
-              w="full"
-              minW="0"
+            <Grid
+              templateColumns={{ base: "1fr", lg: "minmax(0, 640px) auto" }}
+              gap={{ base: "8", lg: "10" }}
+              alignItems="center"
             >
-              <Kicker color="accent.warm">CONTABILIDADE PARA EMPRESAS EM CRESCIMENTO</Kicker>
-              <Heading
-                id="hero-title"
-                as="h1"
-                textStyle="h1"
-                color={{ base: "brand.primary", lg: "fg.onBrand" }}
-                fontSize={{ base: "clamp(2.25rem, 10vw, 3rem)", md: "h1" }}
-                css={{ textWrap: "balance", overflowWrap: "anywhere" }}
-              >
-                Sua contabilidade deve trazer clareza, não mais dúvidas.
-              </Heading>
-              <Text
-                textStyle="body"
-                color={{ base: "fg.default", lg: "fg.onBrand" }}
-                maxW={{ base: "34ch", md: "48ch" }}
-                opacity="0.92"
-              >
-                Organizamos, acompanhamos e traduzimos os números da sua empresa para que você entenda melhor o negócio e tome decisões com mais segurança.
-
-              </Text>
-              <Flex gap="3" wrap="wrap" pt="1" w="full">
+              <Stack gap={{ base: "5", md: "6" }} minW="0" align={{ base: "center", lg: "stretch" }}>
+                <Kicker color="brand.primary" center={{ base: true, lg: false }}>
+                  CONTABILIDADE PARA EMPRESAS EM CRESCIMENTO
+                </Kicker>
+                <Heading
+                  id="hero-title"
+                  as="h1"
+                  fontFamily="heading"
+                  fontWeight="semibold"
+                  color="brand.primary"
+                  fontSize={{ base: "clamp(2.35rem, 10vw, 3.15rem)", lg: "clamp(3.1rem, 4.8vw, 4.35rem)" }}
+                  lineHeight="1.02"
+                  letterSpacing="-0.02em"
+                  textAlign={{ base: "center", lg: "left" }}
+                  css={{ textWrap: "balance" }}
+                >
+                  Sua contabilidade deve trazer{" "}
+                  <Box as="span" color="accent.balance">
+                    clareza,
+                  </Box>{" "}
+                  não mais dúvidas.
+                </Heading>
+                <Text
+                  textStyle="body"
+                  color={{ base: "brand.primary", lg: "fg.default" }}
+                  fontWeight={{ base: "semibold", lg: "regular" }}
+                  maxW="46ch"
+                  textAlign={{ base: "center", lg: "left" }}
+                >
+                  Organizamos, acompanhamos e traduzimos os números da sua empresa para que você tome decisões com mais segurança.
+                </Text>
                 <Button
                   asChild
                   size="lg"
-                  bg="accent.warm"
-                  color="brand.primary"
+                  alignSelf={{ base: "stretch", sm: "center", lg: "flex-start" }}
+                  bg={{ base: "accent.warm", lg: "brand.primary" }}
+                  color="fg.onBrand"
                   borderRadius="full"
-                  px={{ base: "5", md: "7" }}
-                  w={{ base: "full", sm: "auto" }}
-                  minH="12"
-                  _hover={{ bg: "fg.onBrand" }}
+                  px={{ base: "8", lg: "6" }}
+                  minH={{ base: "14", lg: "12" }}
+                  boxShadow={{ base: "0 12px 28px rgba(244, 132, 32, 0.38)", lg: "none" }}
+                  _hover={{ bg: { base: "brand.primary", lg: "accent.balance" } }}
                 >
                   <a href={whatsappHref} {...externalLinkProps}>
-                    Quero conversar sobre minha empresa
                     <FaWhatsapp />
+                    Quero conversar sobre minha empresa
+                    <LuArrowUpRight />
                   </a>
                 </Button>
-              </Flex>
-            </Stack>
+                <HStack
+                  gap="2"
+                  color={{ base: "brand.primary", lg: "fg.muted" }}
+                  pt="1"
+                  justify={{ base: "center", lg: "flex-start" }}
+                  textAlign={{ base: "center", lg: "left" }}
+                >
+                  <LuShieldCheck size={16} aria-hidden="true" />
+                  <Text fontSize="sm" fontWeight={{ base: "semibold", lg: "regular" }}>
+                    Mais de 10 anos de experiência · Atendimento próximo e online
+                  </Text>
+                </HStack>
+              </Stack>
+
+              <Stack
+                display={{ base: "none", lg: "flex" }}
+                gap="7"
+                pl="8"
+                borderLeftWidth="2px"
+                borderColor="accent.balance"
+                alignSelf="center"
+              >
+                {heroPillars.map(({ label, icon: Icon }) => (
+                  <Stack key={label} gap="2.5" align="center" w="104px">
+                    <Flex
+                      boxSize="16"
+                      align="center"
+                      justify="center"
+                      bg="bg.canvas"
+                      borderWidth="2.5px"
+                      borderColor="accent.balance"
+                      borderRadius="full"
+                      color="accent.balance"
+                    >
+                      <Icon size={26} strokeWidth={2.25} aria-hidden="true" />
+                    </Flex>
+                    <Text fontSize="md" fontWeight="semibold" color="brand.primary" textAlign="center">
+                      {label}
+                    </Text>
+                  </Stack>
+                ))}
+              </Stack>
+            </Grid>
           </Container>
         </Box>
 
@@ -730,7 +812,7 @@ export default function Home() {
                 >
                   <Box position="absolute" inset="0" overflow="hidden" aria-hidden="true">
                     <Image
-                      src="/BannerContabilidade.png"
+                      src="/experiencia-mobile-v1.png"
                       alt=""
                       fill
                       sizes="(min-width: 48rem) 1120px, 100vw"
@@ -847,11 +929,7 @@ export default function Home() {
                     delay={index * 60}
                     rotate={index % 2 === 0 ? -1.5 : 1.5}
                   >
-                    <ServiceCard
-                      service={service}
-                      index={index}
-                      target={index < 2 ? "contato" : undefined}
-                    />
+                    <ServiceCard service={service} index={index} />
                   </Reveal>
                 ))}
               </SimpleGrid>

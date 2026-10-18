@@ -107,12 +107,12 @@ export function SiteHeader({
               <Box
                 position="absolute"
                 inset="0"
-                opacity={{ base: scrolled || menuOpen ? 0 : 1, lg: darkSurface ? 1 : 0 }}
+                opacity={{ base: 0, lg: darkSurface ? 1 : 0 }}
                 transition={{
                   base: "opacity 480ms ease-in-out",
                   lg: "opacity 280ms ease-in-out",
                 }}
-                aria-hidden={scrolled || menuOpen}
+                aria-hidden="true"
               >
                 <Image
                   src="/logo-white-reduzida.png"
@@ -126,13 +126,13 @@ export function SiteHeader({
               <Box
                 position="absolute"
                 inset="0"
-                opacity={{ base: scrolled || menuOpen ? 1 : 0, lg: darkSurface ? 0 : 1 }}
+                opacity={{ base: 1, lg: darkSurface ? 0 : 1 }}
                 transition={{
                   base: "opacity 480ms ease-in-out, transform 480ms ease-in-out",
                   lg: "opacity 280ms ease-in-out",
                 }}
                 transform="scale(0.79)"
-                aria-hidden={!(scrolled || menuOpen)}
+                aria-hidden="true"
               >
                 <Image
                   src="/logo-dark-reduzida.png"
@@ -199,7 +199,7 @@ export function SiteHeader({
               aria-expanded={menuOpen}
               onClick={() => setMenuOpen((open) => !open)}
               variant="ghost"
-              color={{ base: scrolled || menuOpen ? "brand.primary" : "fg.onBrand", lg: darkSurface ? "fg.onBrand" : "brand.primary" }}
+              color="brand.primary"
               _hover={{
                 bg: scrolled || menuOpen ? "rgba(0,56,88,0.08)" : "rgba(247,243,238,0.12)",
               }}
