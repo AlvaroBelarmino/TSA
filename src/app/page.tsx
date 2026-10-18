@@ -675,54 +675,6 @@ export default function Home() {
           </Container>
         </Box>
 
-        <Box bg="bg.brand" color="fg.onBrand" py={{ base: "14", md: "18" }}>
-          <Container maxW="1200px" px={{ base: "5", md: "8" }}>
-            <Reveal>
-              <Stack gap={{ base: "10", md: "12" }}>
-                <Stack gap="4" maxW="900px">
-                  <Kicker color="accent.warm">Ainda não sabe por onde começar?</Kicker>
-                  <Heading as="h2" textStyle="h2" color="fg.onBrand" fontStyle="italic">
-                    Você não precisa decidir o próximo passo sozinho.
-                  </Heading>
-                  <Text textStyle="body" color="fg.onBrand" maxW="64ch" opacity="0.9">
-                    Cada empresa tem um momento diferente. Conte a sua situação e a TSA te ajuda a entender o que fazer a seguir, sem compromisso.
-
-                  </Text>
-                </Stack>
-                <Grid
-                  templateColumns={{ base: "1fr", md: "repeat(3, 1fr)" }}
-                  gap={{ base: "8", md: "10" }}
-                >
-                  {["Entender", "Organizar", "Decidir"].map((title, index) => (
-                    <Stack
-                      key={title}
-                      gap="2"
-                      borderLeftWidth="2px"
-                      borderColor="accent.warm"
-                      pl="5"
-                    >
-                      <Text textStyle="micro" color="accent.warm">
-                        0{index + 1}
-                      </Text>
-                      <Heading as="h3" textStyle="h3" color="fg.onBrand">
-                        {title}
-                      </Heading>
-                      <Text textStyle="body" color="fg.onBrand" opacity="0.88">
-                        {index === 0 &&
-                          "Informação técnica traduzida para a realidade do seu negócio."}
-                        {index === 1 &&
-                          "Rotinas e documentos em ordem, sem burocracia extra."}
-                        {index === 2 &&
-                          "Orientação clara para agir no momento certo."}
-                      </Text>
-                    </Stack>
-                  ))}
-                </Grid>
-              </Stack>
-            </Reveal>
-          </Container>
-        </Box>
-
         <Box
           id="servicos"
           as="section"
@@ -935,6 +887,54 @@ export default function Home() {
           </Container>
         </Box>
 
+        <Box bg="bg.brand" color="fg.onBrand" py={{ base: "14", md: "18" }}>
+          <Container maxW="1200px" px={{ base: "5", md: "8" }}>
+            <Reveal>
+              <Stack gap={{ base: "10", md: "12" }}>
+                <Stack gap="4" maxW="900px">
+                  <Kicker color="accent.warm">Ainda não sabe por onde começar?</Kicker>
+                  <Heading as="h2" textStyle="h2" color="fg.onBrand" fontStyle="italic">
+                    Você não precisa decidir o próximo passo sozinho.
+                  </Heading>
+                  <Text textStyle="body" color="fg.onBrand" maxW="64ch" opacity="0.9">
+                    Cada empresa tem um momento diferente. Conte a sua situação e a TSA te ajuda a entender o que fazer a seguir, sem compromisso.
+
+                  </Text>
+                </Stack>
+                <Grid
+                  templateColumns={{ base: "1fr", md: "repeat(3, 1fr)" }}
+                  gap={{ base: "8", md: "10" }}
+                >
+                  {["Entender", "Organizar", "Decidir"].map((title, index) => (
+                    <Stack
+                      key={title}
+                      gap="2"
+                      borderLeftWidth="2px"
+                      borderColor="accent.warm"
+                      pl="5"
+                    >
+                      <Text textStyle="micro" color="accent.warm">
+                        0{index + 1}
+                      </Text>
+                      <Heading as="h3" textStyle="h3" color="fg.onBrand">
+                        {title}
+                      </Heading>
+                      <Text textStyle="body" color="fg.onBrand" opacity="0.88">
+                        {index === 0 &&
+                          "Informação técnica traduzida para a realidade do seu negócio."}
+                        {index === 1 &&
+                          "Rotinas e documentos em ordem, sem burocracia extra."}
+                        {index === 2 &&
+                          "Orientação clara para agir no momento certo."}
+                      </Text>
+                    </Stack>
+                  ))}
+                </Grid>
+              </Stack>
+            </Reveal>
+          </Container>
+        </Box>
+
         <Box
           id="sobre"
           as="section"
@@ -986,25 +986,29 @@ export default function Home() {
                   Sou Thaise, contadora, com mais de 10 anos de experiência na área contábil.
                 </Text>
                 <Text textStyle="body" color="fg.default">
-                  Acredito que a contabilidade vai muito além de impostos, guias e obrigações.
-                  Ela deve ser uma ferramenta para{" "}
-                  <Text as="span" fontWeight="semibold">
-                    ajudar o empresário a compreender o próprio negócio e tomar decisões com mais
-                    segurança e clareza.
-                  </Text>
+                  Ao longo dessa trajetória, aprendi que a contabilidade vai muito além de
+                  impostos, guias e obrigações. Ela precisa ser uma ferramenta para ajudar o
+                  empresário a compreender o próprio negócio, enxergar oportunidades e tomar
+                  decisões com mais segurança e clareza.
                 </Text>
                 <Text textStyle="body" color="fg.default">
-                  Foi dessa visão, amadurecida ao acompanhar empresários durante a pandemia, que
-                  nasceu a TSA. Sou formada em Ciências Contábeis, com MBA em Gestão Financeira e
-                  Auditoria Contábil e formação em Perícia Judicial Contábil.
+                  Foi a partir dessa visão, construída e amadurecida ao longo da minha trajetória,
+                  que nasceu a TSA. Especialmente durante a pandemia, acompanhei de perto
+                  empresários enfrentando desafios reais, tomando decisões difíceis e buscando
+                  caminhos para manter seus negócios sustentáveis e preparados para o futuro.
                 </Text>
                 <Text textStyle="body" color="fg.default">
-                  Boa parte da minha visão profissional nasceu da prática,{" "}
-                  <Text as="span" fontWeight="semibold">
-                    acompanhando empresas em diferentes fases de crescimento.
-                  </Text>
-                  Hoje, à frente da TSA, ofereço uma contabilidade próxima, estratégica e fácil
-                  de compreender.
+                  Sou formada em Ciências Contábeis, com MBA em Gestão Financeira e Auditoria
+                  Contábil e formação em Perícia Judicial Contábil.
+                </Text>
+                <Text textStyle="body" color="fg.default">
+                  Boa parte da minha visão profissional nasceu da prática: acompanhando empresas
+                  em diferentes fases de crescimento.
+                </Text>
+                <Text textStyle="body" color="fg.default">
+                  Hoje, à frente da TSA, ofereço uma contabilidade mais próxima, estratégica e
+                  fácil de compreender. Quero que cada empresário saiba onde sua empresa está, o
+                  que os números dizem e quais decisões podem fortalecer o próximo passo.
                 </Text>
                 <SimpleGrid columns={{ base: 1, md: 3 }} gap={{ base: "6", md: "4" }} pt="3">
                   {values.map((value) => (
