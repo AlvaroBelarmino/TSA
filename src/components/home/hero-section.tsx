@@ -41,9 +41,9 @@ export function HeroSection() {
         display={{ base: "none", lg: "block" }}
         position="absolute"
         top="0"
-        right="0"
+        right="-8px"
         bottom="0"
-        w="48%"
+        w="calc(48% + 8px)"
         aria-hidden="true"
       >
         <Image
