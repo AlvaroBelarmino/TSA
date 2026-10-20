@@ -66,7 +66,7 @@ export function HeroSection() {
         zIndex="1"
         maxW="1200px"
         px={{ base: "5", md: "8" }}
-        pt={{ base: "32", lg: "20" }}
+        pt={{ base: "32", lg: "32" }}
         pb={{ base: "16", lg: "20" }}
       >
         <Grid
@@ -108,6 +108,7 @@ export function HeroSection() {
             <Button
               asChild
               size="lg"
+              fontSize={{ base: "0.875rem", lg: "cta" }}
               alignSelf={{ base: "stretch", sm: "center", lg: "flex-start" }}
               bg={{ base: "accent.warm", lg: "brand.primary" }}
               color="fg.onBrand"

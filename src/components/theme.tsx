@@ -10,6 +10,7 @@ const config = defineConfig({
       background: "bg.canvas",
       color: "fg.default",
       scrollBehavior: "smooth",
+      overscrollBehaviorY: "none",
       overflowX: "clip",
       maxWidth: "100%",
     },
