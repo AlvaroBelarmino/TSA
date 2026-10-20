@@ -14,19 +14,10 @@ import { ScrollLink } from "@/components/scroll-link"
 import { Kicker } from "./kicker"
 import { externalLinkProps, whatsappHref } from "./data"
 
-const serviceScope = [
-  {
-    label: "Rotina",
-    description: "Contabilidade, fiscal e trabalhista",
-  },
-  {
-    label: "Decisões",
-    description: "Consultoria e planejamento tributário",
-  },
-  {
-    label: "Estrutura",
-    description: "Regularização fiscal e legalização",
-  },
+const professionalCredentials = [
+  "Formação em Ciências Contábeis",
+  "MBA em Gestão Financeira e Auditoria Contábil",
+  "Formação em Perícia Judicial Contábil",
 ]
 
 export function HeroSection() {
@@ -35,24 +26,19 @@ export function HeroSection() {
       id="inicio"
       as="section"
       aria-labelledby="hero-title"
-      position="relative"
       bg="bg.canvas"
     >
-      <Container
-        maxW="1200px"
-        px={{ base: "5", md: "8" }}
-        pt={{ base: "28", lg: "24" }}
-        pb={{ base: "14", md: "18", lg: "20" }}
+      <Grid
+        templateColumns={{ base: "1fr", xl: "1fr 1fr" }}
+        alignItems="stretch"
       >
-        <Grid
-          templateColumns={{
-            base: "1fr",
-            lg: "minmax(0, 1.15fr) minmax(0, 0.85fr)",
-          }}
-          gap={{ base: "12", lg: "16" }}
-          alignItems="center"
+        <Container
+          maxW="720px"
+          px={{ base: "5", md: "8", xl: "12" }}
+          pt={{ base: "28", xl: "20" }}
+          pb={{ base: "16", xl: "20" }}
         >
-          <Stack gap={{ base: "5", md: "6" }} minW="0" align="flex-start">
+          <Stack gap={{ base: "5", md: "6" }} align="flex-start">
             <Kicker>CONTABILIDADE PARA EMPRESAS E PRESTADORES DE SERVIÇO</Kicker>
             <Heading
               id="hero-title"
@@ -62,11 +48,11 @@ export function HeroSection() {
               color="brand.primary"
               fontSize={{
                 base: "clamp(2.65rem, 10vw, 3.5rem)",
-                lg: "clamp(3.25rem, 5vw, 4.25rem)",
+                xl: "clamp(3.25rem, 4.7vw, 4.25rem)",
               }}
               lineHeight="1.04"
               letterSpacing="-0.035em"
-              maxW={{ base: "none", lg: "16ch" }}
+              maxW="16ch"
               css={{ textWrap: "balance" }}
             >
               Sua empresa em ordem. Mais clareza para decidir.
@@ -89,7 +75,7 @@ export function HeroSection() {
                 bg="brand.primary"
                 color="fg.onBrand"
                 borderRadius="full"
-                px={{ base: "6", lg: "6" }}
+                px="6"
                 minH="12"
                 _hover={{ bg: "accent.balance" }}
               >
@@ -114,44 +100,68 @@ export function HeroSection() {
               </ScrollLink>
             </Stack>
           </Stack>
+        </Container>
 
-          <Stack
-            gap="0"
-            minW="0"
-            borderTopWidth="1px"
-            borderColor="brand.primary"
-            pt="5"
+        <Box
+          as="aside"
+          aria-labelledby="hero-profile-title"
+          bg="brand.primary"
+          color="fg.onBrand"
+        >
+          <Container
+            maxW="720px"
+            px={{ base: "5", md: "8", xl: "12" }}
+            py={{ base: "12", md: "16", xl: "20" }}
           >
-            <HStack gap="3" align="center" mb="2">
-              <Box w="8" h="2px" bg="accent.warm" aria-hidden="true" />
-              <Text textStyle="micro" color="brand.primary">
-                DO DIA A DIA ÀS DECISÕES
-              </Text>
-            </HStack>
-            {serviceScope.map(({ label, description }) => (
-              <Grid
-                key={label}
-                templateColumns={{
-                  base: "6.5rem minmax(0, 1fr)",
-                  sm: "7.5rem minmax(0, 1fr)",
-                }}
-                gap="4"
-                alignItems="baseline"
-                py={{ base: "4", md: "5" }}
-                borderBottomWidth="1px"
-                borderColor="border.subtle"
-              >
-                <Text fontFamily="heading" fontSize="h3" color="brand.primary">
-                  {label}
+            <Stack gap={{ base: "7", md: "9" }}>
+              <Stack gap="3">
+                <Kicker color="fg.onBrand">À FRENTE DA TSA</Kicker>
+                <Heading
+                  id="hero-profile-title"
+                  as="h2"
+                  fontFamily="heading"
+                  fontWeight="semibold"
+                  fontSize={{ base: "4xl", md: "5xl", xl: "6xl" }}
+                  lineHeight="1"
+                  letterSpacing="-0.03em"
+                  color="fg.onBrand"
+                >
+                  Thaise
+                </Heading>
+                <Text textStyle="cta" color="fg.onBrand">
+                  Contadora e responsável pela TSA Gestão Contábil
                 </Text>
-                <Text fontSize="sm" lineHeight="1.55" color="fg.default">
-                  {description}
+              </Stack>
+
+              <Stack gap="0" borderTopWidth="1px" borderColor="rgba(247,243,238,0.24)">
+                <Text textStyle="micro" color="accent.warm" pt="5" pb="2">
+                  FORMAÇÃO
                 </Text>
-              </Grid>
-            ))}
-          </Stack>
-        </Grid>
-      </Container>
+                {professionalCredentials.map((credential) => (
+                  <Text
+                    key={credential}
+                    fontSize="sm"
+                    lineHeight="1.55"
+                    color="fg.onBrand"
+                    py="3"
+                    borderBottomWidth="1px"
+                    borderColor="rgba(247,243,238,0.16)"
+                  >
+                    {credential}
+                  </Text>
+                ))}
+              </Stack>
+
+              <HStack gap="3" align="center">
+                <Box w="8" h="2px" flexShrink="0" bg="accent.warm" aria-hidden="true" />
+                <Text fontSize="sm" lineHeight="1.5" color="fg.onBrand">
+                  Uma contabilidade próxima, estratégica e fácil de compreender.
+                </Text>
+              </HStack>
+            </Stack>
+          </Container>
+        </Box>
+      </Grid>
     </Box>
   )
 }
