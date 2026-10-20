@@ -1,112 +1,169 @@
-import {
-  Box,
-  Button,
-  Container,
-  Flex,
-  Grid,
-  Heading,
-  Stack,
-  Text,
-} from "@chakra-ui/react"
-import { ScrollLink } from "@/components/scroll-link"
+import { Box, Button, Container, Flex, Grid, HStack, Heading, Stack, Text } from "@chakra-ui/react"
 import Image from "next/image"
 import { FaWhatsapp } from "react-icons/fa"
-import { LuArrowDownRight, LuArrowUpRight } from "react-icons/lu"
-import { externalLinkProps, whatsappHref } from "./data"
+import { LuArrowUpRight, LuShieldCheck } from "react-icons/lu"
+import { Kicker } from "./kicker"
+import { externalLinkProps, heroPillars, whatsappHref } from "./data"
 
 export function HeroSection() {
   return (
-    <Box id="inicio" as="section" aria-labelledby="hero-title" bg="bg.canvas">
+    <Box
+      id="inicio"
+      as="section"
+      aria-labelledby="hero-title"
+      position="relative"
+      overflow="hidden"
+      bg="bg.canvas"
+    >
+      <Box
+        display={{ base: "block", lg: "none" }}
+        position="absolute"
+        inset="0"
+        aria-hidden="true"
+      >
+        <Image
+          src="/hero-mesa.png"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          style={{
+            objectFit: "cover",
+            objectPosition: "center",
+            filter: "blur(12px)",
+            transform: "scale(1.15)",
+          }}
+        />
+        <Box position="absolute" inset="0" bg="rgba(247, 243, 238, 0.58)" />
+      </Box>
+
+      <Box
+        display={{ base: "none", lg: "block" }}
+        position="absolute"
+        top="0"
+        right="0"
+        bottom="0"
+        w="48%"
+        aria-hidden="true"
+      >
+        <Image
+          src="/hero-mesa.png"
+          alt=""
+          fill
+          priority
+          quality={100}
+          sizes="48vw"
+          style={{
+            objectFit: "cover",
+            objectPosition: "center",
+          }}
+        />
+      </Box>
+
       <Container
-        maxW="1440px"
-        px={{ base: "5", md: "8", xl: "12" }}
-        pt={{ base: "28", lg: "12" }}
-        pb={{ base: "14", lg: "16" }}
+        position="relative"
+        zIndex="1"
+        maxW="1200px"
+        px={{ base: "5", md: "8" }}
+        pt={{ base: "32", lg: "20" }}
+        pb={{ base: "16", lg: "20" }}
       >
         <Grid
-          templateColumns={{ base: "1fr", lg: "minmax(0, 1.04fr) minmax(0, 0.96fr)" }}
-          gap={{ base: "10", lg: "12", xl: "20" }}
+          templateColumns={{ base: "1fr", lg: "minmax(0, 640px) auto" }}
+          gap={{ base: "8", lg: "10" }}
           alignItems="center"
         >
-          <Stack gap={{ base: "6", lg: "8" }} align="flex-start" minW="0">
+          <Stack gap={{ base: "5", md: "6" }} minW="0" align={{ base: "center", lg: "stretch" }}>
+            <Kicker color="brand.primary" center={{ base: true, lg: false }}>
+              CONTABILIDADE PARA EMPRESAS EM CRESCIMENTO
+            </Kicker>
             <Heading
               id="hero-title"
               as="h1"
               fontFamily="heading"
               fontWeight="semibold"
-              fontSize={{ base: "clamp(2.75rem, 10vw, 4rem)", lg: "clamp(3.25rem, 4.45vw, 4.5rem)" }}
-              lineHeight="1.12"
-              letterSpacing="-0.04em"
               color="brand.primary"
-              maxW="14ch"
+              fontSize={{ base: "clamp(2.35rem, 10vw, 3.15rem)", lg: "clamp(3.1rem, 4.8vw, 4.35rem)" }}
+              lineHeight="1.02"
+              letterSpacing="-0.02em"
+              textAlign={{ base: "center", lg: "left" }}
+              css={{ textWrap: "balance" }}
             >
-              Números claros.
-              <Box as="span" display="block" color="accent.balance">
-                Decisões seguras.
-              </Box>
+              Sua contabilidade deve trazer{" "}
+              <Box as="span" color="accent.balance">
+                clareza,
+              </Box>{" "}
+              não mais dúvidas.
             </Heading>
-            <Text textStyle="body" color="fg.default" maxW="43ch">
-              Organizamos sua contabilidade e explicamos os números para você decidir com segurança.
-            </Text>
-            <Flex
-              gap={{ base: "5", sm: "7" }}
-              align={{ base: "stretch", sm: "center" }}
-              direction={{ base: "column", sm: "row" }}
-              w={{ base: "full", sm: "auto" }}
+            <Text
+              textStyle="body"
+              color={{ base: "brand.primary", lg: "fg.default" }}
+              fontWeight={{ base: "semibold", lg: "regular" }}
+              maxW="46ch"
+              textAlign={{ base: "center", lg: "left" }}
             >
-              <Button
-                asChild
-                size="lg"
-                minH="14"
-                px="7"
-                bg="brand.primary"
-                color="fg.onBrand"
-                borderRadius="full"
-                transition="background-color 220ms ease, transform 220ms ease"
-                _hover={{ bg: "accent.balance", transform: "translateY(-2px)" }}
-                _active={{ transform: "translateY(0)" }}
-                _focusVisible={{ outline: "3px solid #F48420", outlineOffset: "3px" }}
-              >
-                <a href={whatsappHref} {...externalLinkProps}>
-                  <FaWhatsapp aria-hidden="true" />
-                  Conversar com a TSA
-                  <LuArrowUpRight aria-hidden="true" />
-                </a>
-              </Button>
-              <ScrollLink
-                target="servicos"
-                display="inline-flex"
-                alignItems="center"
-                justifyContent={{ base: "center", sm: "flex-start" }}
-                gap="2"
-                color="brand.primary"
-                textDecoration="underline"
-                textUnderlineOffset="5px"
-                _hover={{ color: "accent.balance" }}
-                _focusVisible={{ outline: "3px solid #F48420", outlineOffset: "3px" }}
-              >
-                Conhecer os serviços
-                <LuArrowDownRight aria-hidden="true" />
-              </ScrollLink>
-            </Flex>
+              Organizamos, acompanhamos e traduzimos os números da sua empresa para que você tome decisões com mais segurança.
+            </Text>
+            <Button
+              asChild
+              size="lg"
+              alignSelf={{ base: "stretch", sm: "center", lg: "flex-start" }}
+              bg={{ base: "accent.warm", lg: "brand.primary" }}
+              color="fg.onBrand"
+              borderRadius="full"
+              px={{ base: "8", lg: "6" }}
+              minH={{ base: "14", lg: "12" }}
+              boxShadow={{ base: "0 12px 28px rgba(244, 132, 32, 0.38)", lg: "none" }}
+              _hover={{ bg: { base: "brand.primary", lg: "accent.balance" } }}
+            >
+              <a href={whatsappHref} {...externalLinkProps}>
+                <FaWhatsapp />
+                Quero conversar sobre minha empresa
+                <LuArrowUpRight />
+              </a>
+            </Button>
+            <HStack
+              gap="2"
+              color={{ base: "brand.primary", lg: "fg.muted" }}
+              pt="1"
+              justify={{ base: "center", lg: "flex-start" }}
+              textAlign={{ base: "center", lg: "left" }}
+            >
+              <LuShieldCheck size={16} aria-hidden="true" />
+              <Text fontSize="sm" fontWeight={{ base: "semibold", lg: "regular" }}>
+                Mais de 10 anos de experiência · Atendimento próximo e online
+              </Text>
+            </HStack>
           </Stack>
 
-          <Box
-            position="relative"
-            aspectRatio={{ base: "4 / 3", md: "4 / 3", lg: "1 / 1.05" }}
-            minW="0"
-            overflow="hidden"
-            borderRadius={{ base: "sm", lg: "md" }}
+          <Stack
+            display={{ base: "none", lg: "flex" }}
+            gap="7"
+            pl="8"
+            borderLeftWidth="2px"
+            borderColor="accent.balance"
+            alignSelf="center"
           >
-            <Image
-              src="/hero-editorial.jpg"
-              alt="Caderno de registros contábeis e lápis sobre uma pasta azul-marinho"
-              fill
-              priority
-              sizes="(min-width: 64rem) 46vw, 100vw"
-              style={{ objectFit: "cover", objectPosition: "center 58%" }}
-            />
-          </Box>
+            {heroPillars.map(({ label, icon: Icon }) => (
+              <Stack key={label} gap="2.5" align="center" w="104px">
+                <Flex
+                  boxSize="16"
+                  align="center"
+                  justify="center"
+                  bg="bg.canvas"
+                  borderWidth="2.5px"
+                  borderColor="accent.balance"
+                  borderRadius="full"
+                  color="accent.balance"
+                >
+                  <Icon size={26} strokeWidth={2.25} aria-hidden="true" />
+                </Flex>
+                <Text fontSize="md" fontWeight="semibold" color="brand.primary" textAlign="center">
+                  {label}
+                </Text>
+              </Stack>
+            ))}
+          </Stack>
         </Grid>
       </Container>
     </Box>
