@@ -1,9 +1,9 @@
-import { Box, Button, Container, Flex, Grid, HStack, Heading, Stack, Text } from "@chakra-ui/react"
+import { Box, Button, Container, Grid, HStack, Heading, Stack, Text } from "@chakra-ui/react"
 import Image from "next/image"
 import { FaWhatsapp } from "react-icons/fa"
 import { LuArrowUpRight, LuShieldCheck } from "react-icons/lu"
 import { Kicker } from "./kicker"
-import { externalLinkProps, heroPillars, whatsappHref } from "./data"
+import { externalLinkProps, whatsappHref } from "./data"
 
 export function HeroSection() {
   return (
@@ -134,35 +134,6 @@ export function HeroSection() {
                 Mais de 10 anos de experiência · Atendimento próximo e online
               </Text>
             </HStack>
-          </Stack>
-
-          <Stack
-            display={{ base: "none", lg: "flex" }}
-            gap="7"
-            pl="8"
-            borderLeftWidth="2px"
-            borderColor="accent.balance"
-            alignSelf="center"
-          >
-            {heroPillars.map(({ label, icon: Icon }) => (
-              <Stack key={label} gap="2.5" align="center" w="104px">
-                <Flex
-                  boxSize="16"
-                  align="center"
-                  justify="center"
-                  bg="bg.canvas"
-                  borderWidth="2.5px"
-                  borderColor="accent.balance"
-                  borderRadius="full"
-                  color="accent.balance"
-                >
-                  <Icon size={26} strokeWidth={2.25} aria-hidden="true" />
-                </Flex>
-                <Text fontSize="md" fontWeight="semibold" color="brand.primary" textAlign="center">
-                  {label}
-                </Text>
-              </Stack>
-            ))}
           </Stack>
         </Grid>
       </Container>

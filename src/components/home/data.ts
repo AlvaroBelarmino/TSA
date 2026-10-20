@@ -1,4 +1,4 @@
-import { LuCalendarDays, LuChartNoAxesCombined, LuFileText, LuMapPin, LuTarget } from "react-icons/lu"
+import { LuCalendarDays, LuChartNoAxesCombined, LuMapPin } from "react-icons/lu"
 
 export const whatsappNumber = process.env.NEXT_PUBLIC_TSA_WHATSAPP_NUMBER?.replace(
   /\D/g,
@@ -165,12 +165,6 @@ export const experienceHighlights = [
     label: "atendimento online e próximo",
     icon: LuMapPin,
   },
-]
-
-export const heroPillars = [
-  { label: "Organização", icon: LuFileText },
-  { label: "Clareza", icon: LuChartNoAxesCombined },
-  { label: "Decisão", icon: LuTarget },
 ]
 
 export const sectionAnchorOffset = { base: "76px", md: "88px" }
