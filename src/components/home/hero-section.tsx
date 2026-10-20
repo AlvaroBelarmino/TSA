@@ -45,6 +45,7 @@ export function HeroSection() {
         bottom="0"
         w="calc(48% + 8px)"
         aria-hidden="true"
+        css={{ maskImage: "linear-gradient(to right, transparent, black 24%)" }}
       >
         <Image
           src="/hero-mesa.png"
