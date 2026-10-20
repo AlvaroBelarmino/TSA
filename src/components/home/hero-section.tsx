@@ -26,7 +26,7 @@ export function HeroSection() {
           alt=""
           fill
           priority
-          sizes="100vw"
+          sizes="(min-width: 64rem) 1px, 100vw"
           style={{
             objectFit: "cover",
             objectPosition: "center",
