@@ -1041,7 +1041,7 @@ export default function Home() {
                 borderRadius="2xl"
               >
                 <Image
-                  src="/home.png"
+                  src="/sobre.jpeg"
                   alt="Profissional responsável pela TSA Gestão Contábil"
                   fill
                   sizes="(min-width: 64rem) 42vw, 100vw"
