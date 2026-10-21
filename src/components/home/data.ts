@@ -35,7 +35,7 @@ export const featuredService = {
   items: [
     "Classificação das receitas e despesas",
     "Balancete mensal",
-    "Demonstrações Financeiras",
+    "Demonstrações financeiras",
     "Escrituração contábil / fiscal",
   ],
   message:
@@ -54,7 +54,7 @@ export const services = [
     items: [
       "Classificação das receitas e despesas",
       "Balancete mensal",
-      "Demonstrações Financeiras",
+      "Demonstrações financeiras",
       "Escrituração contábil / fiscal",
     ],
     image: "/servicos/contabilidade-real.jpg",
