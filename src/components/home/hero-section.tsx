@@ -14,6 +14,7 @@ export function HeroSection() {
       position="relative"
       overflow="hidden"
       bg="bg.canvas"
+      minH={{ base: "680px", lg: "800px" }}
     >
       <Box
         display={{ base: "block", lg: "none" }}
@@ -64,12 +65,16 @@ export function HeroSection() {
       <Container
         position="relative"
         zIndex="1"
+        display="flex"
+        alignItems="center"
+        minH="inherit"
         maxW="1200px"
         px={{ base: "5", md: "8" }}
         pt={{ base: "32", lg: "32" }}
         pb={{ base: "16", lg: "20" }}
       >
         <Grid
+          w="full"
           templateColumns={{ base: "1fr", lg: "minmax(0, 640px) auto" }}
           gap={{ base: "8", lg: "10" }}
           alignItems="center"
