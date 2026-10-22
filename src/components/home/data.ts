@@ -49,34 +49,34 @@ function serviceMessage(title: string) {
 
 export const services = [
   {
-    title: "Contabilidade completa",
+    title: "Contabilidade",
     description:
-      "Rotinas contábeis e fiscais com suporte e clareza em cada etapa.",
+      "Rotina contábil completa, com suporte especializado em todas as etapas.",
     items: [
-      "Escrituração contábil e fiscal",
-      "Impostos e obrigações acessórias",
-      "Folha e rotinas trabalhistas",
-      "Orientação contínua para decidir",
+      "Classificação das receitas e despesas",
+      "Balancete mensal",
+      "Demonstrações financeiras",
+      "Escrituração contábil / fiscal",
     ],
     image: "/servicos/contabilidade-real.jpg",
     imageAlt:
       "Profissionais analisando documentos em um escritório",
-    message: serviceMessage("Contabilidade completa"),
+    message: serviceMessage("Contabilidade"),
   },
   {
-    title: "Contabilidade e escrituração",
+    title: "Fiscal e tributário",
     description:
-      "Escrituração em dia, com clareza sobre a real situação da empresa.",
+      "Atuamos no controle e na gestão das obrigações tributárias.",
     items: [
-      "Demonstrativos contábeis",
+      "Emissão de nota fiscal",
       "Apuração de impostos",
       "Obrigações acessórias",
-      "Balancetes mensais",
+      "PER/DCOMP e compensação de tributos",
     ],
     image: "/servicos/escrituracao-real.jpg",
     imageAlt:
       "Documentos e gráficos organizados ao lado de um computador",
-    message: serviceMessage("Contabilidade e escrituração"),
+    message: serviceMessage("Fiscal e tributário"),
   },
   {
     title: "Folha e rotinas trabalhistas",
@@ -89,7 +89,7 @@ export const services = [
     message: serviceMessage("Folha e rotinas trabalhistas"),
   },
   {
-    title: "Planejamento tributário",
+    title: "Consultoria e planejamento",
     description:
       "Avaliação clara da estrutura tributária, dentro da legislação.",
     items: [
@@ -101,7 +101,7 @@ export const services = [
     image: "/servicos/tributario-real.jpg",
     imageAlt:
       "Documentos fiscais com moedas e a palavra tax",
-    message: serviceMessage("Planejamento tributário"),
+    message: serviceMessage("Consultoria e planejamento"),
   },
   {
     title: "Regularização fiscal",
@@ -119,7 +119,7 @@ export const services = [
     message: serviceMessage("Regularização fiscal"),
   },
   {
-    title: "Abertura e encerramento",
+    title: "Societário e legalização",
     description:
       "Orientação clara para começar, reorganizar ou encerrar a empresa.",
     items: [
@@ -131,7 +131,7 @@ export const services = [
     image: "/servicos/abertura-real.jpg",
     imageAlt:
       "Equipe unindo as mãos sobre documentos e gráficos",
-    message: serviceMessage("Abertura e encerramento"),
+    message: serviceMessage("Societário e legalização"),
   },
 ]
 
