@@ -14,6 +14,25 @@ const config = defineConfig({
       overflowX: "clip",
       maxWidth: "100%",
     },
+    html: {
+      scrollbarColor: "#003858 #F7F3EE",
+      scrollbarWidth: "thin",
+    },
+    "html::-webkit-scrollbar": {
+      width: "10px",
+      height: "10px",
+    },
+    "html::-webkit-scrollbar-track": {
+      background: "#F7F3EE",
+    },
+    "html::-webkit-scrollbar-thumb": {
+      background: "#003858",
+      border: "3px solid #F7F3EE",
+      borderRadius: "999px",
+    },
+    "html::-webkit-scrollbar-thumb:hover": {
+      background: "#F48420",
+    },
     body: {
       fontFamily: "body",
       fontSize: "body",
