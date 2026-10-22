@@ -33,9 +33,10 @@ export function HeroSection() {
           sizes="(min-width: 64rem) 1px, 100vw"
           style={{
             objectFit: "cover",
-            objectPosition: "center",
+            objectPosition: "62% center",
           }}
         />
+        <Box position="absolute" inset="0" bg="rgba(0, 56, 88, 0.22)" />
       </Box>
 
       <Box
