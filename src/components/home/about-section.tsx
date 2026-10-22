@@ -49,7 +49,13 @@ export function AboutSection() {
 
           <Stack gap="4">
             <Kicker>Quem conduz</Kicker>
-            <Heading as="h2" textStyle="h2" color="brand.primary" mb="4">
+            <Heading
+              as="h2"
+              textStyle="h2"
+              fontSize={{ base: "h2", lg: "clamp(1.65rem, 2.8vw, 2rem)" }}
+              color="brand.primary"
+              mb="4"
+            >
               Conhecimento técnico com atenção genuína a quem está do outro lado.
             </Heading>
             <Text textStyle="body" color="fg.default">
