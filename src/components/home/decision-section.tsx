@@ -4,8 +4,38 @@ import { Kicker } from "./kicker"
 
 export function DecisionSection() {
   return (
-    <Box bg="bg.brand" color="fg.onBrand" py={{ base: "14", md: "18" }}>
-      <Container maxW="1200px" px={{ base: "5", md: "8" }}>
+    <Box
+      position="relative"
+      overflow="hidden"
+      bg="bg.brand"
+      color="fg.onBrand"
+      py={{ base: "14", md: "18" }}
+      _before={{
+        content: '""',
+        position: "absolute",
+        inset: "-10px",
+        backgroundImage: "url('/BannerContabilidade.png')",
+        backgroundSize: "auto 145%",
+        backgroundPosition: "90% center",
+        backgroundRepeat: "no-repeat",
+        filter: "blur(4px)",
+        transform: "scale(1.04) translateX(4%)",
+        zIndex: "0",
+      }}
+      _after={{
+        content: '""',
+        position: "absolute",
+        inset: "0",
+        bg: "linear-gradient(90deg, rgba(0, 56, 88, 0.88) 0%, rgba(0, 56, 88, 0.84) 46%, rgba(0, 56, 88, 0.72) 100%)",
+        zIndex: "1",
+      }}
+    >
+      <Container
+        position="relative"
+        zIndex="2"
+        maxW="1200px"
+        px={{ base: "5", md: "8" }}
+      >
         <Reveal>
           <Stack gap={{ base: "10", md: "12" }}>
             <Stack gap="4" maxW="900px">
@@ -15,7 +45,6 @@ export function DecisionSection() {
               </Heading>
               <Text textStyle="body" color="fg.onBrand" maxW="64ch" opacity="0.9">
                 Cada empresa tem um momento diferente. Conte a sua situação e a TSA te ajuda a entender o que fazer a seguir, sem compromisso.
-
               </Text>
             </Stack>
             <Grid
