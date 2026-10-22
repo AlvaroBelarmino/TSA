@@ -1,9 +1,10 @@
-import { Box, Button, Container, Grid, HStack, Heading, Stack, Text } from "@chakra-ui/react"
+import { Box, Button, Container, HStack, Heading, Stack, Text } from "@chakra-ui/react"
 import Image from "next/image"
 import { FaWhatsapp } from "react-icons/fa"
 import { LuArrowUpRight, LuShieldCheck } from "react-icons/lu"
 import { Kicker } from "./kicker"
 import { externalLinkProps, whatsappHref } from "./data"
+import { MobileHeroCard } from "./mobile-hero-card"
 
 export function HeroSection() {
   return (
@@ -74,18 +75,7 @@ export function HeroSection() {
         pt={{ base: "clamp(408px, 112vw, 520px)", lg: "32" }}
         pb={{ base: "0", lg: "20" }}
       >
-        <Grid
-          w="full"
-          templateColumns={{ base: "minmax(0, 1fr)", lg: "minmax(0, 640px) auto" }}
-          gap={{ base: "8", lg: "10" }}
-          alignItems="center"
-          bg={{ base: "bg.canvas", lg: "transparent" }}
-          borderTopRadius={{ base: "32px", lg: "0" }}
-          px={{ base: "6", md: "8", lg: "0" }}
-          pt={{ base: "10", lg: "0" }}
-          pb={{ base: "16", lg: "0" }}
-          boxShadow={{ base: "0 -10px 30px rgba(0, 56, 88, 0.08)", lg: "none" }}
-        >
+        <MobileHeroCard>
           <Stack gap={{ base: "5", md: "6" }} minW="0" align="stretch">
             <Kicker color="brand.primary">
               CONTABILIDADE PARA EMPRESAS EM CRESCIMENTO
@@ -149,7 +139,7 @@ export function HeroSection() {
               </Text>
             </HStack>
           </Stack>
-        </Grid>
+        </MobileHeroCard>
       </Container>
     </Box>
   )

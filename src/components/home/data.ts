@@ -30,14 +30,14 @@ export const whatsappHref = whatsappLink(
 )
 
 export const featuredService = {
-  title: "Contabilidade completa com acompanhamento próximo",
+  title: "Contabilidade",
   description:
-    "Rotinas contábeis e fiscais, apuração de impostos e obrigações acessórias, com explicação, acesso e orientação ao longo de toda a relação.",
-  items: [
-    "Escrituração contábil e fiscal",
-    "Impostos e obrigações acessórias",
-    "Folha e rotinas trabalhistas",
-    "Orientação contínua para decidir",
+    "Rotinas contábil completas, com suporte especializado em todas as etapas.",
+     items: [
+    "classificação das receitas e despesas",
+    "Balancete mensal",
+    "Demonstrações financeiras",
+    "Escrituração contábil / fiscal",
   ],
   message:
     "Olá! Vim pelo site da TSA e gostaria de falar sobre a Contabilidade completa com acompanhamento próximo para a minha empresa.",
