@@ -4,7 +4,7 @@ import { LuClock3, LuInstagram, LuLinkedin, LuMapPin, LuMonitor } from "react-ic
 import { ContactForm } from "@/components/contact-form"
 import { Kicker } from "./kicker"
 import { ContactDetail } from "./contact-detail"
-import { contactFormEndpoint, externalLinkProps, instagramUrl, linkedinUrl, sectionAnchorOffset, whatsappHref, whatsappNumber } from "./data"
+import { contactFormEndpoint, externalLinkProps, instagramUrl, linkedinUrl, sectionAnchorOffset, whatsappHref } from "./data"
 
 export function ContactSection() {
   return (
@@ -147,10 +147,7 @@ export function ContactSection() {
                 entender o perfil antes do primeiro contato.
               </Text>
             </Stack>
-            <ContactForm
-              whatsappNumber={whatsappNumber}
-              formEndpoint={contactFormEndpoint}
-            />
+            <ContactForm formEndpoint={contactFormEndpoint} />
           </Box>
         </Grid>
       </Container>

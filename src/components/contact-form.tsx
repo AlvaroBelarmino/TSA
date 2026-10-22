@@ -15,7 +15,6 @@ import { useState, type FormEvent } from "react"
 import { LuArrowUpRight } from "react-icons/lu"
 
 interface ContactFormProps {
-  whatsappNumber?: string
   formEndpoint?: string
 }
 
@@ -32,21 +31,17 @@ const fieldStyles = {
 }
 
 export function ContactForm({
-  whatsappNumber = "",
   formEndpoint = "",
 }: ContactFormProps) {
   const [submissionState, setSubmissionState] = useState<
     "idle" | "sending" | "success" | "error"
   >("idle")
-  const normalizedNumber = whatsappNumber.replace(/\D/g, "")
-  const hasWhatsapp = normalizedNumber.length > 0
   const hasFormEndpoint = formEndpoint.trim().length > 0
-  const isConfigured = hasWhatsapp || hasFormEndpoint
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
 
-    if (!isConfigured) return
+    if (!hasFormEndpoint) return
 
     const form = event.currentTarget
     const data = new FormData(form)
@@ -72,24 +67,6 @@ export function ContactForm({
       return
     }
 
-    const message = [
-      "Olá! Gostaria de conversar com a TSA Gestão Contábil.",
-      "",
-      `Nome: ${data.get("name")}`,
-      `WhatsApp: ${data.get("whatsapp")}`,
-      `E-mail: ${data.get("email")}`,
-      `Negócio ou atividade: ${data.get("business")}`,
-      `Já possui CNPJ: ${data.get("hasCnpj")}`,
-      `Regime tributário: ${data.get("taxRegime")}`,
-      `Principal necessidade: ${data.get("need")}`,
-      `Contexto: ${data.get("message")}`,
-    ].join("\n")
-
-    window.open(
-      `https://wa.me/${normalizedNumber}?text=${encodeURIComponent(message)}`,
-      "_blank",
-      "noopener,noreferrer",
-    )
   }
 
   return (
@@ -195,16 +172,14 @@ export function ContactForm({
           h="auto"
           minH="12"
           whiteSpace="normal"
-          disabled={!isConfigured || submissionState === "sending"}
+          disabled={!hasFormEndpoint || submissionState === "sending"}
           _hover={{ bg: "accent.warm", color: "brand.primary" }}
         >
           {submissionState === "sending"
             ? "Enviando..."
             : hasFormEndpoint
               ? "Solicitar contato"
-              : hasWhatsapp
-                ? "Enviar pelo WhatsApp"
-                : "Canal comercial em configuração"}
+              : "Envio por e-mail em breve"}
           <LuArrowUpRight />
         </Button>
 
@@ -221,9 +196,9 @@ export function ContactForm({
           )}
         </Box>
 
-        {!isConfigured && (
+        {!hasFormEndpoint && (
           <Text textStyle="micro" color="fg.muted" maxW="60ch">
-            O envio será ativado assim que o número comercial da TSA for definido.
+            O envio por e-mail será ativado em breve.
           </Text>
         )}
       </Stack>
