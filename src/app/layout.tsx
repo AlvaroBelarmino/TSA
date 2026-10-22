@@ -22,9 +22,9 @@ export const metadata: Metadata = {
     siteName: "TSA Gestão Contábil",
     images: [
       {
-        url: "/capaCp.png",
-        width: 852,
-        height: 316,
+        url: "/og-share.png",
+        width: 1200,
+        height: 630,
         alt: "TSA Gestão Contábil — Segurança para cuidar. Clareza para decidir.",
       },
     ],
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "TSA Gestão Contábil",
     description: "Segurança para cuidar. Clareza para decidir.",
-    images: ["/capaCp.png"],
+    images: ["/og-share.png"],
   },
 }
 
