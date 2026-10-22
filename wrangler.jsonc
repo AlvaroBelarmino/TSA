@@ -13,8 +13,5 @@
       "binding": "WORKER_SELF_REFERENCE",
       "service": "tsa-gest-o-cont-bil"
     }
-  ],
-  "images": {
-    "binding": "IMAGES"
-  }
+  ]
 }

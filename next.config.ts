@@ -5,6 +5,7 @@ const nextConfig: NextConfig = {
   outputFileTracingRoot: process.cwd(),
   images: {
     qualities: [100, 75],
+    unoptimized: true,
   },
   experimental: {
     optimizePackageImports: ["@chakra-ui/react"],
