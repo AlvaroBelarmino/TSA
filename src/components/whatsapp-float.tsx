@@ -8,6 +8,8 @@ interface WhatsappFloatProps {
 }
 
 export function WhatsappFloat({ href }: WhatsappFloatProps) {
+  const opensWhatsapp = href.startsWith("https://wa.me/")
+
   return (
     <Box
       position="fixed"
@@ -27,9 +29,9 @@ export function WhatsappFloat({ href }: WhatsappFloatProps) {
     >
       <Link
         href={href}
-        target="_blank"
-        rel="noreferrer"
-        aria-label="Abrir WhatsApp da TSA: você tem 1 mensagem"
+        target={opensWhatsapp ? "_blank" : undefined}
+        rel={opensWhatsapp ? "noreferrer" : undefined}
+        aria-label={opensWhatsapp ? "Abrir WhatsApp da TSA" : "Ir para a seção de contato"}
         position="relative"
         display="flex"
         alignItems="center"

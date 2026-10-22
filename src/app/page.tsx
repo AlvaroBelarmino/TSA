@@ -9,7 +9,7 @@ import { HeroSection } from "@/components/home/hero-section"
 import { PainPointSection } from "@/components/home/pain-point-section"
 import { ServicesSection } from "@/components/home/services-section"
 import { SiteFooter } from "@/components/home/site-footer"
-import { hasWhatsapp, whatsappHref, whatsappNumber } from "@/components/home/data"
+import { whatsappHref, whatsappNumber } from "@/components/home/data"
 
 export default function Home() {
   return (
@@ -25,7 +25,7 @@ export default function Home() {
         <ContactSection />
       </Box>
       <SiteFooter />
-      {hasWhatsapp ? <WhatsappFloat href={whatsappHref} /> : null}
+      <WhatsappFloat href={whatsappHref} />
     </Box>
   )
 }
