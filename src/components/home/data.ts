@@ -30,17 +30,17 @@ export const whatsappHref = whatsappLink(
 )
 
 export const featuredService = {
-  title: "Contabilidade",
+  title: "Contabilidade completa com acompanhamento próximo",
   description:
-    "Rotina contábil completa, com suporte especializado em todas as etapas.",
+    "Rotinas contábeis e fiscais, apuração de impostos e obrigações acessórias, com explicação, acesso e orientação ao longo de toda a relação.",
   items: [
-    "Classificação das receitas e despesas",
-    "Balancete mensal",
-    "Demonstrações financeiras",
-    "Escrituração contábil / fiscal",
+    "Escrituração contábil e fiscal",
+    "Impostos e obrigações acessórias",
+    "Folha e rotinas trabalhistas",
+    "Orientação contínua para decidir",
   ],
   message:
-    "Olá! Vim pelo site da TSA e gostaria de falar sobre Contabilidade para a minha empresa.",
+    "Olá! Vim pelo site da TSA e gostaria de falar sobre a Contabilidade completa com acompanhamento próximo para a minha empresa.",
 }
 
 function serviceMessage(title: string) {
@@ -49,34 +49,34 @@ function serviceMessage(title: string) {
 
 export const services = [
   {
-    title: "Contabilidade",
+    title: "Contabilidade completa",
     description:
-      "Rotina contábil completa, com suporte especializado em todas as etapas.",
+      "Rotinas contábeis e fiscais com suporte e clareza em cada etapa.",
     items: [
-      "Classificação das receitas e despesas",
-      "Balancete mensal",
-      "Demonstrações financeiras",
-      "Escrituração contábil / fiscal",
+      "Escrituração contábil e fiscal",
+      "Impostos e obrigações acessórias",
+      "Folha e rotinas trabalhistas",
+      "Orientação contínua para decidir",
     ],
     image: "/servicos/contabilidade-real.jpg",
     imageAlt:
       "Profissionais analisando documentos em um escritório",
-    message: serviceMessage("Contabilidade"),
+    message: serviceMessage("Contabilidade completa"),
   },
   {
-    title: "Fiscal e tributário",
+    title: "Contabilidade e escrituração",
     description:
-      "Atuamos no controle e na gestão das obrigações tributárias.",
+      "Escrituração em dia, com clareza sobre a real situação da empresa.",
     items: [
-      "Emissão de nota fiscal",
+      "Demonstrativos contábeis",
       "Apuração de impostos",
       "Obrigações acessórias",
-      "PER/DCOMP e compensação de tributos",
+      "Balancetes mensais",
     ],
     image: "/servicos/escrituracao-real.jpg",
     imageAlt:
       "Documentos e gráficos organizados ao lado de um computador",
-    message: serviceMessage("Fiscal e tributário"),
+    message: serviceMessage("Contabilidade e escrituração"),
   },
   {
     title: "Folha e rotinas trabalhistas",
@@ -89,7 +89,7 @@ export const services = [
     message: serviceMessage("Folha e rotinas trabalhistas"),
   },
   {
-    title: "Consultoria e planejamento",
+    title: "Planejamento tributário",
     description:
       "Avaliação clara da estrutura tributária, dentro da legislação.",
     items: [
@@ -101,7 +101,7 @@ export const services = [
     image: "/servicos/tributario-real.jpg",
     imageAlt:
       "Documentos fiscais com moedas e a palavra tax",
-    message: serviceMessage("Consultoria e planejamento"),
+    message: serviceMessage("Planejamento tributário"),
   },
   {
     title: "Regularização fiscal",
@@ -119,7 +119,7 @@ export const services = [
     message: serviceMessage("Regularização fiscal"),
   },
   {
-    title: "Societário e legalização",
+    title: "Abertura e encerramento",
     description:
       "Orientação clara para começar, reorganizar ou encerrar a empresa.",
     items: [
@@ -131,7 +131,7 @@ export const services = [
     image: "/servicos/abertura-real.jpg",
     imageAlt:
       "Equipe unindo as mãos sobre documentos e gráficos",
-    message: serviceMessage("Societário e legalização"),
+    message: serviceMessage("Abertura e encerramento"),
   },
 ]
 
