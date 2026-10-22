@@ -1,9 +1,10 @@
 import { LuCalendarDays, LuChartNoAxesCombined, LuMapPin } from "react-icons/lu"
 
-export const whatsappNumber = process.env.NEXT_PUBLIC_TSA_WHATSAPP_NUMBER?.replace(
-  /\D/g,
-  "",
-)
+const defaultWhatsappNumber = "5521990772435"
+
+export const whatsappNumber =
+  process.env.NEXT_PUBLIC_TSA_WHATSAPP_NUMBER?.replace(/\D/g, "") ??
+  defaultWhatsappNumber
 export const contactFormEndpoint = process.env.NEXT_PUBLIC_TSA_CONTACT_FORM_ENDPOINT
 export const instagramUrl =
   process.env.NEXT_PUBLIC_TSA_INSTAGRAM_URL ??
