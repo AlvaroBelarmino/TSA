@@ -2,6 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   agentRules: false,
+  output: "export",
   outputFileTracingRoot: process.cwd(),
   images: {
     qualities: [100, 75],
