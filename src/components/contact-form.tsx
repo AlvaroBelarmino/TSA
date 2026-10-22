@@ -175,11 +175,7 @@ export function ContactForm({
           disabled={!hasFormEndpoint || submissionState === "sending"}
           _hover={{ bg: "accent.warm", color: "brand.primary" }}
         >
-          {submissionState === "sending"
-            ? "Enviando..."
-            : hasFormEndpoint
-              ? "Solicitar contato"
-              : "Envio por e-mail em breve"}
+          {submissionState === "sending" ? "Enviando..." : "Solicitar contato"}
           <LuArrowUpRight />
         </Button>
 
@@ -195,12 +191,6 @@ export function ContactForm({
             </Text>
           )}
         </Box>
-
-        {!hasFormEndpoint && (
-          <Text textStyle="micro" color="fg.muted" maxW="60ch">
-            O envio por e-mail será ativado em breve.
-          </Text>
-        )}
       </Stack>
     </form>
   )
