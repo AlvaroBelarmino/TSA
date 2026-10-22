@@ -108,7 +108,7 @@ export function SiteHeader({
               <Box
                 position="absolute"
                 inset="0"
-                opacity={{ base: 0, lg: darkSurface ? 1 : 0 }}
+                opacity={{ base: scrolled || menuOpen ? 0 : 1, lg: darkSurface ? 1 : 0 }}
                 transition={{
                   base: "opacity 480ms ease-in-out",
                   lg: "opacity 180ms ease-out",
@@ -127,7 +127,7 @@ export function SiteHeader({
               <Box
                 position="absolute"
                 inset="0"
-                opacity={{ base: 1, lg: darkSurface ? 0 : 1 }}
+                opacity={{ base: scrolled || menuOpen ? 1 : 0, lg: darkSurface ? 0 : 1 }}
                 transition={{
                   base: "opacity 480ms ease-in-out, transform 480ms ease-in-out",
                   lg: "opacity 180ms ease-out",
@@ -200,7 +200,7 @@ export function SiteHeader({
               aria-expanded={menuOpen}
               onClick={() => setMenuOpen((open) => !open)}
               variant="ghost"
-              color="brand.primary"
+              color={scrolled || menuOpen ? "brand.primary" : "fg.onBrand"}
               _hover={{
                 bg: scrolled || menuOpen ? "rgba(0,56,88,0.08)" : "rgba(247,243,238,0.12)",
               }}

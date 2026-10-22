@@ -13,13 +13,16 @@ export function HeroSection() {
       aria-labelledby="hero-title"
       position="relative"
       overflow="hidden"
-      bg="bg.canvas"
-      minH={{ base: "680px", lg: "800px" }}
+      bg={{ base: "brand.primary", lg: "bg.canvas" }}
+      minH={{ base: "auto", lg: "800px" }}
     >
       <Box
         display={{ base: "block", lg: "none" }}
         position="absolute"
-        inset="0"
+        top="0"
+        left="0"
+        right="0"
+        h="clamp(440px, 120vw, 560px)"
         aria-hidden="true"
       >
         <Image
@@ -31,11 +34,8 @@ export function HeroSection() {
           style={{
             objectFit: "cover",
             objectPosition: "center",
-            filter: "blur(12px)",
-            transform: "scale(1.15)",
           }}
         />
-        <Box position="absolute" inset="0" bg="rgba(247, 243, 238, 0.58)" />
       </Box>
 
       <Box
@@ -67,20 +67,26 @@ export function HeroSection() {
         zIndex="1"
         display="flex"
         alignItems="center"
-        minH="inherit"
-        maxW="1200px"
-        px={{ base: "5", md: "8" }}
-        pt={{ base: "32", lg: "32" }}
-        pb={{ base: "16", lg: "20" }}
+        minH={{ base: "auto", lg: "inherit" }}
+        maxW={{ base: "none", lg: "1200px" }}
+        px={{ base: "0", lg: "8" }}
+        pt={{ base: "clamp(408px, 112vw, 520px)", lg: "32" }}
+        pb={{ base: "0", lg: "20" }}
       >
         <Grid
           w="full"
-          templateColumns={{ base: "1fr", lg: "minmax(0, 640px) auto" }}
+          templateColumns={{ base: "minmax(0, 1fr)", lg: "minmax(0, 640px) auto" }}
           gap={{ base: "8", lg: "10" }}
           alignItems="center"
+          bg={{ base: "bg.canvas", lg: "transparent" }}
+          borderTopRadius={{ base: "32px", lg: "0" }}
+          px={{ base: "6", md: "8", lg: "0" }}
+          pt={{ base: "10", lg: "0" }}
+          pb={{ base: "16", lg: "0" }}
+          boxShadow={{ base: "0 -10px 30px rgba(0, 56, 88, 0.08)", lg: "none" }}
         >
-          <Stack gap={{ base: "5", md: "6" }} minW="0" align={{ base: "center", lg: "stretch" }}>
-            <Kicker color="brand.primary" center={{ base: true, lg: false }}>
+          <Stack gap={{ base: "5", md: "6" }} minW="0" align="stretch">
+            <Kicker color="brand.primary">
               CONTABILIDADE PARA EMPRESAS EM CRESCIMENTO
             </Kicker>
             <Heading
@@ -92,7 +98,7 @@ export function HeroSection() {
               fontSize={{ base: "clamp(2.35rem, 10vw, 3.15rem)", lg: "clamp(3.1rem, 4.8vw, 4.35rem)" }}
               lineHeight="1.02"
               letterSpacing="-0.02em"
-              textAlign={{ base: "center", lg: "left" }}
+              textAlign="left"
               css={{ textWrap: "balance" }}
             >
               Sua contabilidade deve trazer{" "}
@@ -103,10 +109,10 @@ export function HeroSection() {
             </Heading>
             <Text
               textStyle="body"
-              color={{ base: "brand.primary", lg: "fg.default" }}
-              fontWeight={{ base: "semibold", lg: "regular" }}
+              color="fg.default"
+              fontWeight="regular"
               maxW="46ch"
-              textAlign={{ base: "center", lg: "left" }}
+              textAlign="left"
             >
               Organizamos, acompanhamos e traduzimos os números da sua empresa para que você tome decisões com mais segurança.
             </Text>
@@ -131,13 +137,13 @@ export function HeroSection() {
             </Button>
             <HStack
               gap="2"
-              color={{ base: "brand.primary", lg: "fg.muted" }}
+              color="fg.muted"
               pt="1"
-              justify={{ base: "center", lg: "flex-start" }}
-              textAlign={{ base: "center", lg: "left" }}
+              justify="flex-start"
+              textAlign="left"
             >
               <LuShieldCheck size={16} aria-hidden="true" />
-              <Text fontSize="sm" fontWeight={{ base: "semibold", lg: "regular" }}>
+              <Text fontSize="sm" fontWeight="regular">
                 Mais de 10 anos de experiência · Atendimento próximo e online
               </Text>
             </HStack>
