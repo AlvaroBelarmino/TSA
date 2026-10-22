@@ -173,7 +173,14 @@ export function ContactForm({
 
         <Field.Root>
           <Field.Label>Conte brevemente o que está acontecendo</Field.Label>
-          <Textarea name="message" minH="120px" resize="vertical" {...fieldStyles} />
+          <Textarea
+            name="message"
+            h="120px"
+            maxH="120px"
+            resize="none"
+            overflowY="auto"
+            {...fieldStyles}
+          />
         </Field.Root>
 
         <Button
