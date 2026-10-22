@@ -54,7 +54,7 @@ export function AboutSection() {
               textStyle="h2"
               fontSize={{ base: "h2", lg: "clamp(1.65rem, 2.8vw, 2rem)" }}
               color="brand.primary"
-              mb="4"
+              mb="0"
             >
               Conhecimento técnico com atenção genuína a quem está do outro lado.
             </Heading>
