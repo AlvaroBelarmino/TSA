@@ -44,6 +44,23 @@ export function ServicesSection() {
             </Text>
           </Grid>
 
+          <SimpleGrid
+            columns={{ base: 1, md: 2, lg: 3 }}
+            gap={{ base: "5", md: "6" }}
+            minW="0"
+            w="full"
+          >
+            {services.map((service, index) => (
+              <Reveal
+                key={service.title}
+                delay={index * 60}
+                rotate={index % 2 === 0 ? -1.5 : 1.5}
+              >
+                <ServiceCard service={service} index={index} />
+              </Reveal>
+            ))}
+          </SimpleGrid>
+
           <Reveal>
             <Box
               position="relative"
@@ -162,23 +179,6 @@ export function ServicesSection() {
               </Grid>
             </Box>
           </Reveal>
-
-          <SimpleGrid
-            columns={{ base: 1, md: 2, lg: 3 }}
-            gap={{ base: "5", md: "6" }}
-            minW="0"
-            w="full"
-          >
-            {services.map((service, index) => (
-              <Reveal
-                key={service.title}
-                delay={index * 60}
-                rotate={index % 2 === 0 ? -1.5 : 1.5}
-              >
-                <ServiceCard service={service} index={index} />
-              </Reveal>
-            ))}
-          </SimpleGrid>
 
           <Flex
             align={{ base: "stretch", sm: "center" }}
