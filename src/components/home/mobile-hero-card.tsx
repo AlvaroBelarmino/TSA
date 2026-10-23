@@ -16,7 +16,7 @@ export function MobileHeroCard({ children }: MobileHeroCardProps) {
       borderTopRadius={{ base: "32px", lg: "0" }}
       px={{ base: "6", md: "8", lg: "0" }}
       pt={{ base: "10", lg: "0" }}
-      pb={{ base: "10", lg: "0" }}
+      pb={{ base: "62px", lg: "0" }}
       boxShadow={{ base: "0 -10px 30px rgba(0, 56, 88, 0.08)", lg: "none" }}
     >
       {children}
