@@ -112,7 +112,7 @@ export function HeroSection() {
               size="lg"
               fontSize={{ base: "0.875rem", lg: "cta" }}
               alignSelf={{ base: "stretch", sm: "center", lg: "flex-start" }}
-              bg="accent.warm"
+              bg="brand.primary"
               color="fg.onBrand"
               borderRadius="full"
               px={{ base: "8", lg: "6" }}
