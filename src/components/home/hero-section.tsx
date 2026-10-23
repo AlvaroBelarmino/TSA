@@ -14,7 +14,7 @@ export function HeroSection() {
       aria-labelledby="hero-title"
       position="relative"
       overflow="hidden"
-      bg={{ base: "brand.primary", lg: "bg.canvas" }}
+      bg="bg.canvas"
       minH={{ base: "auto", lg: "800px" }}
     >
       <Box
