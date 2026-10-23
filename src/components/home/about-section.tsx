@@ -52,16 +52,26 @@ export function AboutSection() {
             <Heading
               as="h2"
               textStyle="h2"
-              fontSize={{ base: "h2", lg: "clamp(1.65rem, 2.8vw, 2rem)" }}
+              fontSize={{ base: "1.65rem", lg: "clamp(1.4rem, 2.2vw, 1.75rem)" }}
               color="brand.primary"
               mb="0"
             >
               Conhecimento técnico com atenção genuína a quem está do outro lado.
             </Heading>
-            <Text textStyle="body" color="fg.default" textAlign={{ base: "left", lg: "justify" }}>
+            <Text
+              textStyle="body"
+              fontSize={{ base: "0.875rem", lg: "0.8rem" }}
+              color="fg.default"
+              textAlign={{ base: "left", lg: "justify" }}
+            >
               Sou Thaise, contadora, com mais de 10 anos de experiência na área contábil.
             </Text>
-            <Text textStyle="body" color="fg.default" textAlign={{ base: "left", lg: "justify" }}>
+            <Text
+              textStyle="body"
+              fontSize={{ base: "0.875rem", lg: "0.8rem" }}
+              color="fg.default"
+              textAlign={{ base: "left", lg: "justify" }}
+            >
               Ao longo dessa trajetória, aprendi que a contabilidade vai muito além de
               impostos, guias e obrigações. Ela precisa ser uma ferramenta para{" "}
               <Text as="em" fontWeight="semibold">
@@ -69,23 +79,43 @@ export function AboutSection() {
                 tomar decisões com mais segurança e clareza.
               </Text>
             </Text>
-            <Text textStyle="body" color="fg.default" textAlign={{ base: "left", lg: "justify" }}>
+            <Text
+              textStyle="body"
+              fontSize={{ base: "0.875rem", lg: "0.8rem" }}
+              color="fg.default"
+              textAlign={{ base: "left", lg: "justify" }}
+            >
               Foi a partir dessa visão, construída e amadurecida ao longo da minha trajetória,
               que nasceu a TSA. Especialmente durante a pandemia, acompanhei de perto
               empresários enfrentando desafios reais, tomando decisões difíceis e buscando
               caminhos para manter seus negócios sustentáveis e preparados para o futuro.
             </Text>
-            <Text textStyle="body" color="fg.default" textAlign={{ base: "left", lg: "justify" }}>
+            <Text
+              textStyle="body"
+              fontSize={{ base: "0.875rem", lg: "0.8rem" }}
+              color="fg.default"
+              textAlign={{ base: "left", lg: "justify" }}
+            >
               Sou formada em Ciências Contábeis, com MBA em Gestão Financeira e Auditoria
               Contábil e formação em Perícia Judicial Contábil.
             </Text>
-            <Text textStyle="body" color="fg.default" textAlign={{ base: "left", lg: "justify" }}>
+            <Text
+              textStyle="body"
+              fontSize={{ base: "0.875rem", lg: "0.8rem" }}
+              color="fg.default"
+              textAlign={{ base: "left", lg: "justify" }}
+            >
               Boa parte da minha visão profissional, nasceu da prática:{" "}
               <Text as="em" fontWeight="semibold">
                 acompanhando empresas em diferentes fases de crescimento.
               </Text>
             </Text>
-            <Text textStyle="body" color="fg.default" textAlign={{ base: "left", lg: "justify" }}>
+            <Text
+              textStyle="body"
+              fontSize={{ base: "0.875rem", lg: "0.8rem" }}
+              color="fg.default"
+              textAlign={{ base: "left", lg: "justify" }}
+            >
               Hoje, à frente da TSA, ofereço uma contabilidade mais próxima, estratégica e
               fácil de compreender. Quero que cada empresário saiba onde sua empresa está, o
               que os números dizem e quais decisões podem fortalecer o próximo passo.
