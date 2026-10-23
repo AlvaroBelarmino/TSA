@@ -47,12 +47,12 @@ export function AboutSection() {
             </Box>
           </Box>
 
-          <Stack gap="4">
+          <Stack gap="3">
             <Kicker>Quem conduz</Kicker>
             <Heading
               as="h2"
               textStyle="h2"
-              fontSize={{ base: "1.65rem", lg: "clamp(1.4rem, 2.2vw, 1.75rem)" }}
+              fontSize={{ base: "1.75rem", lg: "clamp(1.5rem, 2.4vw, 1.9rem)" }}
               color="brand.primary"
               mb="0"
             >
@@ -60,7 +60,7 @@ export function AboutSection() {
             </Heading>
             <Text
               textStyle="body"
-              fontSize={{ base: "0.875rem", lg: "0.8rem" }}
+              fontSize={{ base: "0.95rem", lg: "0.9rem" }}
               color="fg.default"
               textAlign={{ base: "left", lg: "justify" }}
             >
@@ -68,7 +68,7 @@ export function AboutSection() {
             </Text>
             <Text
               textStyle="body"
-              fontSize={{ base: "0.875rem", lg: "0.8rem" }}
+              fontSize={{ base: "0.95rem", lg: "0.9rem" }}
               color="fg.default"
               textAlign={{ base: "left", lg: "justify" }}
             >
@@ -81,7 +81,7 @@ export function AboutSection() {
             </Text>
             <Text
               textStyle="body"
-              fontSize={{ base: "0.875rem", lg: "0.8rem" }}
+              fontSize={{ base: "0.95rem", lg: "0.9rem" }}
               color="fg.default"
               textAlign={{ base: "left", lg: "justify" }}
             >
@@ -92,7 +92,7 @@ export function AboutSection() {
             </Text>
             <Text
               textStyle="body"
-              fontSize={{ base: "0.875rem", lg: "0.8rem" }}
+              fontSize={{ base: "0.95rem", lg: "0.9rem" }}
               color="fg.default"
               textAlign={{ base: "left", lg: "justify" }}
             >
@@ -101,7 +101,7 @@ export function AboutSection() {
             </Text>
             <Text
               textStyle="body"
-              fontSize={{ base: "0.875rem", lg: "0.8rem" }}
+              fontSize={{ base: "0.95rem", lg: "0.9rem" }}
               color="fg.default"
               textAlign={{ base: "left", lg: "justify" }}
             >
@@ -112,7 +112,7 @@ export function AboutSection() {
             </Text>
             <Text
               textStyle="body"
-              fontSize={{ base: "0.875rem", lg: "0.8rem" }}
+              fontSize={{ base: "0.95rem", lg: "0.9rem" }}
               color="fg.default"
               textAlign={{ base: "left", lg: "justify" }}
             >
