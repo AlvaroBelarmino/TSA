@@ -1,7 +1,7 @@
-import { Box, Button, Container, HStack, Heading, Stack, Text } from "@chakra-ui/react"
+import { Box, Button, Container, Heading, Stack, Text } from "@chakra-ui/react"
 import Image from "next/image"
 import { FaWhatsapp } from "react-icons/fa"
-import { LuArrowUpRight, LuShieldCheck } from "react-icons/lu"
+import { LuArrowUpRight } from "react-icons/lu"
 import { Kicker } from "./kicker"
 import { externalLinkProps, whatsappHref } from "./data"
 import { MobileHeroCard } from "./mobile-hero-card"
@@ -126,18 +126,6 @@ export function HeroSection() {
                 <LuArrowUpRight />
               </a>
             </Button>
-            <HStack
-              gap="2"
-              color="fg.muted"
-              pt="1"
-              justify="flex-start"
-              textAlign="left"
-            >
-              <LuShieldCheck size={16} aria-hidden="true" />
-              <Text fontSize="sm" fontWeight="regular">
-                Mais de 10 anos de experiência · Atendimento próximo e online
-              </Text>
-            </HStack>
           </Stack>
         </MobileHeroCard>
       </Container>
