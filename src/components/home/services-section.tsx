@@ -1,13 +1,10 @@
-import { Box, Button, Container, Flex, Grid, Heading, SimpleGrid, Stack, Text } from "@chakra-ui/react"
-import Image from "next/image"
-import { FaWhatsapp } from "react-icons/fa"
+import { Box, Container, Flex, Grid, Heading, SimpleGrid, Stack, Text } from "@chakra-ui/react"
 import { LuArrowDownRight } from "react-icons/lu"
 import { Reveal } from "@/components/reveal"
 import { ScrollLink } from "@/components/scroll-link"
 import { Kicker } from "./kicker"
-import { CheckItem } from "./check-item"
 import { ServiceCard } from "./service-card"
-import { externalLinkProps, featuredService, sectionAnchorOffset, services, whatsappLink } from "./data"
+import { sectionAnchorOffset, services } from "./data"
 
 export function ServicesSection() {
   return (
@@ -60,125 +57,6 @@ export function ServicesSection() {
               </Reveal>
             ))}
           </SimpleGrid>
-
-          <Reveal>
-            <Box
-              position="relative"
-              w="full"
-              minW="0"
-              maxW="100%"
-              bg="bg.brand"
-              color="fg.onBrand"
-              borderRadius="2xl"
-              overflow="hidden"
-              p={{ base: "5", sm: "7", md: "10" }}
-            >
-              <Box position="absolute" inset="0" overflow="hidden" aria-hidden="true">
-                <Image
-                  src="/experiencia-mobile-v1.png"
-                  alt=""
-                  fill
-                  sizes="(min-width: 48rem) 1120px, 100vw"
-                  style={{
-                    objectFit: "cover",
-                    objectPosition: "center",
-                    transform: "scale(1.04)",
-                    filter: "blur(4px)",
-                  }}
-                />
-              </Box>
-              <Box
-                position="absolute"
-                inset="0"
-                bg="linear-gradient(100deg, rgba(0, 56, 88, 0.96) 0%, rgba(0, 56, 88, 0.89) 48%, rgba(0, 56, 88, 0.78) 100%)"
-                aria-hidden="true"
-              />
-              <Grid
-                position="relative"
-                zIndex="1"
-                templateColumns={{ base: "1fr", lg: "1.15fr 0.85fr" }}
-                gap={{ base: "6", md: "7" }}
-                alignItems="center"
-                w="full"
-                minW="0"
-              >
-                <Stack gap="5" minW="0" w="full">
-                  <Heading
-                    as="h3"
-                    fontFamily="heading"
-                    fontSize={{ base: "1.5rem", sm: "h2" }}
-                    lineHeight="1.2"
-                    fontWeight="semibold"
-                    color="fg.onBrand"
-                    css={{ textWrap: "balance", overflowWrap: "anywhere" }}
-                  >
-                    {featuredService.title}
-                  </Heading>
-                  <Text
-                    textStyle="body"
-                    color="fg.onBrand"
-                    opacity="0.9"
-                    maxW="60ch"
-                    css={{ overflowWrap: "anywhere" }}
-                  >
-                    {featuredService.description}
-                  </Text>
-                </Stack>
-
-                <Stack gap="6" minW="0" w="full">
-                  <SimpleGrid columns={{ base: 1, sm: 2, lg: 1 }} gap="3" minW="0">
-                    {featuredService.items.map((item) => (
-                      <CheckItem key={item} onBrand>
-                        {item}
-                      </CheckItem>
-                    ))}
-                  </SimpleGrid>
-                  <Button
-                    asChild
-                    size="lg"
-                    alignSelf="stretch"
-                    w="full"
-                    maxW="100%"
-                    bg="accent.warm"
-                    color="brand.primary"
-                    borderRadius="full"
-                    px={{ base: "4", md: "7" }}
-                    h="auto"
-                    minH="12"
-                    whiteSpace="normal"
-                    _hover={{ bg: "fg.onBrand" }}
-                    css={{
-                      "& a": {
-                        display: "inline-flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        gap: "0.5rem",
-                        width: "100%",
-                        whiteSpace: "normal",
-                        textAlign: "center",
-                        lineHeight: "1.3",
-                        paddingBlock: "0.85rem",
-                        overflowWrap: "anywhere",
-                      },
-                    }}
-                  >
-                    <a
-                      href={whatsappLink(featuredService.message)}
-                      {...externalLinkProps}
-                    >
-                      <Box as="span" display={{ base: "none", sm: "inline" }}>
-                        Explicar minha situação
-                      </Box>
-                      <Box as="span" display={{ base: "inline", sm: "none" }}>
-                        Falar no WhatsApp
-                      </Box>
-                      <FaWhatsapp />
-                    </a>
-                  </Button>
-                </Stack>
-              </Grid>
-            </Box>
-          </Reveal>
 
           <Flex
             align={{ base: "stretch", sm: "center" }}
