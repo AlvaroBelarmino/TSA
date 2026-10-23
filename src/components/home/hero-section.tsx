@@ -117,7 +117,6 @@ export function HeroSection() {
               borderRadius="full"
               px={{ base: "8", lg: "6" }}
               minH={{ base: "14", lg: "12" }}
-              boxShadow={{ base: "0 12px 28px rgba(244, 132, 32, 0.38)", lg: "none" }}
               _hover={{ bg: { base: "brand.primary", lg: "accent.balance" } }}
             >
               <a href={whatsappHref} {...externalLinkProps}>
