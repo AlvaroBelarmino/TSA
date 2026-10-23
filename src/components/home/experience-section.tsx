@@ -10,7 +10,6 @@ export function ExperienceSection() {
         display={{ base: "block", md: "none" }}
         position="relative"
         overflow="hidden"
-        bg="bg.brand"
         color="fg.onBrand"
       >
         <Image
@@ -20,12 +19,6 @@ export function ExperienceSection() {
           priority
           sizes="100vw"
           style={{ objectFit: "cover", objectPosition: "center" }}
-        />
-        <Box
-          position="absolute"
-          inset="0"
-          bg="linear-gradient(90deg, rgba(0, 56, 88, 0.96) 0%, rgba(0, 56, 88, 0.84) 58%, rgba(0, 56, 88, 0.18) 100%)"
-          aria-hidden="true"
         />
         <Container position="relative" zIndex="1" px="5" py="12">
           <Stack gap="8">
