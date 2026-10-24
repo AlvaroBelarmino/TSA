@@ -5,9 +5,7 @@ import { useEffect } from "react"
 /**
  * Animações de scroll exclusivas para telas pequenas (< 1024px).
  *
- * 1. Hero: a foto desce mais devagar que a página (parallax), então o card
- *    branco "sobe" e vai cobrindo a imagem conforme o usuário rola.
- * 2. Elementos marcados com `data-m-reveal` aparecem suavemente ao entrar
+ * Elementos marcados com `data-m-reveal` aparecem suavemente ao entrar
  *    na tela. Opcional: `data-m-reveal="left|right|scale"` e
  *    `data-m-delay="<ms>"`.
  *
@@ -16,20 +14,18 @@ import { useEffect } from "react"
 
 const MOBILE_QUERY = "(max-width: 1023px)"
 const MOTION_QUERY = "(prefers-reduced-motion: no-preference)"
-const PARALLAX_SPEED = 1
-const PARALLAX_MAX_SCROLL = 700
 const EASE = "cubic-bezier(0.22, 1, 0.36, 1)"
 
 function hiddenTransform(kind: string | undefined) {
   switch (kind) {
     case "left":
-      return "translate3d(-28px, 0, 0)"
+      return "translate3d(-16px, 0, 0)"
     case "right":
-      return "translate3d(28px, 0, 0)"
+      return "translate3d(16px, 0, 0)"
     case "scale":
-      return "translate3d(0, 24px, 0) scale(0.96)"
+      return "translate3d(0, 12px, 0)"
     default:
-      return "translate3d(0, 32px, 0)"
+      return "translate3d(0, 16px, 0)"
   }
 }
 
@@ -46,33 +42,12 @@ export function MobileScrollEffects() {
       if (!mobileMq.matches) return
 
       const cleanups: Array<() => void> = []
-      const duration = motionMq.matches ? 800 : 160
+      const duration = motionMq.matches ? 420 : 160
 
-      // 1. Parallax do hero
-      const heroImage = document.querySelector<HTMLElement>("[data-hero-parallax]")
-      if (heroImage && motionMq.matches) {
-        let frame = 0
-        const update = () => {
-          frame = 0
-          const y = Math.min(Math.max(window.scrollY, 0), PARALLAX_MAX_SCROLL)
-          heroImage.style.transform = `translate3d(0, ${(y * PARALLAX_SPEED).toFixed(1)}px, 0)`
-        }
-        const onScroll = () => {
-          if (!frame) frame = requestAnimationFrame(update)
-        }
-        update()
-        window.addEventListener("scroll", onScroll, { passive: true })
-        cleanups.push(() => {
-          window.removeEventListener("scroll", onScroll)
-          if (frame) cancelAnimationFrame(frame)
-          heroImage.style.transform = ""
-        })
-      }
-
-      // 2. Reveal ao entrar na tela
+      // Reveal ao entrar na tela
       const targets = Array.from(
         document.querySelectorAll<HTMLElement>("[data-m-reveal]"),
-      ).filter((el) => el.getBoundingClientRect().top > window.innerHeight * 0.92)
+      ).filter((el) => el.getBoundingClientRect().top >= window.innerHeight - 24)
 
       if (targets.length && "IntersectionObserver" in window) {
         const timers = new Set<number>()
@@ -86,7 +61,6 @@ export function MobileScrollEffects() {
         targets.forEach((el) => {
           el.style.opacity = "0"
           el.style.transform = motionMq.matches ? hiddenTransform(el.dataset.mReveal) : "none"
-          el.style.willChange = motionMq.matches ? "opacity, transform" : "opacity"
         })
 
         const observer = new IntersectionObserver(
@@ -94,7 +68,8 @@ export function MobileScrollEffects() {
             entries.forEach((entry) => {
               if (!entry.isIntersecting) return
               const el = entry.target as HTMLElement
-              const delay = motionMq.matches ? Number(el.dataset.mDelay ?? 0) : 0
+              const delay = motionMq.matches ? Math.min(Number(el.dataset.mDelay ?? 0), 60) : 0
+              el.style.willChange = motionMq.matches ? "opacity, transform" : "opacity"
               el.style.transition = motionMq.matches
                 ? `opacity ${duration}ms ${EASE} ${delay}ms, transform ${duration}ms ${EASE} ${delay}ms`
                 : `opacity ${duration}ms ${EASE}`
@@ -108,7 +83,7 @@ export function MobileScrollEffects() {
               timers.add(timer)
             })
           },
-          { threshold: 0.12, rootMargin: "0px 0px -8% 0px" },
+          { threshold: 0, rootMargin: "0px 0px -24px 0px" },
         )
 
         targets.forEach((el) => observer.observe(el))

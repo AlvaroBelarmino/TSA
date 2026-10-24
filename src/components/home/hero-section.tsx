@@ -16,20 +16,26 @@ export function HeroSection() {
       as="section"
       aria-labelledby="hero-title"
       position="relative"
-      overflow="hidden"
+      overflow={{ base: "clip", lg: "hidden" }}
       bg="bg.canvas"
       minH={{ base: "auto", lg: "800px" }}
     >
       <Box
         display={{ base: "block", lg: "none" }}
-        position="absolute"
+        position="sticky"
         top="0"
         left="0"
         right="0"
         h={`calc(${mobileHeroPhotoHeight} + 24px)`}
-        willChange="transform"
+        mb={`calc(-1 * (${mobileHeroPhotoHeight} + 24px))`}
         data-hero-parallax=""
         aria-hidden="true"
+        css={{
+          "@media (prefers-reduced-motion: reduce)": {
+            position: "absolute",
+            marginBottom: "0",
+          },
+        }}
       >
         <Image
           src="/hero-mesa-mobile.png"
