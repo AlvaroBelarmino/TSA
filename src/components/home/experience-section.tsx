@@ -29,7 +29,6 @@ export function ExperienceSection() {
         />
         <Container position="relative" zIndex="1" px="5" py="12">
           <Stack gap="8">
-            <Kicker color="fg.onBrand">NOSSA EXPERIÊNCIA NA ÁREA CONTÁBIL</Kicker>
             <Stack gap="0">
               {experienceHighlights.map(({ value, label, icon: Icon }, index) => (
                 <Flex

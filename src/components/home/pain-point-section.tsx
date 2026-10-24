@@ -40,7 +40,7 @@ export function PainPointSection() {
               <Stack gap="3">
                 <CheckItem>Você recebe as guias, mas não entende por que os valores mudaram.</CheckItem>
                 <CheckItem>Fatura mais, mas ainda tem dificuldade de saber o que realmente sobra.</CheckItem>
-                <CheckItem>Só fala com a contabilidade quando existe uma obrigação ou problema</CheckItem>
+                <CheckItem>Só fala com a contabilidade quando existe uma obrigação ou problema.</CheckItem>
                 <CheckItem>Precisa tomar decisões importantes sem ter os números organizados e claros.</CheckItem>
               </Stack>
             </Stack>
