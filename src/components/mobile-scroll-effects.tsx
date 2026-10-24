@@ -11,7 +11,7 @@ import { useEffect } from "react"
  *    na tela. Opcional: `data-m-reveal="left|right|scale"` e
  *    `data-m-delay="<ms>"`.
  *
- * Desktop e usuários com "reduzir movimento" não são afetados.
+ * Desktop não é afetado. Com "reduzir movimento", as entradas usam só opacidade.
  */
 
 const MOBILE_QUERY = "(max-width: 1023px)"
@@ -43,13 +43,14 @@ export function MobileScrollEffects() {
     const setup = () => {
       cleanup?.()
       cleanup = undefined
-      if (!mobileMq.matches || !motionMq.matches) return
+      if (!mobileMq.matches) return
 
       const cleanups: Array<() => void> = []
+      const duration = motionMq.matches ? 800 : 160
 
       // 1. Parallax do hero
       const heroImage = document.querySelector<HTMLElement>("[data-hero-parallax]")
-      if (heroImage) {
+      if (heroImage && motionMq.matches) {
         let frame = 0
         const update = () => {
           frame = 0
@@ -74,6 +75,7 @@ export function MobileScrollEffects() {
       ).filter((el) => el.getBoundingClientRect().top > window.innerHeight * 0.92)
 
       if (targets.length && "IntersectionObserver" in window) {
+        const timers = new Set<number>()
         const reset = (el: HTMLElement) => {
           el.style.opacity = ""
           el.style.transform = ""
@@ -83,8 +85,8 @@ export function MobileScrollEffects() {
 
         targets.forEach((el) => {
           el.style.opacity = "0"
-          el.style.transform = hiddenTransform(el.dataset.mReveal)
-          el.style.willChange = "opacity, transform"
+          el.style.transform = motionMq.matches ? hiddenTransform(el.dataset.mReveal) : "none"
+          el.style.willChange = motionMq.matches ? "opacity, transform" : "opacity"
         })
 
         const observer = new IntersectionObserver(
@@ -92,12 +94,18 @@ export function MobileScrollEffects() {
             entries.forEach((entry) => {
               if (!entry.isIntersecting) return
               const el = entry.target as HTMLElement
-              const delay = Number(el.dataset.mDelay ?? 0)
-              el.style.transition = `opacity 800ms ${EASE} ${delay}ms, transform 800ms ${EASE} ${delay}ms`
+              const delay = motionMq.matches ? Number(el.dataset.mDelay ?? 0) : 0
+              el.style.transition = motionMq.matches
+                ? `opacity ${duration}ms ${EASE} ${delay}ms, transform ${duration}ms ${EASE} ${delay}ms`
+                : `opacity ${duration}ms ${EASE}`
               el.style.opacity = "1"
-              el.style.transform = "translate3d(0, 0, 0)"
+              el.style.transform = motionMq.matches ? "translate3d(0, 0, 0)" : "none"
               observer.unobserve(el)
-              window.setTimeout(() => reset(el), 800 + delay + 60)
+              const timer = window.setTimeout(() => {
+                timers.delete(timer)
+                reset(el)
+              }, duration + delay + 60)
+              timers.add(timer)
             })
           },
           { threshold: 0.12, rootMargin: "0px 0px -8% 0px" },
@@ -106,6 +114,7 @@ export function MobileScrollEffects() {
         targets.forEach((el) => observer.observe(el))
         cleanups.push(() => {
           observer.disconnect()
+          timers.forEach((timer) => window.clearTimeout(timer))
           targets.forEach(reset)
         })
       }
