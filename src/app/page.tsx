@@ -1,4 +1,5 @@
 import { Box } from "@chakra-ui/react"
+import { MobileScrollEffects } from "@/components/mobile-scroll-effects"
 import { SiteHeader } from "@/components/site-header"
 import { WhatsappFloat } from "@/components/whatsapp-float"
 import { AboutSection } from "@/components/home/about-section"
@@ -14,6 +15,7 @@ import { whatsappHref, whatsappNumber } from "@/components/home/data"
 export default function Home() {
   return (
     <Box overflowX="clip" maxW="100%">
+      <MobileScrollEffects />
       <SiteHeader whatsappNumber={whatsappNumber} />
       <Box as="main" minW="0" maxW="100%">
         <HeroSection />

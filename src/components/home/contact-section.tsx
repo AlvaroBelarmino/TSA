@@ -22,7 +22,7 @@ export function ContactSection() {
           alignItems="start"
           minW="0"
         >
-          <Stack gap="8">
+          <Stack gap="8" data-m-reveal="">
             <Stack gap="5">
               <Kicker>O PRÓXIMO PASSO</Kicker>
               <Heading as="h2" textStyle="h2" color="brand.primary">
@@ -127,6 +127,7 @@ export function ContactSection() {
           </Stack>
 
           <Box
+            data-m-reveal=""
             bg="bg.canvas"
             minW="0"
             width="full"

@@ -6,6 +6,9 @@ import { Kicker } from "./kicker"
 import { externalLinkProps, whatsappHref } from "./data"
 import { MobileHeroCard } from "./mobile-hero-card"
 
+// Altura da faixa de foto visível acima do card branco (somente mobile).
+const mobileHeroPhotoHeight = "clamp(220px, 58vw, 340px)"
+
 export function HeroSection() {
   return (
     <Box
@@ -23,7 +26,9 @@ export function HeroSection() {
         top="0"
         left="0"
         right="0"
-        h="clamp(440px, 120vw, 560px)"
+        h={`calc(${mobileHeroPhotoHeight} + 24px)`}
+        willChange="transform"
+        data-hero-parallax=""
         aria-hidden="true"
       >
         <Image
@@ -34,7 +39,7 @@ export function HeroSection() {
           sizes="(min-width: 64rem) 1px, 100vw"
           style={{
             objectFit: "cover",
-            objectPosition: "62% center",
+            objectPosition: "62% bottom",
           }}
         />
         <Box position="absolute" inset="0" bg="rgba(0, 56, 88, 0.22)" />
@@ -72,7 +77,7 @@ export function HeroSection() {
         minH={{ base: "auto", lg: "inherit" }}
         maxW={{ base: "none", lg: "1200px" }}
         px={{ base: "0", lg: "8" }}
-        pt={{ base: "clamp(320px, 80vw, 400px)", lg: "32" }}
+        pt={{ base: mobileHeroPhotoHeight, lg: "32" }}
         pb={{ base: "0", lg: "20" }}
       >
         <MobileHeroCard>

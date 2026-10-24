@@ -19,6 +19,7 @@ export function AboutSection() {
           alignItems="center"
         >
           <Box
+            data-m-reveal="scale"
             position="relative"
             aspectRatio="4 / 5"
             overflow="hidden"
@@ -47,7 +48,7 @@ export function AboutSection() {
             </Box>
           </Box>
 
-          <Stack gap="3">
+          <Stack gap="3" data-m-reveal="">
             <Kicker>Quem conduz</Kicker>
             <Heading
               as="h2"
@@ -121,9 +122,11 @@ export function AboutSection() {
               que os números dizem e quais decisões podem fortalecer o próximo passo.
             </Text>
             <SimpleGrid columns={{ base: 1, md: 3 }} gap={{ base: "6", md: "4" }} pt="3">
-              {values.map((value) => (
+              {values.map((value, index) => (
                 <Stack
                   key={value.title}
+                  data-m-reveal=""
+                  data-m-delay={index * 120}
                   gap="3"
                   borderTopWidth="2px"
                   borderColor="accent.warm"
