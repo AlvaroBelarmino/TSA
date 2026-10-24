@@ -27,7 +27,7 @@ export function HeroSection() {
         aria-hidden="true"
       >
         <Image
-          src="/hero-mesa.png"
+          src="/hero-mesa-mobile.png"
           alt=""
           fill
           priority
