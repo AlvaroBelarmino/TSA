@@ -16,7 +16,7 @@ import { useEffect } from "react"
 
 const MOBILE_QUERY = "(max-width: 1023px)"
 const MOTION_QUERY = "(prefers-reduced-motion: no-preference)"
-const PARALLAX_SPEED = 0.55
+const PARALLAX_SPEED = 1
 const PARALLAX_MAX_SCROLL = 700
 const EASE = "cubic-bezier(0.22, 1, 0.36, 1)"
 

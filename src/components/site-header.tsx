@@ -31,7 +31,7 @@ export function SiteHeader({
 
   useEffect(() => {
     const onScroll = () => {
-      const scrollThreshold = window.innerWidth < 1024 ? 32 : 0
+      const scrollThreshold = window.innerWidth < 1024 ? 32 : 520
       setScrolled(window.scrollY > scrollThreshold)
 
       if (window.scrollY > scrollThreshold) {
@@ -87,7 +87,7 @@ export function SiteHeader({
         boxShadow={{ base: "none", lg: darkSurface ? "0 12px 32px rgba(0, 56, 88, 0.16)" : "none" }}
         transition={{
           base: "background 480ms ease-in-out, border-color 480ms ease-in-out, backdrop-filter 480ms ease-in-out",
-          lg: "background 180ms ease-out, border-color 180ms ease-out, backdrop-filter 180ms ease-out, width 240ms ease-out, top 240ms ease-out, border-radius 240ms ease-out, box-shadow 240ms ease-out",
+          lg: "background 480ms ease-in-out, border-color 480ms ease-in-out, backdrop-filter 480ms ease-in-out, width 420ms cubic-bezier(0.22, 1, 0.36, 1), top 420ms cubic-bezier(0.22, 1, 0.36, 1), border-radius 420ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 420ms ease-in-out",
         }}
       >
         <Container maxW="1440px" px={{ base: "5", md: "8", xl: "12" }} minW="0">
@@ -111,7 +111,7 @@ export function SiteHeader({
                 opacity={{ base: scrolled || menuOpen ? 0 : 1, lg: darkSurface ? 1 : 0 }}
                 transition={{
                   base: "opacity 480ms ease-in-out",
-                  lg: "opacity 180ms ease-out",
+                  lg: "opacity 280ms ease-in-out",
                 }}
                 aria-hidden="true"
               >
@@ -130,7 +130,7 @@ export function SiteHeader({
                 opacity={{ base: scrolled || menuOpen ? 1 : 0, lg: darkSurface ? 0 : 1 }}
                 transition={{
                   base: "opacity 480ms ease-in-out, transform 480ms ease-in-out",
-                  lg: "opacity 180ms ease-out",
+                  lg: "opacity 280ms ease-in-out",
                 }}
                 transform="scale(0.79)"
                 aria-hidden="true"
@@ -161,7 +161,7 @@ export function SiteHeader({
                 color={{ base: scrolled ? "brand.primary" : "fg.onBrand", lg: darkSurface ? "fg.onBrand" : "brand.primary" }}
                 transition={{
                   base: "color 480ms ease-in-out",
-                  lg: "color 180ms ease-out",
+                  lg: "color 240ms ease-in-out",
                 }}
                 _hover={{ color: "accent.warm" }}
               >
@@ -182,7 +182,7 @@ export function SiteHeader({
               _hover={{ bg: darkSurface ? "fg.onBrand" : "accent.balance" }}
               transition={{
                 base: "background-color 480ms ease-in-out, color 480ms ease-in-out",
-                lg: "background-color 180ms ease-out",
+                lg: "background-color 240ms ease-in-out",
               }}
             >
               <a

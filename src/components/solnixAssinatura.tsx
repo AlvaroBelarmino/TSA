@@ -11,6 +11,7 @@ export default function SolnixAssinatura() {
       target="_blank"
       rel="noopener noreferrer"
       role="group"
+      className="group"
       display="inline-flex"
       alignItems="center"
       gap="2.5"

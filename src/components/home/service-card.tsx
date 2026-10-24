@@ -12,6 +12,7 @@ export function ServiceCard({
   const card = (
     <Stack
       role="group"
+      className="group"
       position="relative"
       overflow="hidden"
       h="full"

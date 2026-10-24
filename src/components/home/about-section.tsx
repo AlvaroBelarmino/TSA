@@ -20,6 +20,8 @@ export function AboutSection() {
         >
           <Box
             data-m-reveal="scale"
+            alignSelf={{ lg: "start" }}
+            mt={{ lg: "calc(var(--chakra-font-sizes-micro) * 1.3 + var(--chakra-spacing-3))" }}
             position="relative"
             aspectRatio="4 / 5"
             overflow="hidden"
