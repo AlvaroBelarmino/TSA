@@ -72,7 +72,7 @@ export function HeroSection() {
         minH={{ base: "auto", lg: "inherit" }}
         maxW={{ base: "none", lg: "1200px" }}
         px={{ base: "0", lg: "8" }}
-        pt={{ base: "clamp(408px, 112vw, 520px)", lg: "32" }}
+        pt={{ base: "clamp(320px, 80vw, 400px)", lg: "32" }}
         pb={{ base: "0", lg: "20" }}
       >
         <MobileHeroCard>
