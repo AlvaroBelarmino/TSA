@@ -13,6 +13,7 @@ export function ServiceCard({
     <Stack
       role="group"
       className="group"
+      data-m-service-card=""
       position="relative"
       overflow="hidden"
       h="full"
@@ -35,7 +36,13 @@ export function ServiceCard({
         boxShadow: "0 22px 50px rgba(0, 56, 88, 0.14)",
       }}
     >
-      <Box position="relative" aspectRatio="16 / 9" overflow="hidden" flex="0 0 auto">
+      <Box
+        position="relative"
+        aspectRatio="16 / 9"
+        overflow="hidden"
+        flex="0 0 auto"
+        data-m-service-media=""
+      >
         <Box
           position="absolute"
           inset="0"
@@ -65,7 +72,15 @@ export function ServiceCard({
         />
       </Box>
 
-      <Stack gap="0" flex="1" minW="0" px={{ base: "5", md: "7" }} pt="7" pb="6">
+      <Stack
+        gap="0"
+        flex="1"
+        minW="0"
+        px={{ base: "5", md: "7" }}
+        pt="7"
+        pb="6"
+        data-m-service-content=""
+      >
         <Heading
           as="h3"
           fontFamily="heading"

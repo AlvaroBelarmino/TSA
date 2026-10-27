@@ -90,6 +90,82 @@ export function MobileScrollEffects() {
         })
       }
 
+      const serviceCards = Array.from(
+        document.querySelectorAll<HTMLElement>("[data-m-service-card]"),
+      ).filter((card) => card.getBoundingClientRect().top >= window.innerHeight - 24)
+
+      if (serviceCards.length && "IntersectionObserver" in window) {
+        const timers = new Set<number>()
+        const reset = (card: HTMLElement) => {
+          const media = card.querySelector<HTMLElement>("[data-m-service-media]")
+          const content = card.querySelector<HTMLElement>("[data-m-service-content]")
+
+          media?.style.removeProperty("opacity")
+          media?.style.removeProperty("transform")
+          media?.style.removeProperty("transition")
+          media?.style.removeProperty("will-change")
+          content?.style.removeProperty("opacity")
+          content?.style.removeProperty("transform")
+          content?.style.removeProperty("transition")
+          content?.style.removeProperty("will-change")
+        }
+
+        serviceCards.forEach((card) => {
+          const media = card.querySelector<HTMLElement>("[data-m-service-media]")
+          const content = card.querySelector<HTMLElement>("[data-m-service-content]")
+
+          if (media) {
+            media.style.opacity = "0.88"
+            media.style.transform = "scale(1.035)"
+          }
+
+          if (content) {
+            content.style.opacity = "0"
+            content.style.transform = "translate3d(0, 12px, 0)"
+          }
+        })
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return
+              const card = entry.target as HTMLElement
+              const media = card.querySelector<HTMLElement>("[data-m-service-media]")
+              const content = card.querySelector<HTMLElement>("[data-m-service-content]")
+
+              if (media) {
+                media.style.willChange = "opacity, transform"
+                media.style.transition = `opacity 500ms ${EASE}, transform 620ms ${EASE}`
+                media.style.opacity = "1"
+                media.style.transform = "scale(1)"
+              }
+
+              if (content) {
+                content.style.willChange = "opacity, transform"
+                content.style.transition = `opacity 420ms ${EASE} 90ms, transform 420ms ${EASE} 90ms`
+                content.style.opacity = "1"
+                content.style.transform = "translate3d(0, 0, 0)"
+              }
+
+              observer.unobserve(card)
+              const timer = window.setTimeout(() => {
+                timers.delete(timer)
+                reset(card)
+              }, 800)
+              timers.add(timer)
+            })
+          },
+          { threshold: 0.1, rootMargin: "0px 0px -24px 0px" },
+        )
+
+        serviceCards.forEach((card) => observer.observe(card))
+        cleanups.push(() => {
+          observer.disconnect()
+          timers.forEach((timer) => window.clearTimeout(timer))
+          serviceCards.forEach(reset)
+        })
+      }
+
       cleanup = () => cleanups.forEach((fn) => fn())
     }
 
