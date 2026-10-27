@@ -22,9 +22,6 @@ export function WhatsappFloat({ href }: WhatsappFloatProps) {
           "0%, 100%": { transform: "translateY(0)" },
           "50%": { transform: "translateY(-3px)" },
         },
-        "@media (prefers-reduced-motion: reduce)": {
-          animation: "none",
-        },
       }}
     >
       <Link
@@ -77,9 +74,6 @@ export function WhatsappFloat({ href }: WhatsappFloatProps) {
             "@keyframes tsa-wa-badge": {
               "0%, 100%": { transform: "scale(1)" },
               "50%": { transform: "scale(1.12)" },
-            },
-            "@media (prefers-reduced-motion: reduce)": {
-              animation: "none",
             },
           }}
         >

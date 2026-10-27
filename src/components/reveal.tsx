@@ -55,10 +55,6 @@ export function Reveal({ children, delay = 0, y = 24, rotate = 0 }: RevealProps)
           transform: visible ? "translate3d(0, 0, 0)" : "translate3d(0, 12px, 0)",
           transition: "opacity 420ms cubic-bezier(0.22, 1, 0.36, 1), transform 420ms cubic-bezier(0.22, 1, 0.36, 1)",
         },
-        "@media (prefers-reduced-motion: reduce)": {
-          transform: "none",
-          transition: "opacity 160ms cubic-bezier(0.22, 1, 0.36, 1)",
-        },
       }}
     >
       {children}

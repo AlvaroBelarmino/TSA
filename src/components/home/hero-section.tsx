@@ -30,12 +30,6 @@ export function HeroSection() {
         mb={`calc(-1 * (${mobileHeroPhotoHeight} + 24px))`}
         data-hero-parallax=""
         aria-hidden="true"
-        css={{
-          "@media (prefers-reduced-motion: reduce)": {
-            position: "absolute",
-            marginBottom: "0",
-          },
-        }}
       >
         <Image
           src="/hero-mesa-mobile.png"
