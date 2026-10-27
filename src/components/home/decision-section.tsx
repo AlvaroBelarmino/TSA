@@ -36,7 +36,7 @@ export function DecisionSection() {
         maxW="1200px"
         px={{ base: "5", md: "8" }}
       >
-        <Reveal>
+        <Reveal mobileStatic>
           <Stack gap={{ base: "10", md: "12" }}>
             <Stack gap="4" maxW="900px">
               <Kicker color="accent.warm">Ainda não sabe por onde começar?</Kicker>

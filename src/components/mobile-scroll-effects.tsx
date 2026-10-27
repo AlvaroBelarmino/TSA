@@ -5,28 +5,13 @@ import { useEffect } from "react"
 /**
  * Animações de scroll exclusivas para telas pequenas (< 1024px).
  *
- * Elementos marcados com `data-m-reveal` aparecem suavemente ao entrar
- *    na tela. Opcional: `data-m-reveal="left|right|scale"` e
- *    `data-m-delay="<ms>"`.
+ * Controla animações pontuais nas seções mobile.
  *
  * Desktop não é afetado.
  */
 
 const MOBILE_QUERY = "(max-width: 1023px)"
 const EASE = "cubic-bezier(0.22, 1, 0.36, 1)"
-
-function hiddenTransform(kind: string | undefined) {
-  switch (kind) {
-    case "left":
-      return "translate3d(-16px, 0, 0)"
-    case "right":
-      return "translate3d(16px, 0, 0)"
-    case "scale":
-      return "translate3d(0, 12px, 0)"
-    default:
-      return "translate3d(0, 16px, 0)"
-  }
-}
 
 export function MobileScrollEffects() {
   useEffect(() => {
@@ -40,56 +25,6 @@ export function MobileScrollEffects() {
       if (!mobileMq.matches) return
 
       const cleanups: Array<() => void> = []
-      const duration = 420
-
-      // Reveal ao entrar na tela
-      const targets = Array.from(
-        document.querySelectorAll<HTMLElement>("[data-m-reveal]"),
-      ).filter((el) => el.getBoundingClientRect().top >= window.innerHeight - 24)
-
-      if (targets.length && "IntersectionObserver" in window) {
-        const timers = new Set<number>()
-        const reset = (el: HTMLElement) => {
-          el.style.opacity = ""
-          el.style.transform = ""
-          el.style.transition = ""
-          el.style.willChange = ""
-        }
-
-        targets.forEach((el) => {
-          el.style.opacity = "0"
-          el.style.transform = hiddenTransform(el.dataset.mReveal)
-        })
-
-        const observer = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (!entry.isIntersecting) return
-              const el = entry.target as HTMLElement
-              const delay = Math.min(Number(el.dataset.mDelay ?? 0), 60)
-              el.style.willChange = "opacity, transform"
-              el.style.transition = `opacity ${duration}ms ${EASE} ${delay}ms, transform ${duration}ms ${EASE} ${delay}ms`
-              el.style.opacity = "1"
-              el.style.transform = "translate3d(0, 0, 0)"
-              observer.unobserve(el)
-              const timer = window.setTimeout(() => {
-                timers.delete(timer)
-                reset(el)
-              }, duration + delay + 60)
-              timers.add(timer)
-            })
-          },
-          { threshold: 0, rootMargin: "0px 0px -24px 0px" },
-        )
-
-        targets.forEach((el) => observer.observe(el))
-        cleanups.push(() => {
-          observer.disconnect()
-          timers.forEach((timer) => window.clearTimeout(timer))
-          targets.forEach(reset)
-        })
-      }
-
       const serviceCards = Array.from(
         document.querySelectorAll<HTMLElement>("[data-m-service-card]"),
       ).filter((card) => card.getBoundingClientRect().top >= window.innerHeight - 24)
@@ -179,6 +114,104 @@ export function MobileScrollEffects() {
           observer.disconnect()
           timers.forEach((timer) => window.clearTimeout(timer))
           serviceCards.forEach(reset)
+        })
+      }
+
+      const maskTargets = Array.from(
+        document.querySelectorAll<HTMLElement>("[data-m-mask-reveal]"),
+      ).filter((target) => target.getBoundingClientRect().top >= window.innerHeight - 24)
+
+      if (maskTargets.length && "IntersectionObserver" in window) {
+        const timers = new Set<number>()
+        const reset = (target: HTMLElement) => {
+          target.style.removeProperty("clip-path")
+          target.style.removeProperty("transform")
+          target.style.removeProperty("transition")
+          target.style.removeProperty("will-change")
+        }
+
+        maskTargets.forEach((target) => {
+          target.style.clipPath = "inset(0 100% 0 0)"
+          target.style.transform = "scale(1.04)"
+        })
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return
+              const target = entry.target as HTMLElement
+
+              target.style.willChange = "clip-path, transform"
+              target.style.transition = `clip-path 700ms cubic-bezier(0.77, 0, 0.175, 1), transform 700ms ${EASE}`
+              target.style.clipPath = "inset(0 0 0 0)"
+              target.style.transform = "scale(1)"
+              observer.unobserve(target)
+              const timer = window.setTimeout(() => {
+                timers.delete(timer)
+                reset(target)
+              }, 760)
+              timers.add(timer)
+            })
+          },
+          { threshold: 0.2, rootMargin: "0px 0px -24px 0px" },
+        )
+
+        maskTargets.forEach((target) => observer.observe(target))
+        cleanups.push(() => {
+          observer.disconnect()
+          timers.forEach((timer) => window.clearTimeout(timer))
+          maskTargets.forEach(reset)
+        })
+      }
+
+      const counters = Array.from(
+        document.querySelectorAll<HTMLElement>("[data-m-counter]"),
+      ).filter((counter) => counter.getBoundingClientRect().top >= window.innerHeight - 24)
+
+      if (counters.length && "IntersectionObserver" in window) {
+        const frames = new Set<number>()
+        const formatCounter = (counter: HTMLElement, value: number) => {
+          const prefix = counter.dataset.mCounterPrefix ?? ""
+          const suffix = counter.dataset.mCounterSuffix ?? ""
+          counter.textContent = `${prefix}${value}${suffix}`
+        }
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return
+              const counter = entry.target as HTMLElement
+              const target = Number(counter.dataset.mCounter ?? 0)
+              const start = performance.now()
+              const duration = 760
+
+              const update = (now: number) => {
+                const progress = Math.min((now - start) / duration, 1)
+                const easedProgress = 1 - (1 - progress) ** 3
+                formatCounter(counter, Math.round(target * easedProgress))
+
+                if (progress < 1) {
+                  const frame = window.requestAnimationFrame(update)
+                  frames.add(frame)
+                }
+              }
+
+              formatCounter(counter, 0)
+              const frame = window.requestAnimationFrame(update)
+              frames.add(frame)
+              observer.unobserve(counter)
+            })
+          },
+          { threshold: 0.35, rootMargin: "0px 0px -24px 0px" },
+        )
+
+        counters.forEach((counter) => observer.observe(counter))
+        cleanups.push(() => {
+          observer.disconnect()
+          frames.forEach((frame) => window.cancelAnimationFrame(frame))
+          counters.forEach((counter) => {
+            formatCounter(counter, Number(counter.dataset.mCounter ?? 0))
+          })
         })
       }
 

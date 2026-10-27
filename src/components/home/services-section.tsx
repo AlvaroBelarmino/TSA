@@ -23,7 +23,7 @@ export function ServicesSection() {
             alignItems="end"
             minW="0"
           >
-            <Stack gap="5" minW="0" data-m-reveal="">
+            <Stack gap="5" minW="0">
               <Kicker>Assessoria contábil completa</Kicker>
               <Heading
                 as="h2"
@@ -35,7 +35,7 @@ export function ServicesSection() {
                 orientar o caminho.
               </Heading>
             </Stack>
-            <Text textStyle="body" color="fg.default" minW="0" data-m-reveal="" data-m-delay={120}>
+            <Text textStyle="body" color="fg.default" minW="0">
               Escolha o serviço que faz sentido para o seu momento e fale
               diretamente sobre ele. A conversa já começa no assunto certo.
             </Text>
@@ -59,7 +59,6 @@ export function ServicesSection() {
           </SimpleGrid>
 
           <Flex
-            data-m-reveal=""
             align={{ base: "stretch", sm: "center" }}
             justify="space-between"
             direction={{ base: "column", sm: "row" }}

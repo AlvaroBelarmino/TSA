@@ -19,7 +19,7 @@ export function AboutSection() {
           alignItems="center"
         >
           <Box
-            data-m-reveal="scale"
+            data-m-mask-reveal=""
             alignSelf={{ lg: "start" }}
             mt={{ lg: "calc(var(--chakra-font-sizes-micro) * 1.3 + var(--chakra-spacing-3))" }}
             position="relative"
@@ -50,7 +50,7 @@ export function AboutSection() {
             </Box>
           </Box>
 
-          <Stack gap="3" data-m-reveal="">
+          <Stack gap="3">
             <Kicker>Quem conduz</Kicker>
             <Heading
               as="h2"
@@ -124,11 +124,9 @@ export function AboutSection() {
               que os números dizem e quais decisões podem fortalecer o próximo passo.
             </Text>
             <SimpleGrid columns={{ base: 1, md: 3 }} gap={{ base: "6", md: "4" }} pt="3">
-              {values.map((value, index) => (
+              {values.map((value) => (
                 <Stack
                   key={value.title}
-                  data-m-reveal=""
-                  data-m-delay={index * 120}
                   gap="3"
                   borderTopWidth="2px"
                   borderColor="accent.warm"

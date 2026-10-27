@@ -33,8 +33,6 @@ export function ExperienceSection() {
               {experienceHighlights.map(({ value, label, icon: Icon }, index) => (
                 <Flex
                   key={value}
-                  data-m-reveal="left"
-                  data-m-delay={index * 120}
                   gap="5"
                   align="center"
                   py={index === 0 ? "0" : "7"}
@@ -58,6 +56,9 @@ export function ExperienceSection() {
                   </Flex>
                   <Stack gap="2" minW="0">
                     <Text
+                      data-m-counter={value === "+10 anos" ? "10" : undefined}
+                      data-m-counter-prefix={value === "+10 anos" ? "+" : undefined}
+                      data-m-counter-suffix={value === "+10 anos" ? " anos" : undefined}
                       fontFamily="heading"
                       fontSize="clamp(2.5rem, 12vw, 3.5rem)"
                       fontWeight="semibold"

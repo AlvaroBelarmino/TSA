@@ -16,7 +16,7 @@ export function PainPointSection() {
       borderTopRightRadius={{ base: "3xl", md: "0" }}
     >
       <Container maxW="1200px" px={{ base: "5", md: "8" }}>
-        <Reveal>
+        <Reveal mobileStatic>
           <Grid
             templateColumns={{ base: "1fr", lg: "0.92fr 1.08fr" }}
             gap={{ base: "12", lg: "24" }}
