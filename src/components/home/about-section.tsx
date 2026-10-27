@@ -19,7 +19,7 @@ export function AboutSection() {
           alignItems="center"
         >
           <Box
-            data-m-mask-reveal=""
+            data-m-image-reveal=""
             alignSelf={{ lg: "start" }}
             mt={{ lg: "calc(var(--chakra-font-sizes-micro) * 1.3 + var(--chakra-spacing-3))" }}
             position="relative"

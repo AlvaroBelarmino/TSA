@@ -117,21 +117,21 @@ export function MobileScrollEffects() {
         })
       }
 
-      const maskTargets = Array.from(
-        document.querySelectorAll<HTMLElement>("[data-m-mask-reveal]"),
+      const imageTargets = Array.from(
+        document.querySelectorAll<HTMLElement>("[data-m-image-reveal]"),
       ).filter((target) => target.getBoundingClientRect().top >= window.innerHeight - 24)
 
-      if (maskTargets.length && "IntersectionObserver" in window) {
+      if (imageTargets.length && "IntersectionObserver" in window) {
         const timers = new Set<number>()
         const reset = (target: HTMLElement) => {
-          target.style.removeProperty("clip-path")
+          target.style.removeProperty("opacity")
           target.style.removeProperty("transform")
           target.style.removeProperty("transition")
           target.style.removeProperty("will-change")
         }
 
-        maskTargets.forEach((target) => {
-          target.style.clipPath = "inset(0 100% 0 0)"
+        imageTargets.forEach((target) => {
+          target.style.opacity = "0"
           target.style.transform = "scale(1.04)"
         })
 
@@ -141,9 +141,9 @@ export function MobileScrollEffects() {
               if (!entry.isIntersecting) return
               const target = entry.target as HTMLElement
 
-              target.style.willChange = "clip-path, transform"
-              target.style.transition = `clip-path 700ms cubic-bezier(0.77, 0, 0.175, 1), transform 700ms ${EASE}`
-              target.style.clipPath = "inset(0 0 0 0)"
+              target.style.willChange = "opacity, transform"
+              target.style.transition = `opacity 700ms ${EASE}, transform 700ms ${EASE}`
+              target.style.opacity = "1"
               target.style.transform = "scale(1)"
               observer.unobserve(target)
               const timer = window.setTimeout(() => {
@@ -156,11 +156,11 @@ export function MobileScrollEffects() {
           { threshold: 0.2, rootMargin: "0px 0px -24px 0px" },
         )
 
-        maskTargets.forEach((target) => observer.observe(target))
+        imageTargets.forEach((target) => observer.observe(target))
         cleanups.push(() => {
           observer.disconnect()
           timers.forEach((timer) => window.clearTimeout(timer))
-          maskTargets.forEach(reset)
+          imageTargets.forEach(reset)
         })
       }
 
