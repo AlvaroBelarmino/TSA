@@ -64,7 +64,7 @@ export function SiteFooter() {
                 Online e próximo
               </Text>
               <Text textStyle="body" color="fg.onBrand">
-                Segunda a sexta · 9h–18h
+                Segunda à Sexta · 9h às 18h
               </Text>
             </Stack>
           </Stack>

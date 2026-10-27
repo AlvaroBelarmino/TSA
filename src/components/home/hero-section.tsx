@@ -121,7 +121,7 @@ export function HeroSection() {
             <Button
               asChild
               size="lg"
-              fontSize={{ base: "0.875rem", lg: "cta" }}
+              fontSize={{ base: "0.745rem", lg: "cta" }}
               alignSelf={{ base: "stretch", sm: "center", lg: "flex-start" }}
               bg="brand.primary"
               color="fg.onBrand"

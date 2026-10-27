@@ -81,7 +81,7 @@ export const services = [
   {
     title: "Folha e rotinas trabalhistas",
     description:
-      "Rotinas de folha organizadas e explicadas para sua equipe.",
+      "Folha de pagamento organizada, com orientações claras para sua equipe.",
     items: ["Folha de pagamento", "Admissões e desligamentos", "eSocial", "Férias e rescisões"],
     image: "/servicos/folha-real.jpg",
     imageAlt:
