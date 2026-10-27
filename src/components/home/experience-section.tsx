@@ -33,6 +33,7 @@ export function ExperienceSection() {
               {experienceHighlights.map(({ value, label, icon: Icon }, index) => (
                 <Flex
                   key={value}
+                  data-m-experience-reveal={index}
                   gap="5"
                   align="center"
                   py={index === 0 ? "0" : "7"}

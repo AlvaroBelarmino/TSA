@@ -164,6 +164,54 @@ export function MobileScrollEffects() {
         })
       }
 
+      const experienceHighlights = Array.from(
+        document.querySelectorAll<HTMLElement>("[data-m-experience-reveal]"),
+      ).filter((highlight) => highlight.getBoundingClientRect().top >= window.innerHeight - 24)
+
+      if (experienceHighlights.length && "IntersectionObserver" in window) {
+        const timers = new Set<number>()
+        const reset = (highlight: HTMLElement) => {
+          highlight.style.removeProperty("opacity")
+          highlight.style.removeProperty("transform")
+          highlight.style.removeProperty("transition")
+          highlight.style.removeProperty("will-change")
+        }
+
+        experienceHighlights.forEach((highlight) => {
+          highlight.style.opacity = "0"
+          highlight.style.transform = "translate3d(-24px, 0, 0)"
+        })
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return
+              const highlight = entry.target as HTMLElement
+              const delay = Math.min(Number(highlight.dataset.mExperienceReveal ?? 0) * 100, 200)
+
+              highlight.style.willChange = "opacity, transform"
+              highlight.style.transition = `opacity 420ms ${EASE} ${delay}ms, transform 520ms cubic-bezier(0.22, 1, 0.36, 1) ${delay}ms`
+              highlight.style.opacity = "1"
+              highlight.style.transform = "translate3d(0, 0, 0)"
+              observer.unobserve(highlight)
+              const timer = window.setTimeout(() => {
+                timers.delete(timer)
+                reset(highlight)
+              }, 600 + delay)
+              timers.add(timer)
+            })
+          },
+          { threshold: 0.15, rootMargin: "0px 0px -24px 0px" },
+        )
+
+        experienceHighlights.forEach((highlight) => observer.observe(highlight))
+        cleanups.push(() => {
+          observer.disconnect()
+          timers.forEach((timer) => window.clearTimeout(timer))
+          experienceHighlights.forEach(reset)
+        })
+      }
+
       const counters = Array.from(
         document.querySelectorAll<HTMLElement>("[data-m-counter]"),
       ).filter((counter) => counter.getBoundingClientRect().top >= window.innerHeight - 24)
