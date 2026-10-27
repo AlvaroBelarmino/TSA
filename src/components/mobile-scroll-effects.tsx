@@ -106,22 +106,32 @@ export function MobileScrollEffects() {
           media?.style.removeProperty("will-change")
           content?.style.removeProperty("opacity")
           content?.style.removeProperty("transform")
+          content?.style.removeProperty("filter")
           content?.style.removeProperty("transition")
           content?.style.removeProperty("will-change")
+          card.style.removeProperty("opacity")
+          card.style.removeProperty("transform")
+          card.style.removeProperty("transition")
+          card.style.removeProperty("will-change")
         }
 
         serviceCards.forEach((card) => {
           const media = card.querySelector<HTMLElement>("[data-m-service-media]")
           const content = card.querySelector<HTMLElement>("[data-m-service-content]")
+          const index = Number(card.dataset.mServiceCard ?? 0)
+
+          card.style.opacity = "0"
+          card.style.transform = `translate3d(0, 32px, 0) scale(0.94) rotate(${index % 2 === 0 ? "-1.5deg" : "1.5deg"})`
 
           if (media) {
-            media.style.opacity = "0.88"
-            media.style.transform = "scale(1.035)"
+            media.style.opacity = "0.7"
+            media.style.transform = "translate3d(0, -10px, 0) scale(1.14)"
           }
 
           if (content) {
             content.style.opacity = "0"
-            content.style.transform = "translate3d(0, 12px, 0)"
+            content.style.transform = "translate3d(0, 28px, 0)"
+            content.style.filter = "blur(5px)"
           }
         })
 
@@ -133,25 +143,31 @@ export function MobileScrollEffects() {
               const media = card.querySelector<HTMLElement>("[data-m-service-media]")
               const content = card.querySelector<HTMLElement>("[data-m-service-content]")
 
+              card.style.willChange = "opacity, transform"
+              card.style.transition = `opacity 440ms ${EASE}, transform 620ms cubic-bezier(0.34, 1.56, 0.64, 1)`
+              card.style.opacity = "1"
+              card.style.transform = "translate3d(0, 0, 0) scale(1) rotate(0)"
+
               if (media) {
                 media.style.willChange = "opacity, transform"
-                media.style.transition = `opacity 500ms ${EASE}, transform 620ms ${EASE}`
+                media.style.transition = `opacity 480ms ${EASE} 60ms, transform 700ms cubic-bezier(0.22, 1, 0.36, 1) 60ms`
                 media.style.opacity = "1"
-                media.style.transform = "scale(1)"
+                media.style.transform = "translate3d(0, 0, 0) scale(1)"
               }
 
               if (content) {
                 content.style.willChange = "opacity, transform"
-                content.style.transition = `opacity 420ms ${EASE} 90ms, transform 420ms ${EASE} 90ms`
+                content.style.transition = `opacity 440ms ${EASE} 160ms, transform 520ms cubic-bezier(0.22, 1, 0.36, 1) 160ms, filter 400ms ${EASE} 160ms`
                 content.style.opacity = "1"
                 content.style.transform = "translate3d(0, 0, 0)"
+                content.style.filter = "blur(0)"
               }
 
               observer.unobserve(card)
               const timer = window.setTimeout(() => {
                 timers.delete(timer)
                 reset(card)
-              }, 800)
+              }, 960)
               timers.add(timer)
             })
           },

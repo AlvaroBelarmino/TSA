@@ -13,7 +13,7 @@ export function ServiceCard({
     <Stack
       role="group"
       className="group"
-      data-m-service-card=""
+      data-m-service-card={index}
       position="relative"
       overflow="hidden"
       h="full"
