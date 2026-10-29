@@ -119,8 +119,8 @@ export function ContactSection() {
               <ContactDetail icon={<LuMonitor />} title="Atendimento online">
                 Com acesso e acompanhamento de verdade
               </ContactDetail>
-              <ContactDetail icon={<LuClock3 />} title="Segunda à Sexta">
-                9h às 18h
+              <ContactDetail icon={<LuClock3 />} title="Segunda a Sexta">
+                8h às 18h
               </ContactDetail>
             </Stack>
 
