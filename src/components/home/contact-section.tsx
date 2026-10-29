@@ -120,7 +120,7 @@ export function ContactSection() {
                 Com acesso e acompanhamento de verdade
               </ContactDetail>
               <ContactDetail icon={<LuClock3 />} title="Segunda a Sexta">
-                8h às 18h
+                9h as 18h
               </ContactDetail>
             </Stack>
 

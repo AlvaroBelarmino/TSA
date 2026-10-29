@@ -67,7 +67,7 @@ export function SiteFooter() {
                 Segunda a Sexta
               </Text>
               <Text textStyle="body" color="fg.onBrand">
-                9h às 18h
+                9h as 18h
               </Text>
             </Stack>
           </Stack>
